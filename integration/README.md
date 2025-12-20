@@ -30,3 +30,12 @@ This directory contains the Phase 1 infrastructure for the unified Image Analyze
    ```bash
    python3 ../scripts/gate_check.py 1
    ```
+
+## Integration Test Dependencies
+
+Integration tests rely on `redis-py` for Redis pub/sub verification. Use the helper script to
+auto-create a local virtualenv and install `integration/requirements.txt` before running tests:
+
+```bash
+../scripts/run_integration_tests.sh
+```

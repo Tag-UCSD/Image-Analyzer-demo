@@ -4,10 +4,12 @@
 - Added integration test coverage for gateway health checks in `integration/tests/test_integration.py`.
 - Adjusted API proxy routing in `integration/nginx/nginx.conf` for module backends.
 - Updated `scripts/verify_all.sh` to use the unified compose file and correct PostgreSQL settings.
+- Added `integration/requirements.txt` and `scripts/run_integration_tests.sh` to auto-install redis-py for integration tests.
+- Documented integration test dependencies in `integration/README.md`.
 
 ## Verification Results
 - Gate check: `python3 scripts/gate_check.py 5` PASS (13/13)
-- Tests: `python -m unittest integration.tests.test_auth integration.tests.test_events integration.tests.test_api_client integration.tests.test_integration` PASS
+- Tests: `scripts/run_integration_tests.sh` PASS
 - Manual verification: Confirmed API gateway health endpoints return 200 for graphical-model, image-tagger, article-eater, knowledge-graph.
 
 ## Self-Critique
@@ -37,7 +39,7 @@
   - Ready for demo usage; production hardening (auth, HTTPS, secrets) still needed.
 
 ## Known Issues
-- Tests rely on a local `.venv` with redis-py for Redis pub/sub verification.
+- Integration tests install redis-py into a local `.venv` via `scripts/run_integration_tests.sh`.
 
 ## Ready for Phase 6: Yes
 All Phase 5 checks passed and verification artifacts are complete.

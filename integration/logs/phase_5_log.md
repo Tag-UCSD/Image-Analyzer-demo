@@ -27,3 +27,8 @@ Phase: 5 - Polish and Final Verification
 - `python3 scripts/gate_check.py 5` PASS
 - `./scripts/verify_all.sh all` PASS
 - `. .venv/bin/activate && python -m unittest integration.tests.test_auth integration.tests.test_events integration.tests.test_api_client integration.tests.test_integration` PASS
+
+## Update: Redis Dependency Setup
+- Added `integration/requirements.txt` with redis-py.
+- Added `scripts/run_integration_tests.sh` to auto-provision a local `.venv` and run integration tests.
+- Updated `integration/README.md` with integration test dependency guidance.
