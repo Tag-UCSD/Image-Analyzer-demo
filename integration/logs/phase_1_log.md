@@ -30,3 +30,14 @@
 
 ## Updates
 - Changed Nginx host port mapping to 8080 and updated gate checks/verification docs accordingly.
+
+## Updates (Verification Fixes)
+- Updated service Dockerfile references and commands in `integration/docker-compose.unified.yml` to run on ports 8001-8004.
+- Added Dockerfile for knowledge-graph backend at `knowledge-graph-ui/GraphExplorer_Static_v3/backend/Dockerfile`.
+
+## Verification Fixes (Post-Checkpoint)
+- Added `email-validator` dependency and `KeyManager` wrapper for Article Eater startup.
+- Added environment overrides for graphical-model model and upload paths.
+- Added graphical-model healthcheck override for port 8001.
+- Added knowledge-graph backend Dockerfile.
+- Updated Nginx upstream hostnames and routing to strip module prefixes.

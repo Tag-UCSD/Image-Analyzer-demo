@@ -68,18 +68,42 @@ services:
       DATABASE_NAME: image_analyzer
       DATABASE_USER: postgres
       DATABASE_PASSWORD: ${DB_PASSWORD:-devpassword}
+      MODEL_PATH: /app/models
+      IMAGE_UPLOAD_DIR: /app/uploads
     depends_on:
       postgres:
         condition: service_healthy
     expose:
       - "8001"
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:8001/api/v1/health || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    command:
+      - "gunicorn"
+      - "api.main:app"
+      - "--workers"
+      - "4"
+      - "--worker-class"
+      - "uvicorn.workers.UvicornWorker"
+      - "--bind"
+      - "0.0.0.0:8001"
+      - "--timeout"
+      - "300"
+      - "--access-logfile"
+      - "-"
+      - "--error-logfile"
+      - "-"
+      - "--log-level"
+      - "info"
     networks:
       - integration-network
 
   image-tagger:
     build:
       context: ../image-tagger/Image_Tagger_3.4.74_vlm_lab_TL_runbook_full
-      dockerfile: deploy/Dockerfile
+      dockerfile: deploy/Dockerfile.backend
     container_name: integration-image-tagger
     environment:
       DATABASE_URL: postgresql://postgres:${DB_PASSWORD:-devpassword}@postgres:5432/image_analyzer
@@ -88,6 +112,7 @@ services:
         condition: service_healthy
     expose:
       - "8002"
+    command: ["uvicorn", "backend.main:app", "--host", "0.0.0.0", "--port", "8002"]
     volumes:
       - image_storage:/app/storage
     networks:
@@ -105,6 +130,7 @@ services:
         condition: service_healthy
     expose:
       - "8003"
+    command: ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8003"]
     networks:
       - integration-network
 
@@ -120,6 +146,7 @@ services:
         condition: service_healthy
     expose:
       - "8004"
+    command: ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8004"]
     networks:
       - integration-network
 
