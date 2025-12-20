@@ -129,6 +129,7 @@ services:
     container_name: integration-article-eater
     environment:
       DB_URL: postgresql://postgres:${DB_PASSWORD:-devpassword}@postgres:5432/image_analyzer
+      SCHEMA_NAME: evidence
     depends_on:
       postgres:
         condition: service_healthy
@@ -147,6 +148,7 @@ services:
     container_name: integration-knowledge-graph
     environment:
       DATABASE_URL: postgresql://postgres:${DB_PASSWORD:-devpassword}@postgres:5432/image_analyzer
+      SCHEMA_NAME: graph
     depends_on:
       postgres:
         condition: service_healthy
