@@ -50,9 +50,17 @@ const moduleConfigs = [
 ];
 
 function useModuleUrls() {
+  const gateway = import.meta.env.VITE_GATEWAY_URL || window.location.origin;
+  const defaults = {
+    graphical: `${gateway}/graphical/`,
+    tagger: `${gateway}/tagger/`,
+    article: `${gateway}/article/`,
+    graph: `${gateway}/graph/`,
+  };
+
   return useMemo(() => {
     return moduleConfigs.reduce((acc, module) => {
-      const value = import.meta.env[module.envKey] || '';
+      const value = import.meta.env[module.envKey] || defaults[module.id] || '';
       acc[module.id] = value.trim();
       return acc;
     }, {});

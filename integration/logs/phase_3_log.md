@@ -12,3 +12,5 @@
 - Module embedding uses iframe with per-module UI URL environment variables.
 - Build completed with npm; `npm install` reported 2 moderate vulnerabilities (not remediated).
 - Phase 3 gate check passed after build.
+- Added Nginx routes to serve module UIs at `/graphical/`, `/article/`, `/graph/`, and `/tagger/`.
+- Frontend shell now defaults module URLs to those Nginx routes when `VITE_*_UI_URL` is not set.

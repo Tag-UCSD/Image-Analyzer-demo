@@ -44,6 +44,10 @@ services:
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
       - ./frontend-shell/dist:/usr/share/nginx/html:ro
+      - ../graphical-model/frontend:/usr/share/nginx/html/modules/graphical:ro
+      - ../article-eater/Article_Eater_v20_7_43_repo/frontend:/usr/share/nginx/html/modules/article:ro
+      - ../knowledge-graph-ui/GraphExplorer_Static_v3/static-frontend:/usr/share/nginx/html/modules/graph:ro
+      - ../image-tagger/Image_Tagger_3.4.74_vlm_lab_TL_runbook_full/frontend:/usr/share/nginx/html/modules/tagger:ro
     depends_on:
       - graphical-model
       - image-tagger
