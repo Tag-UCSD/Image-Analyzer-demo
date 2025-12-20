@@ -240,7 +240,7 @@ def check_phase_1():
 
     # Port availability (if services not running)
     print("\n[Port Availability]")
-    for port in [5432, 6379, 80, 8001, 8002, 8003, 8004]:
+    for port in [5432, 6379, 8080, 8001, 8002, 8003, 8004]:
         gate.port_available(port)
 
     return gate.summary()
@@ -269,7 +269,7 @@ def check_phase_2():
 
     # Gateway routing
     print("\n[Gateway Routing]")
-    gate.port_responding(80, "Nginx gateway (:80)")
+    gate.port_responding(8080, "Nginx gateway (:8080)")
 
     # Database connectivity
     print("\n[Database]")
@@ -301,7 +301,7 @@ def check_phase_3():
 
     # Frontend serving
     print("\n[Frontend Serving]")
-    gate.port_responding(80, "Frontend via Nginx (:80)")
+    gate.port_responding(8080, "Frontend via Nginx (:8080)")
 
     return gate.summary()
 
@@ -323,7 +323,7 @@ def check_phase_4():
     print("\n[All Services Running]")
     gate.port_responding(5432, "PostgreSQL")
     gate.port_responding(6379, "Redis")
-    gate.port_responding(80, "Nginx gateway")
+    gate.port_responding(8080, "Nginx gateway")
     gate.port_responding(8001, "graphical-model")
     gate.port_responding(8002, "image-tagger")
     gate.port_responding(8003, "article-eater")
@@ -360,7 +360,7 @@ def check_phase_5():
 
     # All services responding
     print("\n[Services]")
-    for port in [5432, 6379, 80, 8001, 8002, 8003, 8004]:
+    for port in [5432, 6379, 8080, 8001, 8002, 8003, 8004]:
         gate.port_responding(port)
 
     # Tests

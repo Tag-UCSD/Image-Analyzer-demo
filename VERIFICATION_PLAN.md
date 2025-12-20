@@ -436,10 +436,10 @@ Create unified frontend shell with navigation between modules.
 **Verification:**
 ```bash
 # Test routing through gateway
-curl -s http://localhost/api/graphical/health | jq .
-curl -s http://localhost/api/tagger/health | jq .
-curl -s http://localhost/api/article/health | jq .
-curl -s http://localhost/api/graph/health | jq .
+curl -s http://localhost:8080/api/graphical/health | jq .
+curl -s http://localhost:8080/api/tagger/health | jq .
+curl -s http://localhost:8080/api/article/health | jq .
+curl -s http://localhost:8080/api/graph/health | jq .
 
 # All should return valid health responses
 ```
@@ -461,7 +461,7 @@ ls -la dist/
 #### Step 3.3: Module Loading
 
 **Verification (Manual):**
-1. Open http://localhost in browser
+1. Open http://localhost:8080 in browser
 2. Verify navigation bar shows all 4 modules
 3. Click each module tab, verify content loads
 4. Check browser console for JavaScript errors
@@ -475,12 +475,12 @@ import requests
 
 def main():
     # Check main page loads
-    resp = requests.get("http://localhost/")
+    resp = requests.get("http://localhost:8080/")
     assert resp.status_code == 200, "Main page failed to load"
     assert "<!DOCTYPE html>" in resp.text, "Not HTML response"
 
     # Check static assets
-    resp = requests.get("http://localhost/assets/main.js")
+    resp = requests.get("http://localhost:8080/assets/main.js")
     assert resp.status_code == 200, "JS assets not loading"
 
     print("✓ Frontend verification passed")
@@ -572,7 +572,7 @@ import requests
 import time
 
 # 1. Create test data in image-tagger
-resp = requests.post("http://localhost/api/tagger/images", json={
+resp = requests.post("http://localhost:8080/api/tagger/images", json={
     "url": "test://image.jpg",
     "tags": ["test_tag"]
 })
@@ -582,7 +582,7 @@ image_id = resp.json()["id"]
 time.sleep(2)
 
 # 3. Check if knowledge-graph has the data
-resp = requests.get(f"http://localhost/api/graph/nodes")
+resp = requests.get(f"http://localhost:8080/api/graph/nodes")
 nodes = resp.json()["nodes"]
 
 # Verify integration worked
@@ -626,7 +626,7 @@ import sys
 
 class IntegrationTests:
     def __init__(self):
-        self.base_url = "http://localhost"
+        self.base_url = "http://localhost:8080"
         self.results = []
 
     def test(self, name, func):

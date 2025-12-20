@@ -166,7 +166,7 @@ check_backends() {
     done
 
     # Check gateway routing (if nginx is running)
-    if curl -s "http://localhost/api/graphical/health" > /dev/null 2>&1; then
+    if curl -s "http://localhost:8080/api/graphical/health" > /dev/null 2>&1; then
         pass "Gateway routing to graphical-model"
     else
         warn "Gateway routing not working (nginx may not be running)"
@@ -199,7 +199,7 @@ check_frontend() {
     fi
 
     # Check if frontend is being served
-    if curl -s "http://localhost/" | grep -q "html" 2>/dev/null; then
+    if curl -s "http://localhost:8080/" | grep -q "html" 2>/dev/null; then
         pass "Frontend being served"
     else
         warn "Frontend not being served (nginx may not be running)"

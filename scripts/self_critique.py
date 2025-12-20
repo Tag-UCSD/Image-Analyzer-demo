@@ -67,7 +67,7 @@ CRITIQUE_QUESTIONS = {
             {
                 "id": "I2",
                 "question": "Are there port conflicts with existing services?",
-                "check": "Checked localhost ports 5432, 6379, 8000-8004, 80?",
+                "check": "Checked localhost ports 5432, 6379, 8000-8004, 8080?",
                 "risk": "Services fail to bind to ports"
             },
             {

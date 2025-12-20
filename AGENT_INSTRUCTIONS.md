@@ -609,7 +609,7 @@ from httpx import AsyncClient
 @pytest.mark.asyncio
 async def test_cross_module_flow():
     """Test data flows from image-tagger to knowledge-graph."""
-    async with AsyncClient(base_url="http://localhost") as client:
+    async with AsyncClient(base_url="http://localhost:8080") as client:
         # Create image in tagger
         response = await client.post("/api/tagger/images", json={...})
         assert response.status_code == 201

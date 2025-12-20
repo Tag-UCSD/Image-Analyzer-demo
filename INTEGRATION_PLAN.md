@@ -1427,11 +1427,11 @@ docker-compose exec postgres psql -U postgres -d image_analyzer
 docker-compose exec graphical-model python manage.py migrate
 
 # Health check all services
-curl http://localhost/health
-curl http://localhost/api/graphical/health
-curl http://localhost/api/tagger/health
-curl http://localhost/api/evidence/healthz
-curl http://localhost/api/graph/health
+curl http://localhost:8080/health
+curl http://localhost:8080/api/graphical/health
+curl http://localhost:8080/api/tagger/health
+curl http://localhost:8080/api/evidence/healthz
+curl http://localhost:8080/api/graph/health
 ```
 
 ---
