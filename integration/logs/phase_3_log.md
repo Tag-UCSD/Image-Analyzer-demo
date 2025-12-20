@@ -16,3 +16,4 @@
 - Frontend shell now defaults module URLs to those Nginx routes when `VITE_*_UI_URL` is not set.
 - Nginx root moved to `/usr/share/nginx/html/shell` to allow mounting module UIs alongside the shell.
 - Image-tagger apps built to `frontend/dist/{workbench,monitor,admin,explorer}` and served at `/workbench/`, `/monitor/`, `/admin/`, `/explorer/`.
+- Added Tagger surface selector in the shell; card selection now updates the embedded surface by deriving URLs from the gateway or `VITE_TAGGER_UI_URL`.

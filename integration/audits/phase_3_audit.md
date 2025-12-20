@@ -9,6 +9,7 @@
 - Shell now defaults to Nginx module routes when `VITE_*_UI_URL` values are not set.
 - Nginx shell root moved to `/usr/share/nginx/html/shell` so module mounts resolve correctly.
 - Image-tagger apps built and served at `/workbench/`, `/monitor/`, `/admin/`, `/explorer/`.
+- Tagger surface selector added to the shell and the embed now switches surfaces correctly.
 
 ## Verification Results
 - Gate check: PASSED (`python3 scripts/gate_check.py 3`, 2025-12-20 14:05:05)
