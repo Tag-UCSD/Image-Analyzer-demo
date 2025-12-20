@@ -29,16 +29,28 @@ export default function ImageTagger({ url, gateway }) {
   const [activeSurface, setActiveSurface] = useState('workbench');
   const surfaceUrls = useMemo(() => {
     const root = gateway || window.location.origin;
+    const normalized = (url || '').trim();
+    let baseRoot = root;
+
+    if (normalized) {
+      const match = normalized.match(/^(.*)\/(workbench|monitor|explorer|admin)\/?$/);
+      if (match) {
+        baseRoot = match[1];
+      } else {
+        baseRoot = normalized.replace(/\/$/, '');
+      }
+    }
+
     return {
-      workbench: `${root}/workbench/`,
-      monitor: `${root}/monitor/`,
-      explorer: `${root}/explorer/`,
-      admin: `${root}/admin/`,
+      workbench: `${baseRoot}/workbench/`,
+      monitor: `${baseRoot}/monitor/`,
+      explorer: `${baseRoot}/explorer/`,
+      admin: `${baseRoot}/admin/`,
     };
-  }, [gateway]);
+  }, [gateway, url]);
 
   const active = surfaces.find((surface) => surface.id === activeSurface);
-  const activeUrl = url || surfaceUrls[activeSurface];
+  const activeUrl = surfaceUrls[activeSurface];
 
   return (
     <section className="module-frame">
