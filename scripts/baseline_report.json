@@ -1,0 +1,147 @@
+{
+  "timestamp": "2025-12-20T10:36:34.973140",
+  "base_directory": "/Users/taggertsmith/Desktop/Image_Analyzer",
+  "modules": [
+    {
+      "name": "graphical-model",
+      "description": "Bayesian causal inference engine",
+      "path": "graphical-model",
+      "exists": true,
+      "checks": {
+        "api_entry": {
+          "exists": true,
+          "path": "api/main.py",
+          "size": 8415,
+          "modified": "2025-11-24T03:51:09.724118"
+        },
+        "requirements": {
+          "exists": true,
+          "path": "requirements.txt",
+          "size": 556,
+          "modified": "2025-11-24T15:25:33.270089"
+        },
+        "docker": {
+          "exists": true,
+          "path": "docker-compose.yml",
+          "size": 4931,
+          "modified": "2025-11-24T15:10:44.557039"
+        },
+        "database": {
+          "exists": true,
+          "path": "database/01_core_tables.sql",
+          "size": 6904,
+          "modified": "2025-11-23T23:06:08.019948"
+        },
+        "claude_md": {
+          "exists": true,
+          "path": "CLAUDE.md",
+          "size": 12869,
+          "modified": "2025-12-19T00:42:11.201702"
+        }
+      },
+      "status": "OK"
+    },
+    {
+      "name": "image-tagger",
+      "description": "Image annotation system",
+      "path": "image-tagger/Image_Tagger_3.4.74_vlm_lab_TL_runbook_full",
+      "exists": true,
+      "checks": {
+        "api_entry": {
+          "exists": true,
+          "path": "backend/main.py",
+          "size": 1390,
+          "modified": "2025-12-12T20:09:06"
+        },
+        "requirements": {
+          "exists": true,
+          "path": "requirements-install.txt",
+          "size": 157,
+          "modified": "2025-12-12T20:09:06"
+        },
+        "docker": {
+          "exists": true,
+          "path": "deploy/docker-compose.yml",
+          "size": 1410,
+          "modified": "2025-12-12T20:09:06"
+        },
+        "claude_md": {
+          "exists": true,
+          "path": "CLAUDE.md",
+          "size": 11120,
+          "modified": "2025-12-19T14:37:28.550960"
+        }
+      },
+      "status": "OK"
+    },
+    {
+      "name": "article-eater",
+      "description": "Evidence extraction from papers",
+      "path": "article-eater/Article_Eater_v20_7_43_repo",
+      "exists": true,
+      "checks": {
+        "api_entry": {
+          "exists": true,
+          "path": "app/main.py",
+          "size": 31118,
+          "modified": "2025-11-29T03:02:26"
+        },
+        "requirements": {
+          "exists": true,
+          "path": "requirements.txt",
+          "size": 856,
+          "modified": "2025-11-29T03:02:26"
+        },
+        "claude_md": {
+          "exists": true,
+          "path": "CLAUDE.md",
+          "size": 11338,
+          "modified": "2025-12-19T14:38:44.825288"
+        }
+      },
+      "status": "OK"
+    },
+    {
+      "name": "knowledge-graph-ui",
+      "description": "Graph visualization interface",
+      "path": "knowledge-graph-ui/GraphExplorer_Static_v3",
+      "exists": true,
+      "checks": {
+        "api_entry": {
+          "exists": true,
+          "path": "backend/app/main.py",
+          "size": 16977,
+          "modified": "2025-11-24T08:07:20"
+        },
+        "requirements": {
+          "exists": true,
+          "path": "backend/requirements.txt",
+          "size": 60,
+          "modified": "2025-11-24T08:07:20"
+        },
+        "frontend": {
+          "exists": true,
+          "path": "static-frontend/index.html",
+          "size": 26322,
+          "modified": "2025-12-04T03:19:18.474694"
+        }
+      },
+      "status": "OK"
+    },
+    {
+      "name": "experiments",
+      "description": "Experimental/prototype code",
+      "path": "experiments",
+      "exists": true,
+      "checks": {
+        "claude_md": {
+          "exists": true,
+          "path": "CLAUDE.md",
+          "size": 6409,
+          "modified": "2025-12-19T14:40:57.474009"
+        }
+      },
+      "status": "OK"
+    }
+  ]
+}
