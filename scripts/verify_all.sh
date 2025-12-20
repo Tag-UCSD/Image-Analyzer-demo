@@ -137,13 +137,11 @@ check_infrastructure() {
 
     # Check if containers are running (if docker-compose exists)
     if [ -f "$BASE_DIR/integration/docker-compose.unified.yml" ]; then
-        cd "$BASE_DIR/integration"
-        if docker-compose ps 2>/dev/null | grep -q "Up"; then
+        if docker-compose -f "$BASE_DIR/integration/docker-compose.unified.yml" ps 2>/dev/null | grep -q "Up"; then
             pass "Integration containers running"
         else
             warn "Integration containers not running"
         fi
-        cd "$BASE_DIR"
     fi
 }
 
@@ -225,7 +223,7 @@ check_integration() {
     fi
 
     # Check schemas exist
-    if docker exec integration-postgres psql -U admin -d unified_db -c "\dn" 2>/dev/null | grep -q "graphical"; then
+    if docker exec integration-postgres psql -U postgres -d image_analyzer -c "\dn" 2>/dev/null | grep -q "graphical"; then
         pass "Database schemas created"
     else
         warn "Database schemas not created yet"
