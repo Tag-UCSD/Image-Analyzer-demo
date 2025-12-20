@@ -111,7 +111,10 @@ export default function App() {
           </div>
         </header>
         {activeModule && ActiveComponent && (
-          <ActiveComponent url={moduleUrls[activeModule.id]} />
+          <ActiveComponent
+            url={moduleUrls[activeModule.id]}
+            gateway={gateway}
+          />
         )}
       </main>
     </div>

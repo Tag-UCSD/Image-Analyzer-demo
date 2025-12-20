@@ -1,14 +1,95 @@
-import React from 'react';
+import React, { useMemo, useState } from 'react';
 
 import ModuleFrame from '../components/ModuleFrame.jsx';
 
-export default function ImageTagger({ url }) {
+const surfaces = [
+  {
+    id: 'workbench',
+    title: 'Tagger Workbench',
+    description: 'High-throughput labeling of images and regions.',
+  },
+  {
+    id: 'monitor',
+    title: 'Supervisor Monitor',
+    description: 'Track IRR, throughput, and QA disagreements.',
+  },
+  {
+    id: 'explorer',
+    title: 'Research Explorer',
+    description: 'Search and export tagged corpora.',
+  },
+  {
+    id: 'admin',
+    title: 'Admin Cockpit',
+    description: 'System controls and budget safeguards.',
+  },
+];
+
+export default function ImageTagger({ url, gateway }) {
+  const [activeSurface, setActiveSurface] = useState('workbench');
+  const surfaceUrls = useMemo(() => {
+    const root = gateway || window.location.origin;
+    return {
+      workbench: `${root}/workbench/`,
+      monitor: `${root}/monitor/`,
+      explorer: `${root}/explorer/`,
+      admin: `${root}/admin/`,
+    };
+  }, [gateway]);
+
+  const active = surfaces.find((surface) => surface.id === activeSurface);
+  const activeUrl = url || surfaceUrls[activeSurface];
+
   return (
-    <ModuleFrame
-      title="Image Tagger"
-      description="Annotate images, inspect attributes, and export training data."
-      url={url}
-      envKey="VITE_TAGGER_UI_URL"
-    />
+    <section className="module-frame">
+      <div className="panel">
+        <div className="panel-header">
+          <div>
+            <h2>Image Tagger Surfaces</h2>
+            <p>Select a surface to embed. Each surface opens in a new tab as well.</p>
+          </div>
+          <a
+            className="panel-link"
+            href={`${gateway || window.location.origin}/tagger/`}
+            target="_blank"
+            rel="noreferrer"
+          >
+            Portal page
+          </a>
+        </div>
+        <div className="panel-body">
+          <div className="surface-grid">
+            {surfaces.map((surface) => (
+              <button
+                key={surface.id}
+                className={`surface-card ${surface.id === activeSurface ? 'is-active' : ''}`}
+                onClick={() => setActiveSurface(surface.id)}
+                type="button"
+              >
+                <div className="surface-title">{surface.title}</div>
+                <div className="surface-description">{surface.description}</div>
+                <div className="surface-actions">
+                  <span className="surface-chip">Embed</span>
+                  <a
+                    href={surfaceUrls[surface.id]}
+                    onClick={(event) => event.stopPropagation()}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    Open tab
+                  </a>
+                </div>
+              </button>
+            ))}
+          </div>
+        </div>
+      </div>
+      <ModuleFrame
+        title={active?.title || 'Image Tagger'}
+        description={active?.description || 'Annotate images, inspect attributes, and export training data.'}
+        url={activeUrl}
+        envKey="VITE_TAGGER_UI_URL"
+      />
+    </section>
   );
 }
