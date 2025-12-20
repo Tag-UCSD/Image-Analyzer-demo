@@ -53,7 +53,7 @@ function useModuleUrls() {
   const gateway = import.meta.env.VITE_GATEWAY_URL || window.location.origin;
   const defaults = {
     graphical: `${gateway}/graphical/`,
-    tagger: `${gateway}/tagger/`,
+    tagger: `${gateway}/workbench/`,
     article: `${gateway}/article/`,
     graph: `${gateway}/graph/`,
   };

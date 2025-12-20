@@ -7,6 +7,8 @@
 - Added build outputs to `integration/frontend-shell/dist`.
 - Added Nginx routes and volume mounts to serve module UIs under `/graphical/`, `/article/`, `/graph/`, and `/tagger/`.
 - Shell now defaults to Nginx module routes when `VITE_*_UI_URL` values are not set.
+- Nginx shell root moved to `/usr/share/nginx/html/shell` so module mounts resolve correctly.
+- Image-tagger apps built and served at `/workbench/`, `/monitor/`, `/admin/`, `/explorer/`.
 
 ## Verification Results
 - Gate check: PASSED (`python3 scripts/gate_check.py 3`, 2025-12-20 14:05:05)
@@ -14,7 +16,6 @@
 - npm audit: 2 moderate vulnerabilities (not remediated)
 
 ## Known Issues
-- Module iframes require explicit `VITE_*_UI_URL` values to render actual UIs.
-- Image-tagger frontend is not prebuilt; `/tagger/` serves the static portal but app bundles need a build step for full functionality.
+- Image-tagger portal (`/tagger/`) links to apps now available at `/workbench/`, `/monitor/`, `/admin/`, `/explorer/`.
 
 ## Ready for Phase 4: Yes, pending human review

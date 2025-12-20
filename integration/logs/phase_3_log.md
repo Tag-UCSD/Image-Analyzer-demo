@@ -14,3 +14,5 @@
 - Phase 3 gate check passed after build.
 - Added Nginx routes to serve module UIs at `/graphical/`, `/article/`, `/graph/`, and `/tagger/`.
 - Frontend shell now defaults module URLs to those Nginx routes when `VITE_*_UI_URL` is not set.
+- Nginx root moved to `/usr/share/nginx/html/shell` to allow mounting module UIs alongside the shell.
+- Image-tagger apps built to `frontend/dist/{workbench,monitor,admin,explorer}` and served at `/workbench/`, `/monitor/`, `/admin/`, `/explorer/`.
