@@ -1,0 +1,14 @@
+# Phase 3 Log
+
+## Planned Changes
+- Create unified frontend shell under `integration/frontend-shell` (Vite + React) with shared navigation and module frames.
+- Match styling to existing article-eater and image-tagger design patterns (panels/cards/nav), extracting palette/typography/spacing tokens.
+- Configure frontend to proxy API calls through the Nginx gateway using `/api/{module}` routes (or `/api/v1/{module}` if needed).
+- Add minimal build artifacts for Nginx static serving.
+
+## Notes
+- Phase 3 gate check failed initially due to missing frontend shell files; will address during implementation.
+- Frontend shell implemented with Vite/React and article-eater inspired design tokens.
+- Module embedding uses iframe with per-module UI URL environment variables.
+- Build completed with npm; `npm install` reported 2 moderate vulnerabilities (not remediated).
+- Phase 3 gate check passed after build.
