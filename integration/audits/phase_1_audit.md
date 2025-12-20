@@ -24,6 +24,9 @@
     - `http://localhost:8080/api/article/healthz`
     - `http://localhost:8080/api/graph/graph/v1_demo`
 
+## Follow-Up Infrastructure Adjustment
+- Exposed backend ports 8001-8004 on the host to satisfy Phase 2 gate checks.
+
 ## Known Issues
 - None in Phase 1. (Gateway host port now 8080; prior port 80 required elevated permissions.)
 

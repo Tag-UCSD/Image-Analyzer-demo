@@ -41,3 +41,6 @@
 - Added graphical-model healthcheck override for port 8001.
 - Added knowledge-graph backend Dockerfile.
 - Updated Nginx upstream hostnames and routing to strip module prefixes.
+
+## Updates (Phase 2 Gate Prep)
+- Exposed backend ports 8001-8004 to host in `integration/docker-compose.unified.yml` to satisfy Phase 2 gate checks.
