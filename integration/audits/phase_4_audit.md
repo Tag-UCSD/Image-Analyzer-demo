@@ -6,10 +6,11 @@
 - Added unified API client under `integration/shared/api_client/` using stdlib HTTP.
 - Added integration tests for auth, event bus, and API client in `integration/tests/`.
 - Added package markers in `integration/__init__.py` and `integration/shared/__init__.py`.
+- Stabilized Redis subscriber teardown to avoid socket errors during test shutdown.
 
 ## Verification Results
 - Gate check: `python3 scripts/gate_check.py 4` PASS (9/9)
-- Tests: `python3 -m unittest integration.tests.test_auth integration.tests.test_events integration.tests.test_api_client` PASS (1 skipped: Redis optional test)
+- Tests: `python3 -m unittest integration.tests.test_auth integration.tests.test_events integration.tests.test_api_client` PASS (Redis pub/sub test enabled)
 - Manual verification: Verified shared auth and event bus modules import cleanly in local Python.
 
 ## Self-Critique
@@ -40,7 +41,7 @@
 
 **General self-critique:**
 - What doesn't work perfectly?
-  - Redis-backed test is skipped without redis-py installed.
+  - Redis-backed test requires redis-py; tests assume `.venv` dependency is available.
 - What shortcuts did I take?
   - Avoided wiring shared auth/event bus into module backends to prevent container import issues.
 - What would I do differently?

@@ -5,6 +5,7 @@ from __future__ import annotations
 import json
 import os
 import threading
+import time
 from typing import Callable, Dict, List, Optional
 
 from .schemas import EventMessage
@@ -50,10 +51,18 @@ class RedisEventSubscriber:
             self._pubsub.close()
         except Exception:
             pass
+        if self._thread and self._thread.is_alive():
+            self._thread.join(timeout=2)
 
     def _listen(self) -> None:
         while not self._stop_event.is_set():
-            message = self._pubsub.get_message(ignore_subscribe_messages=True, timeout=1.0)
+            try:
+                message = self._pubsub.get_message(ignore_subscribe_messages=True, timeout=1.0)
+            except Exception:
+                if self._stop_event.is_set():
+                    break
+                time.sleep(0.1)
+                continue
             if not message:
                 continue
             if message.get("type") != "message":

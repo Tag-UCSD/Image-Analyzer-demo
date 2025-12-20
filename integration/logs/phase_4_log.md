@@ -48,3 +48,8 @@ Phase: 4 - Integration
 - Ran: `python3 -m unittest integration.tests.test_auth integration.tests.test_events integration.tests.test_api_client`
 - Result: PASS (1 skipped: Redis optional test)
 - Gate check: `python3 scripts/gate_check.py 4` PASS
+
+## Update: Redis Test Stabilization
+- Installed redis-py in local `.venv` to enable Redis pub/sub test.
+- Adjusted Redis subscriber shutdown handling to avoid socket errors during test teardown.
+- Re-ran unit tests with Redis enabled: all pass.
