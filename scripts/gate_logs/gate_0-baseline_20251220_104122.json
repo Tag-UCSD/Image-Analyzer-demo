@@ -1,0 +1,68 @@
+{
+  "phase": "0-baseline",
+  "timestamp": "2025-12-20T10:41:22.802039",
+  "checks": [
+    {
+      "name": "Integration plan document",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Verification plan document",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Root CLAUDE.md",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Baseline check script",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Verification script",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Self-critique script",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "graphical-model exists",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "graphical-model API",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "image-tagger exists",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "article-eater exists",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "knowledge-graph-ui exists",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Baseline check script passes",
+      "passed": true,
+      "details": ""
+    }
+  ],
+  "passed": 12,
+  "failed": 0
+}

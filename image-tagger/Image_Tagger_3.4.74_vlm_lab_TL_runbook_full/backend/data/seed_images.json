@@ -1,0 +1,98 @@
+{
+    "images": [
+        {
+            "filename": "kitchen_modern_01.jpg",
+            "url": "https://picsum.photos/seed/100/800/600",
+            "tags": [
+                "Modern",
+                "Kitchen",
+                "High-Res"
+            ],
+            "meta_data": {
+                "source": "picsum_seed"
+            }
+        },
+        {
+            "filename": "living_traditional_02.jpg",
+            "url": "https://picsum.photos/seed/101/800/600",
+            "tags": [
+                "Traditional",
+                "Living Room",
+                "Low-Light"
+            ],
+            "meta_data": {
+                "source": "picsum_seed"
+            }
+        },
+        {
+            "filename": "kitchen_modern_03.jpg",
+            "url": "https://picsum.photos/seed/102/800/600",
+            "tags": [
+                "Modern",
+                "Kitchen"
+            ],
+            "meta_data": {
+                "source": "picsum_seed"
+            }
+        },
+        {
+            "filename": "living_traditional_04.jpg",
+            "url": "https://picsum.photos/seed/103/800/600",
+            "tags": [
+                "Traditional",
+                "Living Room"
+            ],
+            "meta_data": {
+                "source": "picsum_seed"
+            }
+        },
+        {
+            "filename": "office_modern_05.jpg",
+            "url": "https://picsum.photos/seed/104/800/600",
+            "tags": [
+                "Modern",
+                "Office",
+                "High-Res"
+            ],
+            "meta_data": {
+                "source": "picsum_seed"
+            }
+        },
+        {
+            "filename": "bedroom_cozy_06.jpg",
+            "url": "https://picsum.photos/seed/105/800/600",
+            "tags": [
+                "Cozy",
+                "Bedroom",
+                "Low-Light"
+            ],
+            "meta_data": {
+                "source": "picsum_seed"
+            }
+        },
+        {
+            "filename": "retail_bright_07.jpg",
+            "url": "https://picsum.photos/seed/106/800/600",
+            "tags": [
+                "Retail",
+                "Bright",
+                "High-Res"
+            ],
+            "meta_data": {
+                "source": "picsum_seed"
+            }
+        },
+        {
+            "filename": "hospitality_lobby_08.jpg",
+            "url": "https://picsum.photos/seed/107/800/600",
+            "tags": [
+                "Hospitality",
+                "Lobby",
+                "Luxury"
+            ],
+            "meta_data": {
+                "source": "picsum_seed"
+            }
+        }
+    ]
+}

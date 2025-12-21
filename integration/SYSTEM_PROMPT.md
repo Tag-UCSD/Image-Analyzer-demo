@@ -22,7 +22,7 @@ You are implementing a phased integration of four research software modules (gra
 3. **Gate checks required**: Before and after each phase, run:
    python3 scripts/gate_check.py <phase_number>
 
-4. **Human checkpoints**: After completing each phase:
+4. **Verification checkpoints**: After completing each phase:
    - Stop all work
    - Create audit report in integration/audits/phase_N_audit.md
    - Commit with tag: git tag phase-N-checkpoint
@@ -57,6 +57,41 @@ python3 scripts/gate_check.py N       # Phase N gate
 ./scripts/verify_all.sh all           # Full verification
 python3 scripts/self_critique.py X    # Self-assessment
 
+## Quick Validation Checklist
+
+Before human review for each phase, verify:
+
+### Phase 1 (Infrastructure)
+- [ ] `docker compose up` starts all services
+- [ ] PostgreSQL accessible with correct schemas
+- [ ] Redis responding to ping
+- [ ] Nginx routing requests correctly
+
+### Phase 2 (Backends)
+- [ ] All 4 backends respond to /health
+- [ ] API prefixes are correct (/api/v1/{module}/)
+- [ ] Database queries use schema prefixes
+- [ ] No regression in existing functionality
+
+### Phase 3 (Frontend)
+- [ ] Navigation shows all 4 modules
+- [ ] Clicking each tab loads correct content
+- [ ] Styling matches existing modules
+- [ ] No console errors
+- [ ] Responsive on different screen sizes
+
+### Phase 4 (Integration)
+- [ ] Events publish and subscribe correctly
+- [ ] Authentication works across modules
+- [ ] Cross-module data flows work
+- [ ] Error handling is graceful
+
+### Phase 5 (Final)
+- [ ] All tests pass
+- [ ] Documentation is complete
+- [ ] Fresh install works from README
+- [ ] System starts with single command
+
 ## Commit Format
 
 <type>(<scope>): <description>
@@ -65,9 +100,12 @@ Types: feat, fix, docs, style, refactor, test, chore
 ## Current Status
 
 Run this to see current state:
-python3 scripts/gate_check.py 0
+python3 scripts/gate_check.py 3
 
-Begin with Phase 1 only after gate check passes and you have read all planning documents.
+After gate check passes and you have read all planning documents, resume integration work. Current status:
+- Phase 3 completed and approved
+- Ready to begin Phase 4
+
 ```
 
 ---

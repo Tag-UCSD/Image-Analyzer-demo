@@ -1,0 +1,43 @@
+{
+  "phase": "2-backends",
+  "timestamp": "2025-12-20T13:32:22.456243",
+  "checks": [
+    {
+      "name": "graphical-model backend (:8001)",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "image-tagger backend (:8002)",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "article-eater backend (:8003)",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "knowledge-graph-ui backend (:8004)",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Nginx gateway (:8080)",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "PostgreSQL (:5432)",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Redis (:6379)",
+      "passed": true,
+      "details": ""
+    }
+  ],
+  "passed": 7,
+  "failed": 0
+}

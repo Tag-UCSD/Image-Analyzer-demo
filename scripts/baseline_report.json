@@ -1,5 +1,5 @@
 {
-  "timestamp": "2025-12-20T10:36:34.973140",
+  "timestamp": "2025-12-20T21:41:02.443714",
   "base_directory": "/Users/taggertsmith/Desktop/Image_Analyzer",
   "modules": [
     {
@@ -11,14 +11,14 @@
         "api_entry": {
           "exists": true,
           "path": "api/main.py",
-          "size": 8415,
-          "modified": "2025-11-24T03:51:09.724118"
+          "size": 9490,
+          "modified": "2025-12-20T18:45:17.417831"
         },
         "requirements": {
           "exists": true,
           "path": "requirements.txt",
-          "size": 556,
-          "modified": "2025-11-24T15:25:33.270089"
+          "size": 593,
+          "modified": "2025-12-20T21:38:53.990477"
         },
         "docker": {
           "exists": true,
@@ -50,8 +50,8 @@
         "api_entry": {
           "exists": true,
           "path": "backend/main.py",
-          "size": 1390,
-          "modified": "2025-12-12T20:09:06"
+          "size": 4893,
+          "modified": "2025-12-20T19:38:03.669487"
         },
         "requirements": {
           "exists": true,
@@ -83,14 +83,14 @@
         "api_entry": {
           "exists": true,
           "path": "app/main.py",
-          "size": 31118,
-          "modified": "2025-11-29T03:02:26"
+          "size": 32459,
+          "modified": "2025-12-20T20:00:01.531522"
         },
         "requirements": {
           "exists": true,
           "path": "requirements.txt",
-          "size": 856,
-          "modified": "2025-11-29T03:02:26"
+          "size": 901,
+          "modified": "2025-12-20T13:13:16.936336"
         },
         "claude_md": {
           "exists": true,
@@ -110,20 +110,20 @@
         "api_entry": {
           "exists": true,
           "path": "backend/app/main.py",
-          "size": 16977,
-          "modified": "2025-11-24T08:07:20"
+          "size": 21465,
+          "modified": "2025-12-20T13:28:36.332074"
         },
         "requirements": {
           "exists": true,
           "path": "backend/requirements.txt",
-          "size": 60,
-          "modified": "2025-11-24T08:07:20"
+          "size": 83,
+          "modified": "2025-12-20T13:28:43.184772"
         },
         "frontend": {
           "exists": true,
           "path": "static-frontend/index.html",
-          "size": 26322,
-          "modified": "2025-12-04T03:19:18.474694"
+          "size": 36561,
+          "modified": "2025-12-20T21:24:59.819016"
         }
       },
       "status": "OK"

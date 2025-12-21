@@ -1,0 +1,83 @@
+{
+  "phase": "1-infrastructure",
+  "timestamp": "2025-12-20T10:47:50.674226",
+  "checks": [
+    {
+      "name": "Docker available",
+      "passed": false,
+      "details": "Cannot connect to the Docker daemon at unix:///Users/taggertsmith/.docker/run/docker.sock. Is the do"
+    },
+    {
+      "name": "Docker Compose v2 available",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Integration directory",
+      "passed": false,
+      "details": "Missing: /Users/taggertsmith/Desktop/Image_Analyzer/integration"
+    },
+    {
+      "name": "Nginx config directory",
+      "passed": false,
+      "details": "Missing: /Users/taggertsmith/Desktop/Image_Analyzer/integration/nginx"
+    },
+    {
+      "name": "Database init directory",
+      "passed": false,
+      "details": "Missing: /Users/taggertsmith/Desktop/Image_Analyzer/integration/db-init"
+    },
+    {
+      "name": "Unified docker-compose",
+      "passed": false,
+      "details": "Not created yet"
+    },
+    {
+      "name": "Nginx configuration",
+      "passed": false,
+      "details": "Missing: /Users/taggertsmith/Desktop/Image_Analyzer/integration/nginx/nginx.conf"
+    },
+    {
+      "name": "Schema creation SQL",
+      "passed": false,
+      "details": "Missing: /Users/taggertsmith/Desktop/Image_Analyzer/integration/db-init/00_create_schemas.sql"
+    },
+    {
+      "name": "Port 5432 available",
+      "passed": false,
+      "details": "Port 5432 already in use"
+    },
+    {
+      "name": "Port 6379 available",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Port 80 available",
+      "passed": false,
+      "details": "Port 80 already in use"
+    },
+    {
+      "name": "Port 8001 available",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Port 8002 available",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Port 8003 available",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Port 8004 available",
+      "passed": true,
+      "details": ""
+    }
+  ],
+  "passed": 6,
+  "failed": 9
+}

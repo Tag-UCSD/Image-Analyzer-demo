@@ -1,0 +1,88 @@
+{
+  "phase": "1-infrastructure",
+  "timestamp": "2025-12-20T10:54:06.755564",
+  "checks": [
+    {
+      "name": "Docker available",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Docker Compose v2 available",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Integration directory",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Nginx config directory",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Database init directory",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Unified docker-compose",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Docker Compose syntax valid",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Nginx configuration",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Schema creation SQL",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Port 5432 available",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Port 6379 available",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Port 80 available",
+      "passed": false,
+      "details": "Port 80 already in use"
+    },
+    {
+      "name": "Port 8001 available",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Port 8002 available",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Port 8003 available",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Port 8004 available",
+      "passed": true,
+      "details": ""
+    }
+  ],
+  "passed": 15,
+  "failed": 1
+}

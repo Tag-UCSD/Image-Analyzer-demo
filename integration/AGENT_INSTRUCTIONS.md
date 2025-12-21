@@ -67,19 +67,48 @@ Each module has a `CLAUDE.md` file describing its structure:
    ```
 4. **Generate audit report** - Create `integration/audits/phase_N_audit.md`:
    ```markdown
-   # Phase N Audit Report
-
-   ## Changes Made
-   - [List all files created/modified]
-
-   ## Verification Results
-   - [Gate check output]
-   - [Test results]
-
-   ## Known Issues
-   - [Any issues for human review]
-
-   ## Ready for Phase N+1: Yes/No
+   # Phase N Audit Report                                                     
+                                                                                
+     ## Changes Made                                                            
+     - [List all files created/modified with brief descriptions]                
+                                                                                
+     ## Verification Results                                                    
+     - Gate check: [output from gate_check.py]                                  
+     - Tests: [test results with pass/fail counts]                              
+     - Manual verification: [what was checked manually]                         
+                                                                                
+     ## Self-Critique                                                           
+                                                                                
+     At each gate, you MUST answer these questions in the audit report:            
+  - [ ] Does this actually work, or does it just look like it works?            
+  - [ ] What assumptions am I making that might be wrong?                       
+  - [ ] What edge cases haven't I tested?                                       
+  - [ ] Is this the simplest solution, or am I over-engineering?                
+  - [ ] Would this be maintainable by someone else?                             
+  - [ ] Am I introducing any security vulnerabilities?                          
+                                                                                
+  PLUS all phase-specific questions from VERIFICATION_PLAN.md Phase N:      
+                                                                                
+     **[Question 1 from VERIFICATION_PLAN.md]**                                 
+     Answer: [Your honest assessment]                                           
+                                                                                
+     **[Question 2 from VERIFICATION_PLAN.md]**                                 
+     Answer: [Your honest assessment]                                           
+                                                                                
+     [Continue for all questions...]                                            
+                                                                                
+     **General self-critique:**                                                 
+     - What doesn't work perfectly?                                             
+     - What shortcuts did I take?                                               
+     - What would I do differently?                                             
+     - What's the worst that could happen?                                      
+     - Is this ready for the next phase?                                        
+                                                                                
+     ## Known Issues                                                            
+     - [Any issues requiring human review or decisions]                         
+                                                                                
+     ## Ready for Phase N+1: Yes/No                                             
+     [Justify your answer based on gate check results and self-critique]
    ```
 5. **STOP and await human approval** before proceeding to next phase
 

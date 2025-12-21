@@ -1,0 +1,53 @@
+{
+  "phase": "4-integration",
+  "timestamp": "2025-12-20T18:17:18.468153",
+  "checks": [
+    {
+      "name": "Redis for event bus",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "PostgreSQL",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Redis",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Nginx gateway",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "graphical-model",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "image-tagger",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "article-eater",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "knowledge-graph-ui",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Shared auth module",
+      "passed": true,
+      "details": ""
+    }
+  ],
+  "passed": 9,
+  "failed": 0
+}

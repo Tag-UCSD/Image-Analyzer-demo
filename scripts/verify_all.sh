@@ -67,14 +67,14 @@ check_baseline() {
     done
 
     # Check integration plan
-    if [ -f "$BASE_DIR/INTEGRATION_PLAN.md" ]; then
+    if [ -f "$BASE_DIR/INTEGRATION_PLAN.md" ] || [ -f "$BASE_DIR/integration/INTEGRATION_PLAN.md" ]; then
         pass "Integration plan exists"
     else
         warn "Integration plan not found"
     fi
 
     # Check verification plan
-    if [ -f "$BASE_DIR/VERIFICATION_PLAN.md" ]; then
+    if [ -f "$BASE_DIR/VERIFICATION_PLAN.md" ] || [ -f "$BASE_DIR/integration/VERIFICATION_PLAN.md" ]; then
         pass "Verification plan exists"
     else
         warn "Verification plan not found"
@@ -235,8 +235,8 @@ check_quick() {
     header "Quick Verification"
 
     # Files exist
-    [ -f "$BASE_DIR/INTEGRATION_PLAN.md" ] && pass "Integration plan" || warn "No integration plan"
-    [ -f "$BASE_DIR/VERIFICATION_PLAN.md" ] && pass "Verification plan" || warn "No verification plan"
+    [ -f "$BASE_DIR/INTEGRATION_PLAN.md" ] || [ -f "$BASE_DIR/integration/INTEGRATION_PLAN.md" ] && pass "Integration plan" || warn "No integration plan"
+    [ -f "$BASE_DIR/VERIFICATION_PLAN.md" ] || [ -f "$BASE_DIR/integration/VERIFICATION_PLAN.md" ] && pass "Verification plan" || warn "No verification plan"
     [ -f "$BASE_DIR/scripts/baseline_check.py" ] && pass "Baseline check script" || warn "No baseline script"
 
     # Docker available
