@@ -230,6 +230,33 @@ check_integration() {
     fi
 }
 
+# Data Flow Checks
+check_data_flow() {
+    header "Data Flow Checks"
+
+    if python3 "$SCRIPT_DIR/gate_check_data_flow.py" 0 > /dev/null 2>&1; then
+        pass "Data flow baseline gate"
+    else
+        fail "Data flow baseline gate failed"
+    fi
+
+    if [ -f "$BASE_DIR/integration/tests/test_data_flow.py" ]; then
+        pass "Data flow test suite present"
+    else
+        warn "Data flow test suite missing"
+    fi
+
+    if [ -x "$SCRIPT_DIR/run_data_flow_tests.sh" ]; then
+        if "$SCRIPT_DIR/run_data_flow_tests.sh" > /dev/null 2>&1; then
+            pass "Data flow tests"
+        else
+            warn "Data flow tests failed (endpoints may not be wired yet)"
+        fi
+    else
+        warn "Data flow test runner missing"
+    fi
+}
+
 # Quick checks only
 check_quick() {
     header "Quick Verification"
@@ -290,6 +317,7 @@ main() {
             check_backends
             check_frontend
             check_integration
+            check_data_flow
             ;;
         *)
             echo "Usage: $0 [quick|all|phase N]"

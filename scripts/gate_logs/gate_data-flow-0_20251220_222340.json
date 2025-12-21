@@ -1,0 +1,43 @@
+{
+  "phase": "data-flow-0",
+  "timestamp": "2025-12-20T22:23:40.816784",
+  "checks": [
+    {
+      "name": "Data flow plan",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Agent instructions",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "Verification plan",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "graphical-model CLAUDE",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "image-tagger CLAUDE",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "article-eater CLAUDE",
+      "passed": true,
+      "details": ""
+    },
+    {
+      "name": "knowledge-graph CLAUDE",
+      "passed": true,
+      "details": ""
+    }
+  ],
+  "passed": 7,
+  "failed": 0
+}
