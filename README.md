@@ -66,11 +66,32 @@ Health checks:
 
 ## What Makes This Useful for Scientists and Architects
 
-- **Causal reasoning, not just correlations**: the graphical-model uses Bayesian causal inference with explicit mediation layers.
-- **Evidence-grounded design rules**: article-eater structures findings into rules with provenance and quality metadata.
-- **Human + machine tagging loop**: tagger provides a repeatable tagging workflow with deterministic science methods.
-- **Graph exploration with evidence**: the knowledge graph UI connects edges to literature and effect sizes.
-- **Cross-module integration**: a unified system lets a research team move from papers to predictions without context-switching tools.
+- **Causal reasoning, not just correlations**: the graphical-model is built around Bayesian causal inference and interventional queries (Pearl, 2009).
+- **Evidence-grounded design rules**: article-eater structures findings into auditable rules with provenance and quality metadata (Guyatt et al., 2008).
+- **Human + machine tagging loop**: the tagger’s deterministic science pipeline supports repeatable feature extraction for controlled studies.
+- **Graph exploration with evidence**: the knowledge graph UI connects edges to effect sizes and underlying sources, enabling evidence inspection.
+- **Cross-module integration**: a unified system lets teams move from papers to predictions without context-switching tools.
+
+## Scientific Foundations (Demo Summary)
+
+This demo follows an academic architecture developed for evidence-based design, emphasizing interpretability, causal identification, and uncertainty transparency.
+
+- **Three-layer model**: attributes (image-derived) -> mediators (perceived states) -> outcomes (psychological measures), supporting mechanistic interpretation.
+- **Goldilocks effects**: key environmental attributes are modeled with inverted-U responses, preventing linear overgeneralization in design recommendations.
+- **Bayesian evidence synthesis**: priors are informed by literature and updated with new data, yielding credible intervals rather than point claims.
+- **Uncertainty classes**: structural, causal identification, heterogeneity, parametric, and model specification uncertainties are tracked separately.
+- **Triangulation**: multiple study designs are combined to strengthen causal confidence when biases differ across methods (Munafò & Davey Smith, 2018).
+
+## Citations (Selected)
+
+- Boubekri, M., Cheung, I. N., Reid, K. J., Wang, C. H., & Zee, P. C. (2014). Impact of windows and daylight exposure on overall health and sleep quality of office workers. Journal of Clinical Sleep Medicine, 10(6), 603–611. https://doi.org/10.5664/jcsm.3780
+- Gignac, G. E., & Szodorai, E. T. (2016). Effect size guidelines for individual differences researchers. Personality and Individual Differences, 102, 74–78. https://doi.org/10.1016/j.paid.2016.06.069
+- Guyatt, G. H., et al. (2008). GRADE: an emerging consensus on rating quality of evidence and strength of recommendations. BMJ, 336(7650), 924–926. https://doi.org/10.1136/bmj.39489.470347.AD
+- Lewin, S., et al. (2018). Applying GRADE-CERQual to qualitative evidence synthesis findings. Implementation Science, 13(S1), 2. https://doi.org/10.1186/s13012-017-0688-3
+- Lohr, V. I., Pearson-Mims, C. H., & Goodwin, G. K. (1996). Interior plants may improve worker productivity and reduce stress. Journal of Environmental Horticulture, 14(2), 97–100. https://doi.org/10.24266/0738-2898-14.2.97
+- Munafò, M. R., & Davey Smith, G. (2018). Robust research needs many lines of evidence. Nature, 553(7689), 399–401. https://doi.org/10.1038/d41586-018-01023-3
+- Pearl, J. (2009). Causality: Models, reasoning, and inference (2nd ed.). Cambridge University Press.
+- Ulrich, R. S. (1984). View through a window may influence recovery from surgery. Science, 224(4647), 420–421. https://doi.org/10.1126/science.6143402
 
 ## Important Notes
 
