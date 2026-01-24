@@ -1,0 +1,58 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://image-analyzer/contracts/evidence_export.schema.json",
+  "title": "Evidence Export (Article-Eater to Knowledge-Graph)",
+  "description": "Schema for findings exported from Article-Eater to Knowledge-Graph",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "required": ["edge_id", "from_node", "to_node", "effect_direction"],
+    "properties": {
+      "edge_id": {
+        "type": "string",
+        "description": "Unique identifier for the edge"
+      },
+      "from_node": {
+        "type": "string",
+        "description": "Source node ID (attribute or mediator)"
+      },
+      "to_node": {
+        "type": "string",
+        "description": "Target node ID (mediator or outcome)"
+      },
+      "effect_size": {
+        "type": "number",
+        "description": "Standardized effect size"
+      },
+      "effect_direction": {
+        "type": "string",
+        "enum": ["positive", "negative", "increases", "decreases", "mixed"],
+        "description": "Direction of effect"
+      },
+      "uncertainty": {
+        "type": "object",
+        "properties": {
+          "pi": {"type": "number", "minimum": 0, "maximum": 1, "description": "Structural probability"},
+          "gamma": {"type": "number", "minimum": 0, "maximum": 1, "description": "Causal identification probability"},
+          "tau2": {"type": "number", "minimum": 0, "description": "Between-study heterogeneity"},
+          "sigma2": {"type": "number", "minimum": 0, "description": "Parametric uncertainty"},
+          "phi": {"type": "number", "minimum": 0, "maximum": 1, "description": "Functional form correctness"}
+        }
+      },
+      "kappa": {
+        "type": "string",
+        "enum": ["A", "B", "C", "D"],
+        "description": "GRADE-style evidence certainty class"
+      },
+      "evidence": {
+        "type": "object",
+        "properties": {
+          "doi": {"type": "string"},
+          "title": {"type": "string"},
+          "population": {"type": "string"},
+          "quality": {"type": "number", "minimum": 0, "maximum": 1}
+        }
+      }
+    }
+  }
+}

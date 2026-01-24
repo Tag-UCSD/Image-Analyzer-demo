@@ -6,15 +6,30 @@ This script provides structured self-assessment checkpoints to ensure
 quality, completeness, and honest evaluation of work.
 
 Usage:
-    python scripts/self_critique.py [phase]
+    # Interactive mode (prompts for answers)
+    python scripts/self_critique.py <phase>
+
+    # Non-interactive mode (for agents)
+    python scripts/self_critique.py <phase> --answers answers.json
+    python scripts/self_critique.py <phase> --answers '{"B1": "Yes, verified", "B2": "No issues"}'
+
+    # List all phases
+    python scripts/self_critique.py list
+
+    # Show all questions (no prompts)
+    python scripts/self_critique.py all
 
 Phases: baseline, infrastructure, backends, frontend, integration, final
 """
 
-import sys
+from __future__ import annotations
+
+import argparse
 import json
+import sys
 from pathlib import Path
 from datetime import datetime
+from typing import Dict, Optional
 
 BASE_DIR = Path(__file__).parent.parent
 
@@ -263,8 +278,30 @@ CRITIQUE_QUESTIONS = {
 }
 
 
-def run_critique(phase: str) -> dict:
-    """Run self-critique for a specific phase."""
+def load_answers(answers_arg: str) -> Dict[str, str]:
+    """Load answers from file path or JSON string."""
+    # Try as file path first
+    path = Path(answers_arg)
+    if path.exists():
+        with open(path) as f:
+            return json.load(f)
+
+    # Try as JSON string
+    try:
+        return json.loads(answers_arg)
+    except json.JSONDecodeError:
+        print(f"Error: Could not parse answers as file path or JSON: {answers_arg}")
+        sys.exit(1)
+
+
+def run_critique(phase: str, answers: Optional[Dict[str, str]] = None, interactive: bool = True) -> dict:
+    """Run self-critique for a specific phase.
+
+    Args:
+        phase: The phase to critique
+        answers: Pre-provided answers (for non-interactive mode)
+        interactive: Whether to prompt for answers
+    """
     if phase not in CRITIQUE_QUESTIONS:
         print(f"Unknown phase: {phase}")
         print(f"Available phases: {', '.join(CRITIQUE_QUESTIONS.keys())}")
@@ -275,21 +312,32 @@ def run_critique(phase: str) -> dict:
         "phase": phase,
         "title": critique["title"],
         "timestamp": datetime.now().isoformat(),
+        "mode": "interactive" if interactive and not answers else "non-interactive",
         "responses": []
     }
 
     print("\n" + "=" * 70)
     print(f"SELF-CRITIQUE: {critique['title']}")
     print("=" * 70)
-    print("\nAnswer each question honestly. Press Enter to skip.\n")
+
+    if interactive and not answers:
+        print("\nAnswer each question honestly. Press Enter to skip.\n")
 
     for q in critique["questions"]:
         print(f"\n[{q['id']}] {q['question']}")
         print(f"    Check: {q['check']}")
         print(f"    Risk if ignored: {q['risk']}")
-        print()
 
-        response = input("    Your answer (or Enter to skip): ").strip()
+        # Get answer from pre-provided answers or prompt
+        if answers and q["id"] in answers:
+            response = answers[q["id"]]
+            print(f"\n    Answer (from file): {response}")
+        elif interactive and not answers:
+            print()
+            response = input("    Your answer (or Enter to skip): ").strip()
+        else:
+            response = ""
+
         status = "answered" if response else "skipped"
 
         results["responses"].append({
@@ -307,7 +355,7 @@ def run_critique(phase: str) -> dict:
     print(f"CRITIQUE COMPLETE: {answered} answered, {skipped} skipped")
 
     if skipped > 0:
-        print("\n⚠️  WARNING: Skipped questions represent unexamined risks!")
+        print("\n  WARNING: Skipped questions represent unexamined risks!")
         print("    Consider revisiting skipped items before proceeding.")
 
     print("=" * 70)
@@ -324,10 +372,12 @@ def run_critique(phase: str) -> dict:
 
     print(f"\nResults saved to: {results_file}")
 
+    # Return exit code based on skipped questions
+    results["exit_code"] = 0 if skipped == 0 else 1
     return results
 
 
-def list_phases():
+def list_phases() -> None:
     """Print all available phases."""
     print("\nAvailable self-critique phases:")
     print("-" * 40)
@@ -337,10 +387,10 @@ def list_phases():
     print()
 
 
-def run_all_phases():
-    """Run critique for all phases (non-interactive summary)."""
+def show_all_questions() -> None:
+    """Show all questions without prompting."""
     print("\n" + "=" * 70)
-    print("SELF-CRITIQUE SUMMARY - All Phases")
+    print("SELF-CRITIQUE QUESTIONS - All Phases")
     print("=" * 70)
 
     for phase, info in CRITIQUE_QUESTIONS.items():
@@ -351,26 +401,93 @@ def run_all_phases():
     print()
 
 
-def main():
-    if len(sys.argv) < 2:
-        print("Self-Critique Framework for Agent-Driven Development")
-        print("\nUsage:")
-        print("  python scripts/self_critique.py <phase>    - Run critique for phase")
-        print("  python scripts/self_critique.py list       - List all phases")
-        print("  python scripts/self_critique.py all        - Show all questions")
+def generate_template(phase: str) -> None:
+    """Generate a JSON template for answers."""
+    if phase not in CRITIQUE_QUESTIONS:
+        print(f"Unknown phase: {phase}")
+        sys.exit(1)
+
+    critique = CRITIQUE_QUESTIONS[phase]
+    template = {}
+    for q in critique["questions"]:
+        template[q["id"]] = ""
+
+    print(json.dumps(template, indent=2))
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(
+        description="Self-critique framework for agent-driven development",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog="""
+Examples:
+  # Interactive critique
+  python scripts/self_critique.py baseline
+
+  # Non-interactive with answers file
+  python scripts/self_critique.py infrastructure --answers answers.json
+
+  # Non-interactive with inline JSON
+  python scripts/self_critique.py backends --answers '{"K1": "Yes", "K2": "Verified"}'
+
+  # Generate template for a phase
+  python scripts/self_critique.py baseline --template
+
+  # List all phases
+  python scripts/self_critique.py list
+        """
+    )
+
+    parser.add_argument(
+        "phase",
+        nargs="?",
+        help="Phase to critique (baseline, infrastructure, backends, frontend, integration, final)"
+    )
+    parser.add_argument(
+        "--answers",
+        help="Path to answers JSON file, or inline JSON string"
+    )
+    parser.add_argument(
+        "--template",
+        action="store_true",
+        help="Generate a JSON template for answers"
+    )
+    parser.add_argument(
+        "--non-interactive",
+        action="store_true",
+        help="Run without prompting (skip unanswered questions)"
+    )
+
+    args = parser.parse_args()
+
+    if not args.phase:
+        parser.print_help()
+        print()
         list_phases()
         return 0
 
-    arg = sys.argv[1].lower()
-
-    if arg == "list":
+    if args.phase == "list":
         list_phases()
-    elif arg == "all":
-        run_all_phases()
-    else:
-        run_critique(arg)
+        return 0
 
-    return 0
+    if args.phase == "all":
+        show_all_questions()
+        return 0
+
+    if args.template:
+        generate_template(args.phase)
+        return 0
+
+    # Load answers if provided
+    answers = None
+    if args.answers:
+        answers = load_answers(args.answers)
+
+    # Determine interactivity
+    interactive = not (args.answers or args.non_interactive)
+
+    results = run_critique(args.phase, answers=answers, interactive=interactive)
+    return results.get("exit_code", 0)
 
 
 if __name__ == "__main__":

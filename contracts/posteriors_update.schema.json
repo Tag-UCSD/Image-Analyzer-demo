@@ -1,0 +1,42 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://image-analyzer/contracts/posteriors_update.schema.json",
+  "title": "Posteriors Update (Graphical-Model to Knowledge-Graph)",
+  "description": "Schema for posterior edge effects published back to Knowledge-Graph",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "required": ["edge_id", "posterior_mean", "posterior_sd"],
+    "properties": {
+      "edge_id": {
+        "type": "string",
+        "description": "Edge identifier matching Knowledge-Graph edge"
+      },
+      "posterior_mean": {
+        "type": "number",
+        "description": "Updated posterior mean effect"
+      },
+      "posterior_sd": {
+        "type": "number",
+        "minimum": 0,
+        "description": "Updated posterior standard deviation"
+      },
+      "credible_interval_95": {
+        "type": "array",
+        "items": {"type": "number"},
+        "minItems": 2,
+        "maxItems": 2,
+        "description": "95% credible interval [lower, upper]"
+      },
+      "model_version": {
+        "type": "string",
+        "description": "Version of the model that produced this posterior"
+      },
+      "n_observations": {
+        "type": "integer",
+        "minimum": 0,
+        "description": "Number of observations used in training"
+      }
+    }
+  }
+}

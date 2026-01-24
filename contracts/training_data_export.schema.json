@@ -1,0 +1,72 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://image-analyzer/contracts/training_data_export.schema.json",
+  "title": "Training Data Export (Image-Tagger to Graphical-Model)",
+  "description": "Schema for tagged image attributes exported for Bayesian network training",
+  "type": "object",
+  "required": ["version", "images"],
+  "properties": {
+    "version": {
+      "type": "string",
+      "description": "Schema version"
+    },
+    "images": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["image_id"],
+        "properties": {
+          "image_id": {
+            "type": "string",
+            "description": "Unique image identifier"
+          },
+          "attributes": {
+            "type": "object",
+            "additionalProperties": {
+              "oneOf": [
+                {"type": "number"},
+                {"type": "string"},
+                {"type": "boolean"}
+              ]
+            },
+            "description": "Visual attribute key-value pairs"
+          },
+          "marker_nodes": {
+            "type": "array",
+            "items": {"type": "string"},
+            "description": "Building typology and room type markers (BTxx, RTxx)"
+          },
+          "detection_metadata": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object",
+              "properties": {
+                "detection_class": {
+                  "type": "string",
+                  "enum": ["detected", "computed", "inferred", "proxy_only"]
+                },
+                "extractability": {
+                  "type": "string",
+                  "enum": ["2d_high", "2d_partial", "3d_partial", "sensor_only"]
+                },
+                "confidence_gamma": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1
+                }
+              }
+            }
+          },
+          "mediator_ratings": {
+            "type": "object",
+            "additionalProperties": {"type": "number"}
+          },
+          "outcome_ratings": {
+            "type": "object",
+            "additionalProperties": {"type": "number"}
+          }
+        }
+      }
+    }
+  }
+}

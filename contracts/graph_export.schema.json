@@ -1,0 +1,67 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://image-analyzer/contracts/graph_export.schema.json",
+  "title": "Graph Export (Knowledge-Graph to Graphical-Model)",
+  "description": "Schema for causal graph structure exported for Bayesian inference",
+  "type": "object",
+  "required": ["nodes", "edges"],
+  "properties": {
+    "nodes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "type", "label"],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Node identifier (V1-xxx, Lxx, Mxx, or outcome ID)"
+          },
+          "type": {
+            "type": "string",
+            "enum": ["attribute", "latent", "mediator", "outcome", "marker"],
+            "description": "Node type in the causal hierarchy"
+          },
+          "label": {
+            "type": "string",
+            "description": "Human-readable label"
+          },
+          "domain": {
+            "type": "string",
+            "description": "Taxonomy domain (e.g., Visual, Thermal, Acoustic)"
+          }
+        }
+      }
+    },
+    "edges": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["from", "to"],
+        "properties": {
+          "from": {
+            "type": "string",
+            "description": "Source node ID"
+          },
+          "to": {
+            "type": "string",
+            "description": "Target node ID"
+          },
+          "prior_mean": {
+            "type": "number",
+            "description": "Prior mean for edge effect"
+          },
+          "prior_sd": {
+            "type": "number",
+            "minimum": 0,
+            "description": "Prior standard deviation"
+          },
+          "status": {
+            "type": "string",
+            "enum": ["confirmed", "hypothesized", "contested"],
+            "description": "Evidence status for this edge"
+          }
+        }
+      }
+    }
+  }
+}

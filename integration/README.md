@@ -1,41 +1,65 @@
-# Integration Infrastructure
+# Integration Infrastructure - Data Flow Phase
 
-This directory contains the Phase 1 infrastructure for the unified Image Analyzer system.
+## Current Status
 
-## Contents
+Infrastructure scaffolding is **COMPLETE** (December 2024).
 
-- `docker-compose.unified.yml` - Unified orchestration for database, cache, gateway, and services
-- `nginx/nginx.conf` - Nginx gateway configuration
-- `db-init/` - PostgreSQL initialization SQL
-- `.env.example` - Environment variable template
+**Next Phase:** Backend data flow integration - see `/DATA_FLOW_INTEGRATION_PLAN.md`
+
+## What's Working
+
+- ✅ Docker Compose orchestration
+- ✅ Nginx API gateway (port 8080)
+- ✅ PostgreSQL with shared schemas (port 5432)
+- ✅ Redis event bus (port 6379)
+- ✅ React navigation shell
+- ✅ All 4 backend services containerized
+
+## What's NOT Working
+
+- ❌ Modules don't use shared database
+- ❌ No cross-module API calls
+- ❌ No event bus integration
+- ❌ Modules remain isolated
 
 ## Quick Start
 
-1. Copy environment variables:
-   ```bash
-   cp .env.example .env
-   ```
-
-2. Validate the compose file:
-   ```bash
-   docker compose -f docker-compose.unified.yml config
-   ```
-
-3. Start infrastructure services:
-   ```bash
-   docker compose -f docker-compose.unified.yml up -d postgres redis
-   ```
-
-4. Run the Phase 1 gate check:
-   ```bash
-   python3 ../scripts/gate_check.py 1
-   ```
-
-## Integration Test Dependencies
-
-Integration tests rely on `redis-py` for Redis pub/sub verification. Use the helper script to
-auto-create a local virtualenv and install `integration/requirements.txt` before running tests:
-
 ```bash
-../scripts/run_integration_tests.sh
+# Start all services
+docker compose -f docker-compose.unified.yml up -d
+
+# Check service health
+docker compose ps
+
+# View logs
+docker compose logs -f
+
+# Stop all services
+docker compose down
 ```
+
+## Health Check URLs
+
+- Gateway: http://localhost:8080/
+- Graphical Model: http://localhost:8080/api/graphical/health
+- Image Tagger: http://localhost:8080/api/tagger/health
+- Article Eater: http://localhost:8080/api/article/healthz
+- Knowledge Graph: http://localhost:8080/api/graph/health
+
+## Active Work Plan
+
+**PRIMARY DOCUMENT:** `/DATA_FLOW_INTEGRATION_PLAN.md` (in repo root)
+
+This document defines the 5 phases of backend integration:
+1. Database Migrations (3-4 days)
+2. Article-Eater → Knowledge-Graph (4-5 days)
+3. Image-Tagger → Graphical-Model (4-5 days)
+4. Bidirectional Graph ↔ Model (3-4 days)
+5. Frontend & Testing (3-4 days)
+
+## Architecture Note
+
+Old infrastructure documentation archived in:
+`/archive/infrastructure-phase-complete-dec2024/`
+
+Do not reference archived documents during data flow integration.
