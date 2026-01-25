@@ -24,23 +24,23 @@ This document analyzes the current data flow between modules in the Image Analyz
 
 ```mermaid
 flowchart LR
-    subgraph "Data Sources"
-        AE[Article Eater<br/>Findings & Rules]
-        IT[Image Tagger<br/>Tags & Attributes]
-    end
-    
-    subgraph "Knowledge Layer"
-        KG[Knowledge Graph UI<br/>Causal Edges + Evidence]
-    end
-    
-    subgraph "Inference Engine"
-        GM[Graphical Model<br/>Bayesian Predictions]
-    end
-    
-    AE -->|"❌ NOT CONNECTED"| KG
-    IT -->|"❌ NOT CONNECTED"| GM
-    KG -->|"❌ NOT CONNECTED"| GM
-    GM -->|"❌ NOT CONNECTED"| KG
+ subgraph "Data Sources"
+ AE[Article Eater<br/>Findings & Rules]
+ IT[Image Tagger<br/>Tags & Attributes]
+ end
+ 
+ subgraph "Knowledge Layer"
+ KG[Knowledge Graph UI<br/>Causal Edges + Evidence]
+ end
+ 
+ subgraph "Inference Engine"
+ GM[Graphical Model<br/>Bayesian Predictions]
+ end
+ 
+ AE -->|"❌ NOT CONNECTED"| KG
+ IT -->|"❌ NOT CONNECTED"| GM
+ KG -->|"❌ NOT CONNECTED"| GM
+ GM -->|"❌ NOT CONNECTED"| KG
 ```
 
 ---
@@ -63,10 +63,10 @@ flowchart LR
 **Export Schema**:
 ```json
 {
-  "bn_version": "0.2",
-  "nodes": [{"id": "trait:SPS", "type": "subject_trait", "label": "SPS"}],
-  "edges": [{"from": "trait:SPS", "to": "rule:Ulrich_1984:R1", "type": "subject_scope"}],
-  "rules": [{"rule_id": "R1", "paper_id": "Ulrich_1984", "rule_text": "...", "evidence": {...}}]
+ "bn_version": "0.2",
+ "nodes": [{"id": "trait:SPS", "type": "subject_trait", "label": "SPS"}],
+ "edges": [{"from": "trait:SPS", "to": "rule:Ulrich_1984:R1", "type": "subject_scope"}],
+ "rules": [{"rule_id": "R1", "paper_id": "Ulrich_1984", "rule_text": "...", "evidence": {...}}]
 }
 ```
 
@@ -114,8 +114,8 @@ The backend has infrastructure for PostgreSQL loading but defaults to static dem
 
 ```python
 # From main.py - demo edges defined in code
-NODES: List[GraphNode] = [...]  # Hardcoded
-EDGES: Dict[str, EdgeDetail] = {}  # Populated by register_edge() calls
+NODES: List[GraphNode] = [...] # Hardcoded
+EDGES: Dict[str, EdgeDetail] = {} # Populated by register_edge calls
 
 # Database loading exists but DATABASE_STATUS defaults to "unconfigured"
 DATABASE_GRAPH: Optional[Tuple[...]] = None
@@ -123,7 +123,7 @@ DATABASE_GRAPH: Optional[Tuple[...]] = None
 
 **Prediction Endpoint** (`POST /predict`): Deterministic formulas, NOT Bayesian inference:
 ```python
-perceived_warmth = 0.3 + 0.8 * w - 0.2 * glare  # Simple linear, not model output
+perceived_warmth = 0.3 + 0.8 * w - 0.2 * glare # Simple linear, not model output
 ```
 
 > [!CAUTION]
@@ -256,25 +256,25 @@ perceived_warmth = 0.3 + 0.8 * w - 0.2 * glare  # Simple linear, not model outpu
 
 ```python
 @router.post("/integration/export-to-graph")
-async def export_findings_to_graph():
-    """Export extracted findings in format for knowledge-graph edges."""
-    findings = db.get_recent_findings()
-    return [
-        {
-            "edge_id": f"{f.cause_node}->{f.effect_node}",
-            "from_node": f.cause_node,
-            "to_node": f.effect_node,
-            "effect_size": f.effect_size,
-            "effect_direction": f.direction,
-            "evidence": {
-                "doi": f.paper_doi,
-                "title": f.paper_title,
-                "population": f.population,
-                "quality": f.quality_score
-            }
-        }
-        for f in findings
-    ]
+async def export_findings_to_graph:
+ """Export extracted findings in format for knowledge-graph edges."""
+ findings = db.get_recent_findings
+ return [
+ {
+ "edge_id": f"{f.cause_node}->{f.effect_node}",
+ "from_node": f.cause_node,
+ "to_node": f.effect_node,
+ "effect_size": f.effect_size,
+ "effect_direction": f.direction,
+ "evidence": {
+ "doi": f.paper_doi,
+ "title": f.paper_title,
+ "population": f.population,
+ "quality": f.quality_score
+ }
+ }
+ for f in findings
+ ]
 ```
 
 ---
@@ -286,16 +286,16 @@ async def export_findings_to_graph():
 ```python
 @app.post("/api/v1/edges/update-from-findings")
 def update_edges_from_findings(findings: List[FindingInput]):
-    """Receive new evidence from article-eater and update edge posteriors."""
-    for finding in findings:
-        edge = EDGES.get(finding.edge_id) or create_new_edge(finding)
-        edge.evidence.append(finding.to_evidence_item())
-        # Update effect size posterior with new evidence
-        edge.param = update_posterior(edge.param, finding.effect_size, finding.weight)
-    
-    # Publish event for other modules
-    event_bus.publish("graph:edges_updated", {"edge_ids": [f.edge_id for f in findings]})
-    return {"updated": len(findings)}
+ """Receive new evidence from article-eater and update edge posteriors."""
+ for finding in findings:
+ edge = EDGES.get(finding.edge_id) or create_new_edge(finding)
+ edge.evidence.append(finding.to_evidence_item)
+ # Update effect size posterior with new evidence
+ edge.param = update_posterior(edge.param, finding.effect_size, finding.weight)
+ 
+ # Publish event for other modules
+ event_bus.publish("graph:edges_updated", {"edge_ids": [f.edge_id for f in findings]})
+ return {"updated": len(findings)}
 ```
 
 ---
@@ -307,14 +307,12 @@ def update_edges_from_findings(findings: List[FindingInput]):
 ```python
 from integration.shared.events import RedisEventPublisher, EventMessage
 
-publisher = RedisEventPublisher()
+publisher = RedisEventPublisher
 
 # In article-eater after finding extraction:
-publisher.publish("evidence:finding_extracted", EventMessage.create(
-    event_type="finding_extracted",
-    source_module="article-eater",
-    payload={"finding_id": finding.id, "edge_candidates": [...]}
-))
+publisher.publish("evidence:finding_extracted", EventMessage.create(event_type="finding_extracted",
+ source_module="article-eater",
+ payload={"finding_id": finding.id, "edge_candidates": [...]}))
 
 # In knowledge-graph as subscriber:
 subscriber.subscribe("evidence:finding_extracted", handle_new_evidence)
@@ -331,25 +329,25 @@ subscriber.subscribe("evidence:finding_extracted", handle_new_evidence)
 ```python
 @router.get("/v1/export/bn-training-data")
 async def export_bn_training_data(format: str = "json"):
-    """Export tagged image attributes for Bayesian network training."""
-    images = await db.get_images_with_complete_tags()
-    return {
-        "version": "1.0",
-        "images": [
-            {
-                "image_id": img.id,
-                "attributes": {
-                    "wood_coverage": img.attrs.wood_coverage,
-                    "plant_density": img.attrs.plant_density,
-                    "spatial_clutter": img.attrs.spatial_clutter,
-                    # ... all visual attributes
-                },
-                "mediator_ratings": img.aggregate_ratings(),
-                "outcome_ratings": img.aggregate_outcomes()
-            }
-            for img in images
-        ]
-    }
+ """Export tagged image attributes for Bayesian network training."""
+ images = await db.get_images_with_complete_tags
+ return {
+ "version": "1.0",
+ "images": [
+ {
+ "image_id": img.id,
+ "attributes": {
+ "wood_coverage": img.attrs.wood_coverage,
+ "plant_density": img.attrs.plant_density,
+ "spatial_clutter": img.attrs.spatial_clutter,
+ #... all visual attributes
+ },
+ "mediator_ratings": img.aggregate_ratings,
+ "outcome_ratings": img.aggregate_outcomes
+ }
+ for img in images
+ ]
+ }
 ```
 
 ---
@@ -361,16 +359,16 @@ async def export_bn_training_data(format: str = "json"):
 ```python
 @router.post("/integration/import-training-data")
 async def import_training_data(data: TrainingDataImport):
-    """Import tagged images from image-tagger for model training."""
-    # Save to database
-    for image in data.images:
-        await db.upsert_training_sample(image)
-    
-    # Optionally trigger retraining
-    if data.trigger_retrain:
-        background_tasks.add_task(retrain_models)
-    
-    return {"imported": len(data.images), "status": "queued"}
+ """Import tagged images from image-tagger for model training."""
+ # Save to database
+ for image in data.images:
+ await db.upsert_training_sample(image)
+ 
+ # Optionally trigger retraining
+ if data.trigger_retrain:
+ background_tasks.add_task(retrain_models)
+ 
+ return {"imported": len(data.images), "status": "queued"}
 ```
 
 ---
@@ -381,21 +379,21 @@ async def import_training_data(data: TrainingDataImport):
 
 ```python
 @app.get("/api/v1/graph/export-for-bayesian")
-def export_for_bayesian():
-    """Export graph structure for graphical-model DAG specification."""
-    return {
-        "nodes": [n.dict() for n in NODES],
-        "edges": [
-            {
-                "from": e.from_node,
-                "to": e.to_node,
-                "prior_mean": e.param.mean,
-                "prior_sd": e.param.sd,
-                "status": e.status
-            }
-            for e in EDGES.values()
-        ]
-    }
+def export_for_bayesian:
+ """Export graph structure for graphical-model DAG specification."""
+ return {
+ "nodes": [n.dict for n in NODES],
+ "edges": [
+ {
+ "from": e.from_node,
+ "to": e.to_node,
+ "prior_mean": e.param.mean,
+ "prior_sd": e.param.sd,
+ "status": e.status
+ }
+ for e in EDGES.values
+ ]
+ }
 ```
 
 ---
@@ -406,16 +404,14 @@ def export_for_bayesian():
 # In graphical-model after model fitting:
 @router.post("/integration/publish-posteriors")
 async def publish_posteriors(model_version: str):
-    """Publish updated effect sizes back to knowledge-graph."""
-    posteriors = await get_model_posteriors(model_version)
-    
-    # Call knowledge-graph API
-    async with httpx.AsyncClient() as client:
-        await client.post(
-            f"{KNOWLEDGE_GRAPH_URL}/api/v1/edges/update-from-posteriors",
-            json=posteriors
-        )
-    return {"published": len(posteriors)}
+ """Publish updated effect sizes back to knowledge-graph."""
+ posteriors = await get_model_posteriors(model_version)
+ 
+ # Call knowledge-graph API
+ async with httpx.AsyncClient as client:
+ await client.post(f"{KNOWLEDGE_GRAPH_URL}/api/v1/edges/update-from-posteriors",
+ json=posteriors)
+ return {"published": len(posteriors)}
 ```
 
 ---
@@ -431,16 +427,14 @@ Replace iframe-based isolation with data-aware components:
 ```jsx
 // Instead of iframe, use API calls to fetch real data
 export default function KnowledgeGraph({ gateway }) {
-  const [graph, setGraph] = useState(null);
-  
-  useEffect(() => {
-    fetch(`${gateway}/api/graph/v1_demo`)
-      .then(res => res.json())
-      .then(setGraph);
-  }, [gateway]);
-  
-  // Render with real data, not iframe
-  return <CytoscapeGraph data={graph} />;
+ const [graph, setGraph] = useState(null);
+ 
+ useEffect(=> {
+ fetch(`${gateway}/api/graph/v1_demo`).then(res => res.json).then(setGraph);
+ }, [gateway]);
+ 
+ // Render with real data, not iframe
+ return <CytoscapeGraph data={graph} />;
 }
 ```
 
@@ -460,33 +454,33 @@ export default function KnowledgeGraph({ gateway }) {
 ### Manual Verification Workflow
 
 1. **Start unified infrastructure**:
-   ```bash
-   cd integration
-   docker compose -f docker-compose.unified.yml up -d
-   ```
+ ```bash
+ cd integration
+ docker compose -f docker-compose.unified.yml up -d
+ ```
 
 2. **Submit a paper in Article-Eater** (http://localhost:8003):
-   - Process paper through L2 extraction
-   - Verify findings appear in database
+ - Process paper through L2 extraction
+ - Verify findings appear in database
 
 3. **Check Knowledge-Graph updates** (http://localhost:8004):
-   - Navigate to Causal Graph
-   - Verify new evidence appears on edges
-   - Check DOIs are clickable
+ - Navigate to Causal Graph
+ - Verify new evidence appears on edges
+ - Check DOIs are clickable
 
 4. **Tag an image in Image-Tagger** (http://localhost:8002):
-   - Upload and tag image with attributes
-   - Verify tags export to training data
+ - Upload and tag image with attributes
+ - Verify tags export to training data
 
 5. **Run prediction in Graphical-Model** (http://localhost:8001):
-   - Submit attributes from tagged image
-   - Verify prediction uses trained model
-   - Check uncertainty intervals
+ - Submit attributes from tagged image
+ - Verify prediction uses trained model
+ - Check uncertainty intervals
 
 6. **Observe event flow in logs**:
-   ```bash
-   docker compose logs -f | grep -E "(evidence:|graph:|image:)"
-   ```
+ ```bash
+ docker compose logs -f | grep -E "(evidence:|graph:|image:)"
+ ```
 
 ---
 
@@ -519,32 +513,32 @@ export default function KnowledgeGraph({ gateway }) {
 
 ```mermaid
 flowchart TB
-    subgraph "Phase 2"
-        AE_API[Article Eater<br/>POST /integration/export-to-graph]
-        KG_IMPORT[Knowledge Graph<br/>POST /edges/update-from-findings]
-        AE_API -->|HTTP| KG_IMPORT
-    end
-    
-    subgraph "Phase 3"
-        IT_API[Image Tagger<br/>GET /export/bn-training-data]
-        GM_IMPORT[Graphical Model<br/>POST /integration/import-training-data]
-        IT_API -->|HTTP| GM_IMPORT
-    end
-    
-    subgraph "Phase 4"
-        KG_EXPORT[Knowledge Graph<br/>GET /graph/export-for-bayesian]
-        GM_STRUCT[Graphical Model<br/>Use for DAG structure]
-        GM_POST[Graphical Model<br/>POST /integration/publish-posteriors]
-        KG_UPDATE[Knowledge Graph<br/>POST /edges/update-from-posteriors]
-        
-        KG_EXPORT --> GM_STRUCT
-        GM_POST --> KG_UPDATE
-    end
-    
-    subgraph "Event Bus (All Phases)"
-        REDIS[(Redis)]
-        REDIS -.->|evidence:finding_extracted| KG_IMPORT
-        REDIS -.->|graph:edges_updated| GM_STRUCT
-        REDIS -.->|image:tagged| GM_IMPORT
-    end
+ subgraph "Phase 2"
+ AE_API[Article Eater<br/>POST /integration/export-to-graph]
+ KG_IMPORT[Knowledge Graph<br/>POST /edges/update-from-findings]
+ AE_API -->|HTTP| KG_IMPORT
+ end
+ 
+ subgraph "Phase 3"
+ IT_API[Image Tagger<br/>GET /export/bn-training-data]
+ GM_IMPORT[Graphical Model<br/>POST /integration/import-training-data]
+ IT_API -->|HTTP| GM_IMPORT
+ end
+ 
+ subgraph "Phase 4"
+ KG_EXPORT[Knowledge Graph<br/>GET /graph/export-for-bayesian]
+ GM_STRUCT[Graphical Model<br/>Use for DAG structure]
+ GM_POST[Graphical Model<br/>POST /integration/publish-posteriors]
+ KG_UPDATE[Knowledge Graph<br/>POST /edges/update-from-posteriors]
+ 
+ KG_EXPORT --> GM_STRUCT
+ GM_POST --> KG_UPDATE
+ end
+ 
+ subgraph "Event Bus (All Phases)"
+ REDIS[(Redis)]
+ REDIS -.->|evidence:finding_extracted| KG_IMPORT
+ REDIS -.->|graph:edges_updated| GM_STRUCT
+ REDIS -.->|image:tagged| GM_IMPORT
+ end
 ```

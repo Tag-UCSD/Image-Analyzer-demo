@@ -43,16 +43,16 @@ For each run, create:
 
 ```text
 reports/
-  vlm_health/
-    RUN_ID/
-      raw/
-      derived/
-      log.md
+ vlm_health/
+ RUN_ID/
+ raw/
+ derived/
+ log.md
 ```
 
 where `RUN_ID = YYYY-MM-DD_<repo_version>_<vlm_profile>`.
 
-- `raw/`   holds input CSVs and the Turing panel files.
+- `raw/` holds input CSVs and the Turing panel files.
 - `derived/` holds audit outputs and Turing summaries.
 - `log.md` summarises decisions and follow-ups.
 
@@ -62,9 +62,9 @@ where `RUN_ID = YYYY-MM-DD_<repo_version>_<vlm_profile>`.
 
 The SOP expects three CSVs:
 
-1. `bn_validations_flat.csv`  
-2. `vlm_validations.csv`  
-3. `human_validations.csv`  
+1. `bn_validations_flat.csv` 
+2. `vlm_validations.csv` 
+3. `human_validations.csv` 
 
 The actual filenames may differ, but they should provide:
 
@@ -88,30 +88,30 @@ mkdir -p "reports/vlm_health/${RUN_ID}/raw"
 mkdir -p "reports/vlm_health/${RUN_ID}/derived"
 
 cp reports/bn_validations_flat.csv "reports/vlm_health/${RUN_ID}/raw/"
-cp reports/vlm_validations.csv    "reports/vlm_health/${RUN_ID}/raw/"
-cp reports/human_validations.csv  "reports/vlm_health/${RUN_ID}/raw/"
+cp reports/vlm_validations.csv "reports/vlm_health/${RUN_ID}/raw/"
+cp reports/human_validations.csv "reports/vlm_health/${RUN_ID}/raw/"
 ```
 
 ### 5.2 Variance audit
 
 ```bash
-python scripts/audit_vlm_variance.py       "reports/vlm_health/${RUN_ID}/raw/bn_validations_flat.csv"       --out "reports/vlm_health/${RUN_ID}/derived/vlm_variance_audit.csv"       --source-column source       --attribute-column attribute_key       --value-column value       --source-prefix science_pipeline.vlm
+python scripts/audit_vlm_variance.py "reports/vlm_health/${RUN_ID}/raw/bn_validations_flat.csv" --out "reports/vlm_health/${RUN_ID}/derived/vlm_variance_audit.csv" --source-column source --attribute-column attribute_key --value-column value --source-prefix science_pipeline.vlm
 ```
 
 Review the resulting CSV and note:
 
 - Attributes with high `dominant_ratio` and low variance.
 - Whether each flagged attribute is:
-  - Acceptable (true domain skew),
-  - Needs investigation,
-  - Blocking for release.
+ - Acceptable (true domain skew),
+ - Needs investigation,
+ - Blocking for release.
 
 Document your judgment in `log.md`.
 
 ### 5.3 Build the Turing panel
 
 ```bash
-python scripts/vlm_turing_test_prep.py       --vlm   "reports/vlm_health/${RUN_ID}/raw/vlm_validations.csv"       --human "reports/vlm_health/${RUN_ID}/raw/human_validations.csv"       --out   "reports/vlm_health/${RUN_ID}/raw/vlm_turing_panel.csv"       --max-trials 400       --seed 42
+python scripts/vlm_turing_test_prep.py --vlm "reports/vlm_health/${RUN_ID}/raw/vlm_validations.csv" --human "reports/vlm_health/${RUN_ID}/raw/human_validations.csv" --out "reports/vlm_health/${RUN_ID}/raw/vlm_turing_panel.csv" --max-trials 400 --seed 42
 ```
 
 Give `vlm_turing_panel.csv` to human judges (e.g., via Google Sheets or a small UI) and ask them to complete:
@@ -130,7 +130,7 @@ reports/vlm_health/${RUN_ID}/raw/vlm_turing_panel_completed.csv
 ### 5.4 Score the Turing panel
 
 ```bash
-python scripts/vlm_turing_test_score.py       --panel "reports/vlm_health/${RUN_ID}/raw/vlm_turing_panel_completed.csv"       > "reports/vlm_health/${RUN_ID}/derived/vlm_turing_summary.txt"
+python scripts/vlm_turing_test_score.py --panel "reports/vlm_health/${RUN_ID}/raw/vlm_turing_panel_completed.csv" > "reports/vlm_health/${RUN_ID}/derived/vlm_turing_summary.txt"
 ```
 
 The summary includes:
@@ -149,12 +149,12 @@ For each run, fill in `reports/vlm_health/${RUN_ID}/log.md` with:
 
 - Date, repo version, VLM profile.
 - Pointer to:
-  - `derived/vlm_variance_audit.csv`
-  - `derived/vlm_turing_summary.txt`
+ - `derived/vlm_variance_audit.csv`
+ - `derived/vlm_turing_summary.txt`
 - Short narrative of:
-  - Which attributes, if any, are problematic.
-  - Whether human judges can reliably distinguish AI vs human labels.
-  - Whether apparent quality is acceptable.
+ - Which attributes, if any, are problematic.
+ - Whether human judges can reliably distinguish AI vs human labels.
+ - Whether apparent quality is acceptable.
 - A small checklist of follow-up actions.
 
 Example sections:

@@ -1,6 +1,6 @@
 # Ruthless Audit — Image Tagger v3.4.50 (Upload Orchestrator + Cost View)
 
-Target build: **Image_Tagger_v3.4.50_upload_orchestrator_cost_view_full.zip**  
+Target build: **Image_Tagger_v3.4.50_upload_orchestrator_cost_view_full.zip** 
 Scope: backend, admin frontend, governance, science pipeline as exercised by the new upload job orchestrator and cost ledger.
 
 ## 1. Executive Verdict (GO / NO-GO)
@@ -18,15 +18,15 @@ Scope: backend, admin frontend, governance, science pipeline as exercised by the
 
 No **hard** technical blockers for classroom / lab usage were found. The following are **soft blockers** for large-scale, multi-user deployments:
 
-- **K1 — Orchestrator observability gap (soft blocker):**  
-  - There is no dedicated Admin panel to monitor upload jobs, even though the backend exposes `/admin/upload/jobs` and `/admin/upload/jobs/{job_id}`.
-  - Risk: Admins cannot easily see whether a big batch is still running, has failed, or is completed without manual API calls.
-  - Impact: For large cohorts, this undermines trust in the orchestrator and makes triage slow.
+- **K1 — Orchestrator observability gap (soft blocker):** 
+ - There is no dedicated Admin panel to monitor upload jobs, even though the backend exposes `/admin/upload/jobs` and `/admin/upload/jobs/{job_id}`.
+ - Risk: Admins cannot easily see whether a big batch is still running, has failed, or is completed without manual API calls.
+ - Impact: For large cohorts, this undermines trust in the orchestrator and makes triage slow.
 
-- **K2 — BackgroundTasks as the only worker (soft blocker):**  
-  - `run_upload_job(job_id)` is only wired from FastAPI `BackgroundTasks` in `upload_images`.
-  - If the app process is restarted after upload but before the background task completes, the job may remain `RUNNING` or `PENDING` without a retry mechanism.
-  - Impact: For long-running, large jobs this is fragile; for classroom-scale jobs it is acceptable.
+- **K2 — BackgroundTasks as the only worker (soft blocker):** 
+ - `run_upload_job(job_id)` is only wired from FastAPI `BackgroundTasks` in `upload_images`.
+ - If the app process is restarted after upload but before the background task completes, the job may remain `RUNNING` or `PENDING` without a retry mechanism.
+ - Impact: For long-running, large jobs this is fragile; for classroom-scale jobs it is acceptable.
 
 These do **not** prevent GO for lab and teaching deployments but should be addressed before "industrial" multi-process deployment.
 
@@ -36,11 +36,11 @@ These do **not** prevent GO for lab and teaching deployments but should be addre
 
 - **Job models:** `UploadJob` and `UploadJobItem` are canonical SQLAlchemy models with timestamps, status fields, and FK links to `users` and `images`. No ellipses, no `# STUB:` markers.
 - **Service layer:** `backend/services/upload_jobs.py` cleanly encapsulates:
-  - Job creation (`create_upload_job_for_images`).
-  - A reusable `_run_upload_job_inner(session, job_id)` that can be reused by real workers.
-  - A `run_upload_job(job_id)` entry point holding its own `SessionLocal`.
+ - Job creation (`create_upload_job_for_images`).
+ - A reusable `_run_upload_job_inner(session, job_id)` that can be reused by real workers.
+ - A `run_upload_job(job_id)` entry point holding its own `SessionLocal`.
 - **Science pipeline:** Orchestrator uses `SciencePipeline(config=SciencePipelineConfig(enable_all=True), db=session)` and `process_image(image_id)`; no short-circuits, no half-wired calls.
-- **Cost ledger:** Both `CognitiveStateAnalyzer` and `ArchPatternsVLMAnalyzer` now call `describe_vlm_configuration()` and `log_vlm_usage(...)` in their real-data paths; stub paths still early-return.
+- **Cost ledger:** Both `CognitiveStateAnalyzer` and `ArchPatternsVLMAnalyzer` now call `describe_vlm_configuration` and `log_vlm_usage(...)` in their real-data paths; stub paths still early-return.
 - **No rot:** `compileall` passes on `backend/`; no stray `...` or uncontrolled stubs in critical modules.
 
 ## 4. Admin Frontend (UX / Workflow)
@@ -48,12 +48,12 @@ These do **not** prevent GO for lab and teaching deployments but should be addre
 **Status: Good foundations, missing one key panel**
 
 - **Budget & cost:**
-  - Existing Budget panel shows `total_spent`, `hard_limit`, and kill switch status.
-  - New `CostHistoryCard` renders a minimal daily bar chart, last-7-days cost, and delta vs previous 7 days.
-  - Failure mode: When there is no usage, card shows a clear informational message instead of blank UI.
+ - Existing Budget panel shows `total_spent`, `hard_limit`, and kill switch status.
+ - New `CostHistoryCard` renders a minimal daily bar chart, last-7-days cost, and delta vs previous 7 days.
+ - Failure mode: When there is no usage, card shows a clear informational message instead of blank UI.
 - **Upload workflow:**
-  - The upload form still works as before but now receives a `job_id` from `AdminUploadResult`.
-  - There is not yet a dedicated "Upload jobs" table or progress indicator tied to this `job_id`.
+ - The upload form still works as before but now receives a `job_id` from `AdminUploadResult`.
+ - There is not yet a dedicated "Upload jobs" table or progress indicator tied to this `job_id`.
 
 **UX Warnings:**
 
@@ -67,10 +67,10 @@ These do **not** prevent GO for lab and teaching deployments but should be addre
 - **Math layers (L0/L1):** Fractal, texture, color, and complexity analyzers remain fully implemented and stable.
 - **Cognitive VLM:** Cognitive state analyzer uses the configured VLM, logs costs, and writes attributes + evidence strings into the frame and DB.
 - **Architectural patterns VLM:**
-  - VLM-backed architectural pattern analyzer is live, emitting attributes like `arch.pattern.prospect_strong`, with confidence values and evidence.
-  - Costs are logged per call into the ledger.
+ - VLM-backed architectural pattern analyzer is live, emitting attributes like `arch.pattern.prospect_strong`, with confidence values and evidence.
+ - Costs are logged per call into the ledger.
 - **Semantic tags (L3/L4):**
-  - Style and room-function semantics are still in the registry but marked as stubs; they are not yet wired to real VLM classification.
+ - Style and room-function semantics are still in the registry but marked as stubs; they are not yet wired to real VLM classification.
 
 **Science warning:**
 
@@ -89,16 +89,16 @@ These do **not** prevent GO for lab and teaching deployments but should be addre
 Prioritised based on this audit:
 
 1. **Upload Job Monitor UI (high priority):**
-   - Add an Admin "Upload jobs" panel:
-     - Table: job id, status, total/completed/failed, created time, error summary.
-     - Link from the upload success message: “Job #123 created — view in Upload Jobs.”
-     - Auto-refresh or a manual “Refresh jobs” button.
+ - Add an Admin "Upload jobs" panel:
+ - Table: job id, status, total/completed/failed, created time, error summary.
+ - Link from the upload success message: “Job #123 created — view in Upload Jobs.”
+ - Auto-refresh or a manual “Refresh jobs” button.
 
 2. **Optional worker hook (medium priority):**
-   - Add a script or CLI entry point to run `run_upload_job(job_id)` from a separate worker process.
-   - Document how to wire this into a real queue in `docs/UPLOAD_JOBS_README.md`.
+ - Add a script or CLI entry point to run `run_upload_job(job_id)` from a separate worker process.
+ - Document how to wire this into a real queue in `docs/UPLOAD_JOBS_README.md`.
 
 3. **Semantic tag activation (larger science sprint):**
-   - Wire one or two high-value semantic tag families (e.g., `style.modern`, `room_function.living_room`) to a real VLM classifier and feed their costs into the ledger.
+ - Wire one or two high-value semantic tag families (e.g., `style.modern`, `room_function.living_room`) to a real VLM classifier and feed their costs into the ledger.
 
 This sprint (v3.4.50) is therefore **GO** for classroom and lab use, with the above steps recommended for the next iterations.

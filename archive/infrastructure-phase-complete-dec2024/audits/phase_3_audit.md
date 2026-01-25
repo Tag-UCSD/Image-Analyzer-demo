@@ -12,7 +12,7 @@
 - Tagger surface selector added to the shell and the embed now switches surfaces correctly.
 
 ## Verification Results
-- Gate check: PASSED (`python3 scripts/gate_check.py 3`, 2025-12-20 14:05:05)
+- Gate check: PASSED (`python3 scripts/gate_check.py 3`, 14:05:05)
 - Build: `npm run build` (success)
 - npm audit: 2 moderate vulnerabilities (not remediated)
 

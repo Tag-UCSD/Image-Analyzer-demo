@@ -1,10 +1,10 @@
 # UNDERGRADUATE RESEARCH ASSISTANT TESTING PROTOCOL
 ## Adaptive Preference Testing System v3.5.11
 
-**Assigned To**: [Student Name]  
-**Supervisor**: Professor [Name], Cognitive Science Department, UCSD  
-**Date Assigned**: November 2025  
-**Estimated Time**: 8-12 hours (thorough testing)  
+**Assigned To**: [Student Name] 
+**Supervisor**: Professor [Name], Cognitive Science Department, UCSD 
+**Date Assigned**: 
+**Estimated Time**: 8-12 hours (thorough testing) 
 **Purpose**: Verify this system is ready for IRB submission and actual research use
 
 ---
@@ -43,24 +43,24 @@ Traditional preference studies ask subjects to rate items on Likert scales (1-7)
 **Before touching any code, read these:**
 
 1. **Bradley-Terry Model** (15 minutes)
-   - Wikipedia: "Bradley–Terry model"
-   - Focus on: How pairwise comparisons estimate item "strengths"
-   - Key equation: P(i beats j) = exp(μᵢ) / (exp(μᵢ) + exp(μⱼ))
+ - Wikipedia: "Bradley–Terry model"
+ - Focus on: How pairwise comparisons estimate item "strengths"
+ - Key equation: P(i beats j) = exp(μᵢ) / (exp(μᵢ) + exp(μⱼ))
 
 2. **Adaptive Testing Basics** (20 minutes)
-   - Search Google Scholar: "adaptive testing item response theory"
-   - Key concept: Each response updates your belief about the subject's preferences
-   - Analogy: Like a smart doctor who asks follow-up questions based on your answers
+ - Search Google Scholar: "adaptive testing item response theory"
+ - Key concept: Each response updates your belief about the subject's preferences
+ - Analogy: Like a smart doctor who asks follow-up questions based on your answers
 
 3. **Information Gain in Bayesian Inference** (25 minutes)
-   - Wikipedia: "Information gain in decision trees"
-   - Key concept: Entropy reduction
-   - The algorithm selects pairs where the answer tells us the MOST about preferences
+ - Wikipedia: "Information gain in decision trees"
+ - Key concept: Entropy reduction
+ - The algorithm selects pairs where the answer tells us the MOST about preferences
 
 4. **This System's Documentation** (1 hour)
-   - Read: `V3.5.11_COMPLETE_FEATURE_INVENTORY.md` (in the ZIP)
-   - Read: `DEPLOYMENT_GUIDE.md` (in the ZIP)
-   - Read: `README.md` (in the ZIP)
+ - Read: `V3.5.11_COMPLETE_FEATURE_INVENTORY.md` (in the ZIP)
+ - Read: `DEPLOYMENT_GUIDE.md` (in the ZIP)
+ - Read: `README.md` (in the ZIP)
 
 ### Self-Check Questions (Answer these before proceeding)
 
@@ -79,7 +79,7 @@ Traditional preference studies ask subjects to rate items on Likert scales (1-7)
 ### Step 1.1: Extract the ZIP
 
 ```bash
-cd ~/Desktop  # Or wherever you work
+cd ~/Desktop # Or wherever you work
 unzip COMPLETE_v3.5.11_ALL_GUI_FIXED.zip
 cd COMPLETE_v3.5.11_SYSTEM
 ls -la
@@ -119,7 +119,7 @@ sudo -u postgres createdb adaptive_testing
 
 **Verify**:
 ```bash
-psql adaptive_testing -c "SELECT version();"
+psql adaptive_testing -c "SELECT version;"
 ```
 
 **Document**: Screenshot of successful connection.
@@ -167,14 +167,12 @@ psql adaptive_testing
 
 ```sql
 INSERT INTO users (user_id, email, username, password_hash, role, created_at)
-VALUES (
-    gen_random_uuid(),
-    'admin@ucsd.edu',
-    'admin',
-    '$2b$12$LQv3c1yqBWVHxkd0LHAkCOYz6TtxMQJqhN8/LewY5oDhCQWxYPW.S',  -- password: "research123"
-    'admin',
-    NOW()
-);
+VALUES (gen_random_uuid,
+ 'admin@ucsd.edu',
+ 'admin',
+ '$2b$12$LQv3c1yqBWVHxkd0LHAkCOYz6TtxMQJqhN8/LewY5oDhCQWxYPW.S', -- password: "research123"
+ 'admin',
+ NOW);
 ```
 
 **Document**: Screenshot of successful INSERT.
@@ -186,10 +184,10 @@ VALUES (
 ### Step 1.5: Install Python Dependencies
 
 ```bash
-cd ../backend
+cd../backend
 python3 -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-pip install -r ../requirements.txt
+source venv/bin/activate # On Windows: venv\Scripts\activate
+pip install -r../requirements.txt
 ```
 
 **Verify installation**:
@@ -212,7 +210,7 @@ pip list | grep -E "flask|psycopg2|numpy|scipy"
 Create `.env` file in `backend/` folder:
 
 ```bash
-cat > .env << EOF
+cat >.env << EOF
 DATABASE_URL=postgresql://localhost/adaptive_testing
 JWT_SECRET=CHANGE_THIS_IN_PRODUCTION_TO_RANDOM_STRING_12345
 FLASK_ENV=development
@@ -221,7 +219,7 @@ EOF
 
 **Security Note**: The JWT_SECRET above is fine for testing but MUST be changed for production.
 
-**Document**: Screenshot showing .env file created.
+**Document**: Screenshot showing.env file created.
 
 ---
 
@@ -272,7 +270,7 @@ python3 -m http.server 8000
 
 **Expected output**:
 ```
-Serving HTTP on :: port 8000 (http://[::]:8000/) ...
+Serving HTTP on:: port 8000 (http://[::]:8000/)...
 ```
 
 **Document**: Screenshot showing both servers running (Flask on 5000, HTTP on 8000).
@@ -306,7 +304,7 @@ Before proceeding, verify ALL of these:
 - [ ] 9 tables exist in database
 - [ ] Admin user created (email: admin@ucsd.edu, password: research123)
 - [ ] Python dependencies installed
-- [ ] .env file configured
+- [ ].env file configured
 - [ ] Flask API running on port 5000
 - [ ] HTTP server running on port 8000
 - [ ] Admin dashboard loads in browser
@@ -334,19 +332,19 @@ Before proceeding, verify ALL of these:
 **Test login API directly**:
 ```bash
 curl -X POST http://localhost:5000/api/auth/login \
-  -H "Content-Type: application/json" \
-  -d '{"email":"admin@ucsd.edu","password":"research123"}'
+ -H "Content-Type: application/json" \
+ -d '{"email":"admin@ucsd.edu","password":"research123"}'
 ```
 
 **Expected response**:
 ```json
 {
-  "token": "eyJ0eXAiOiJKV1QiLCJhbGc...",
-  "user": {
-    "user_id": "...",
-    "email": "admin@ucsd.edu",
-    "role": "admin"
-  }
+ "token": "eyJ0eXAiOiJKV1QiLCJhbGc...",
+ "user": {
+ "user_id": "...",
+ "email": "admin@ucsd.edu",
+ "role": "admin"
+ }
 }
 ```
 
@@ -490,34 +488,34 @@ Thank you for participating!
 **Option A**: Use provided test images (if included)
 ```bash
 ls test_stimuli/
-# Should have 10 .jpg or .png files
+# Should have 10.jpg or.png files
 ```
 
 **Option B**: Create 10 placeholder images
 ```bash
 # On macOS/Linux with ImageMagick:
 for i in {1..10}; do
-  convert -size 800x600 xc:blue -pointsize 72 -fill white \
-    -draw "text 300,300 'Room $i'" room_$i.jpg
+ convert -size 800x600 xc:blue -pointsize 72 -fill white \
+ -draw "text 300,300 'Room $i'" room_$i.jpg
 done
 ```
 
 **Upload Process**:
 
 1. **Test drag-and-drop**:
-   - Drag all 10 images onto the upload area
-   - Verify thumbnails appear
-   - Verify file names shown
+ - Drag all 10 images onto the upload area
+ - Verify thumbnails appear
+ - Verify file names shown
 
 2. **Test paste from clipboard**:
-   - Copy an image (Cmd+C)
-   - Click "Paste from Clipboard"
-   - Verify image appears
+ - Copy an image (Cmd+C)
+ - Click "Paste from Clipboard"
+ - Verify image appears
 
 3. **Test file selector**:
-   - Click "Choose Files"
-   - Select multiple images
-   - Verify all appear
+ - Click "Choose Files"
+ - Select multiple images
+ - Verify all appear
 
 **Verify for EACH image**:
 - [ ] Thumbnail preview visible
@@ -535,7 +533,7 @@ done
 - Are thumbnails clear enough?
 - Can you easily remove wrong images?
 - Is there a file size limit? (Test with huge image)
-- What image formats are accepted? (Test .gif, .webp, .bmp)
+- What image formats are accepted? (Test.gif,.webp,.bmp)
 
 **IMPORTANT**: Check browser Network tab (F12 → Network):
 - When you upload, you should see POST requests to `/api/experiments/{id}/stimuli`
@@ -596,11 +594,11 @@ LIMIT 1;
 **Check stimuli were uploaded**:
 ```sql
 SELECT experiment_id, stimulus_id, stimulus_index, filename, 
-       length(file_data) as size_bytes,
-       mime_type
+ length(file_data) as size_bytes,
+ mime_type
 FROM stimuli
 WHERE experiment_id = (SELECT experiment_id FROM experiments 
-                       ORDER BY created_at DESC LIMIT 1)
+ ORDER BY created_at DESC LIMIT 1)
 ORDER BY stimulus_index;
 ```
 
@@ -681,9 +679,9 @@ ORDER BY stimulus_index;
 - Is consent IMPOSSIBLE to skip?
 - Is "I Do Not Agree" just as prominent as "I Agree"? (No dark patterns!)
 - Is the consent text clear about:
-  - What they're consenting to?
-  - How data will be used?
-  - That they can withdraw?
+ - What they're consenting to?
+ - How data will be used?
+ - That they can withdraw?
 - Would UCSD IRB approve this flow?
 
 **If consent is skippable or unclear, this is a CRITICAL BUG.**
@@ -757,7 +755,7 @@ Watch the Network tab (F12) when page loads:
 
 **Check Network tab**:
 - **POST /api/sessions/{token}/choice** with status 200
-- Request body should include: `{"chosen_stimulus_id": "...", "response_time_ms": ...}`
+- Request body should include: `{"chosen_stimulus_id": "...", "response_time_ms":...}`
 - **GET /api/sessions/{token}/next** fetches next pair
 
 **Document**:
@@ -777,7 +775,7 @@ Watch the Network tab (F12) when page loads:
 
 **Complete 10 trials**, choosing strategically:
 
-**Trials 1-5**: Always choose stimulus #3 (if it appears)  
+**Trials 1-5**: Always choose stimulus #3 (if it appears) 
 **Trials 6-10**: Always choose stimulus #7 (if it appears)
 
 **Monitor which pairs are shown**:
@@ -792,7 +790,7 @@ psql adaptive_testing
 ```sql
 -- Get your session
 SELECT session_id, experiment_id, status, 
-       (bayesian_state->>'mean_vector')::text as mean_vec
+ (bayesian_state->>'mean_vector')::text as mean_vec
 FROM sessions
 WHERE status = 'in_progress'
 ORDER BY created_at DESC
@@ -822,15 +820,15 @@ ORDER BY trial_number;
 
 **Critical Evaluation** (This is the heart of the system):
 - **Is the algorithm truly adaptive?** 
-  - If you keep choosing #3, does it stop showing obviously worse options?
-  - Does it start showing #3 vs other strong candidates?
+ - If you keep choosing #3, does it stop showing obviously worse options?
+ - Does it start showing #3 vs other strong candidates?
 - **Is information gain maximization working?**
-  - Are early trials exploratory (random pairs)?
-  - Are later trials focused (comparing top items)?
+ - Are early trials exploratory (random pairs)?
+ - Are later trials focused (comparing top items)?
 - **Red flags**:
-  - Same pair shown twice in a row (bug)
-  - Pairs that make no sense given past choices (algorithm broken)
-  - Convergence doesn't happen (stuck showing random pairs)
+ - Same pair shown twice in a row (bug)
+ - Pairs that make no sense given past choices (algorithm broken)
+ - Convergence doesn't happen (stuck showing random pairs)
 
 **If you suspect the algorithm ISN'T adapting, document this clearly. This is the system's most important feature.**
 
@@ -873,16 +871,16 @@ ORDER BY trial_number;
 1. **Pass it correctly** (follow instruction)
 2. **Fail it deliberately** (choose wrong)
 3. Check what happens:
-   - Is failure logged?
-   - Does experiment continue?
-   - Is failure counted against data quality?
+ - Is failure logged?
+ - Does experiment continue?
+ - Is failure counted against data quality?
 
 **Check database**:
 ```sql
 SELECT trial_number, is_attention_check, attention_check_passed
 FROM choices
 WHERE session_id = '{your-session-id}'
-  AND is_attention_check = true;
+ AND is_attention_check = true;
 ```
 
 **Document**:
@@ -918,7 +916,7 @@ WHERE session_id = '{your-session-id}'
 ```sql
 -- Session should be marked complete
 SELECT session_id, status, completed_at, 
-       (bayesian_state->>'mean_vector')::text as final_ratings
+ (bayesian_state->>'mean_vector')::text as final_ratings
 FROM sessions
 WHERE session_id = '{your-session-id}';
 ```
@@ -970,7 +968,7 @@ df = pd.read_csv('/tmp/my_session.csv')
 
 # Extract final ratings from database
 # (You'll need to query bayesian_state->>'mean_vector')
-final_ratings = [0.8, 1.2, 1.5, 0.3, -0.5, -0.8, 1.0, 0.9, -0.2, 0.1]  # Example
+final_ratings = [0.8, 1.2, 1.5, 0.3, -0.5, -0.8, 1.0, 0.9, -0.2, 0.1] # Example
 # Replace with YOUR actual final ratings from database
 
 # Plot ratings
@@ -980,7 +978,7 @@ plt.xlabel('Stimulus Index')
 plt.ylabel('Bradley-Terry Rating (μ)')
 plt.title('Final Preference Ratings After 50 Trials')
 plt.axhline(y=0, color='r', linestyle='--', label='Neutral')
-plt.legend()
+plt.legend
 plt.savefig('/tmp/final_ratings.png', dpi=150)
 print("Ratings:", final_ratings)
 print("Top 3 stimuli:", np.argsort(final_ratings)[-3:][::-1])
@@ -1014,10 +1012,10 @@ print("Top 3 stimuli:", np.argsort(final_ratings)[-3:][::-1])
 **Verify**:
 - [ ] Experiment name shown
 - [ ] Summary statistics displayed:
-  - Total sessions
-  - Completed sessions
-  - Average duration
-  - Completion rate
+ - Total sessions
+ - Completed sessions
+ - Average duration
+ - Completion rate
 - [ ] List of individual sessions
 - [ ] CSV export button
 
@@ -1055,11 +1053,11 @@ print("Top 3 stimuli:", np.argsort(final_ratings)[-3:][::-1])
 - [ ] Beautiful dark theme (not broken light borders!)
 - [ ] List of all experiments
 - [ ] Each experiment shows:
-  - Name
-  - Status (active/draft)
-  - Date created
-  - Number of sessions
-  - Actions (View Results button)
+ - Name
+ - Status (active/draft)
+ - Date created
+ - Number of sessions
+ - Actions (View Results button)
 
 **Test Consent/Debrief Upload**:
 1. Scroll to "Consent & Debrief" section
@@ -1181,7 +1179,7 @@ selector.covariance[1, 1] = 2.0
 selector.covariance[2, 2] = 2.0
 
 # Get next pair
-pair, info_gain = selector.select_pair()
+pair, info_gain = selector.select_pair
 print(f"Selected pair: {pair}")
 print(f"Information gain: {info_gain}")
 
@@ -1222,27 +1220,27 @@ selector = PureBayesianAdaptiveSelector(n_stimuli=n)
 
 # Simulate subject who chooses according to Bradley-Terry model
 def simulate_choice(i, j, true_ratings, noise=0.1):
-    """Subject chooses i over j with probability σ(μᵢ - μⱼ + noise)"""
-    diff = true_ratings[i] - true_ratings[j] + np.random.normal(0, noise)
-    return i if diff > 0 else j
+ """Subject chooses i over j with probability σ(μᵢ - μⱼ + noise)"""
+ diff = true_ratings[i] - true_ratings[j] + np.random.normal(0, noise)
+ return i if diff > 0 else j
 
 # Run 100 trials
 estimates = []
 uncertainties = []
 for trial in range(100):
-    # Get next pair
-    i, j = selector.select_pair()
-    
-    # Simulate choice
-    winner = simulate_choice(i, j, true_ratings)
-    loser = j if winner == i else i
-    
-    # Update
-    selector.update(winner, loser)
-    
-    # Track estimates
-    estimates.append(selector.mean_vector.copy())
-    uncertainties.append(np.diag(selector.covariance).mean())
+ # Get next pair
+ i, j = selector.select_pair
+ 
+ # Simulate choice
+ winner = simulate_choice(i, j, true_ratings)
+ loser = j if winner == i else i
+ 
+ # Update
+ selector.update(winner, loser)
+ 
+ # Track estimates
+ estimates.append(selector.mean_vector.copy)
+ uncertainties.append(np.diag(selector.covariance).mean)
 
 # Check convergence
 import matplotlib.pyplot as plt
@@ -1254,12 +1252,12 @@ fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(10, 8))
 # Plot rating evolution
 estimates = np.array(estimates)
 for i in range(n):
-    ax1.plot(estimates[:, i], label=f'Stimulus {i}')
-    ax1.axhline(true_ratings[i], linestyle='--', color='gray', alpha=0.5)
+ ax1.plot(estimates[:, i], label=f'Stimulus {i}')
+ ax1.axhline(true_ratings[i], linestyle='--', color='gray', alpha=0.5)
 ax1.set_xlabel('Trial')
 ax1.set_ylabel('Estimated Rating')
 ax1.set_title('Rating Convergence')
-ax1.legend()
+ax1.legend
 ax1.grid(True, alpha=0.3)
 
 # Plot uncertainty
@@ -1269,15 +1267,15 @@ ax2.set_ylabel('Average Uncertainty')
 ax2.set_title('Uncertainty Reduction')
 ax2.grid(True, alpha=0.3)
 
-plt.tight_layout()
+plt.tight_layout
 plt.savefig('/tmp/convergence_test.png', dpi=150)
 
 # Calculate Spearman correlation at different points
 correlations = []
 for trial in range(10, 100, 10):
-    corr, _ = spearmanr(estimates[trial], true_ratings)
-    correlations.append((trial, corr))
-    print(f"Trial {trial}: Spearman ρ = {corr:.3f}")
+ corr, _ = spearmanr(estimates[trial], true_ratings)
+ correlations.append((trial, corr))
+ print(f"Trial {trial}: Spearman ρ = {corr:.3f}")
 
 # Final correlation
 final_corr, _ = spearmanr(estimates[-1], true_ratings)
@@ -1289,7 +1287,7 @@ print("✅ Convergence test passed")
 
 **Document**:
 - Convergence plot (/tmp/convergence_test.png)
-- Spearman correlations at trials 10, 20, 30, ..., 100
+- Spearman correlations at trials 10, 20, 30,..., 100
 - Final correlation (should be > 0.9)
 
 **Critical Evaluation**:
@@ -1307,15 +1305,15 @@ print("✅ Convergence test passed")
 ```sql
 -- Get all sessions with failed attention checks
 SELECT s.session_id, 
-       COUNT(*) FILTER (WHERE c.is_attention_check = true) as total_checks,
-       COUNT(*) FILTER (WHERE c.is_attention_check = true AND NOT c.attention_check_passed) as failed_checks,
-       COUNT(*) FILTER (WHERE c.response_time_ms < 500) as fast_responses
+ COUNT(*) FILTER (WHERE c.is_attention_check = true) as total_checks,
+ COUNT(*) FILTER (WHERE c.is_attention_check = true AND NOT c.attention_check_passed) as failed_checks,
+ COUNT(*) FILTER (WHERE c.response_time_ms < 500) as fast_responses
 FROM sessions s
 JOIN choices c ON s.session_id = c.session_id
 WHERE s.status = 'completed'
 GROUP BY s.session_id
 HAVING COUNT(*) FILTER (WHERE c.is_attention_check = true AND NOT c.attention_check_passed) > 0
-   OR COUNT(*) FILTER (WHERE c.response_time_ms < 500) > 2;
+ OR COUNT(*) FILTER (WHERE c.response_time_ms < 500) > 2;
 ```
 
 **Document**:
@@ -1350,62 +1348,62 @@ HAVING COUNT(*) FILTER (WHERE c.is_attention_check = true AND NOT c.attention_ch
 **Test these scenarios and document what happens:**
 
 1. **No images uploaded**
-   - Create experiment, skip image upload
-   - Try to publish
-   - Expected: Error message
-   - Actual: ?
+ - Create experiment, skip image upload
+ - Try to publish
+ - Expected: Error message
+ - Actual: ?
 
 2. **Wrong image format**
-   - Upload a .txt file renamed to .jpg
-   - Expected: Validation error
-   - Actual: ?
+ - Upload a.txt file renamed to.jpg
+ - Expected: Validation error
+ - Actual: ?
 
 3. **Duplicate experiment names**
-   - Create two experiments with same name
-   - Expected: Allowed (or warning?)
-   - Actual: ?
+ - Create two experiments with same name
+ - Expected: Allowed (or warning?)
+ - Actual: ?
 
 4. **Empty instructions**
-   - Leave instructions blank
-   - Try to publish
-   - Expected: Validation error or default instructions
-   - Actual: ?
+ - Leave instructions blank
+ - Try to publish
+ - Expected: Validation error or default instructions
+ - Actual: ?
 
 5. **Incomplete session**
-   - Start session, complete 10 trials, close browser
-   - Reopen same URL
-   - Expected: Resume from trial 11 (or restart?)
-   - Actual: ?
+ - Start session, complete 10 trials, close browser
+ - Reopen same URL
+ - Expected: Resume from trial 11 (or restart?)
+ - Actual: ?
 
 6. **Invalid experiment ID**
-   - Open subject_interface.html?exp=invalid-uuid
-   - Expected: "Experiment not found" error
-   - Actual: ?
+ - Open subject_interface.html?exp=invalid-uuid
+ - Expected: "Experiment not found" error
+ - Actual: ?
 
 7. **Expired JWT token**
-   - Get login token
-   - Wait 8+ hours
-   - Try to use token
-   - Expected: 401 Unauthorized, redirect to login
-   - Actual: ?
+ - Get login token
+ - Wait 8+ hours
+ - Try to use token
+ - Expected: 401 Unauthorized, redirect to login
+ - Actual: ?
 
 8. **Concurrent sessions**
-   - Open same experiment in two browser tabs
-   - Complete trials in both
-   - Expected: Two separate sessions (not conflict)
-   - Actual: ?
+ - Open same experiment in two browser tabs
+ - Complete trials in both
+ - Expected: Two separate sessions (not conflict)
+ - Actual: ?
 
 9. **Database connection lost**
-   - Stop PostgreSQL: `brew services stop postgresql` (macOS)
-   - Try to load admin dashboard
-   - Expected: Clear error message
-   - Actual: ?
-   - Restart PostgreSQL: `brew services start postgresql`
+ - Stop PostgreSQL: `brew services stop postgresql` (macOS)
+ - Try to load admin dashboard
+ - Expected: Clear error message
+ - Actual: ?
+ - Restart PostgreSQL: `brew services start postgresql`
 
 10. **Extremely large image**
-    - Try uploading a 50MB image
-    - Expected: File size limit error
-    - Actual: ?
+ - Try uploading a 50MB image
+ - Expected: File size limit error
+ - Actual: ?
 
 **For EACH scenario, document**:
 - What happened
@@ -1488,22 +1486,22 @@ HAVING COUNT(*) FILTER (WHERE c.is_attention_check = true AND NOT c.attention_ch
 **Measure load times**:
 
 1. **Experimenter dashboard with 100 images**
-   - Upload 100 images (if possible)
-   - Does upload succeed?
-   - How long does it take?
+ - Upload 100 images (if possible)
+ - Does upload succeed?
+ - How long does it take?
 
 2. **Subject interface trial loading**
-   - Time from clicking image → next trial appears
-   - Expected: < 500ms
-   - Actual: ?
+ - Time from clicking image → next trial appears
+ - Expected: < 500ms
+ - Actual: ?
 
 3. **Database query speed**
-   ```sql
-   EXPLAIN ANALYZE
-   SELECT * FROM choices WHERE session_id = '{id}';
-   ```
-   - Execution time?
-   - Are indexes used?
+ ```sql
+ EXPLAIN ANALYZE
+ SELECT * FROM choices WHERE session_id = '{id}';
+ ```
+ - Execution time?
+ - Are indexes used?
 
 **Document**:
 - Load times for each operation
@@ -1517,27 +1515,27 @@ HAVING COUNT(*) FILTER (WHERE c.is_attention_check = true AND NOT c.attention_ch
 **Attempt basic attacks** (ethical testing only):
 
 1. **SQL Injection**
-   - Try to create experiment with name: `'; DROP TABLE experiments; --`
-   - Expected: Safely escaped, no SQL executed
-   - Actual: ?
+ - Try to create experiment with name: `'; DROP TABLE experiments; --`
+ - Expected: Safely escaped, no SQL executed
+ - Actual: ?
 
 2. **XSS (Cross-Site Scripting)**
-   - Try to create experiment with name: `<script>alert('XSS')</script>`
-   - View experiment list
-   - Expected: Script not executed, displayed as text
-   - Actual: ?
+ - Try to create experiment with name: `<script>alert('XSS')</script>`
+ - View experiment list
+ - Expected: Script not executed, displayed as text
+ - Actual: ?
 
 3. **CSRF (Cross-Site Request Forgery)**
-   - Create experiment while logged in
-   - Log out
-   - Try to resubmit same POST request
-   - Expected: Rejected (invalid/expired token)
-   - Actual: ?
+ - Create experiment while logged in
+ - Log out
+ - Try to resubmit same POST request
+ - Expected: Rejected (invalid/expired token)
+ - Actual: ?
 
 4. **Path Traversal**
-   - Try to access: `http://localhost:5000/api/../../../../etc/passwd`
-   - Expected: 404 or 403
-   - Actual: ?
+ - Try to access: `http://localhost:5000/api/../../../../etc/passwd`
+ - Expected: 404 or 403
+ - Actual: ?
 
 **Document**:
 - Which attacks succeeded? (CRITICAL BUGS)
@@ -1553,8 +1551,8 @@ HAVING COUNT(*) FILTER (WHERE c.is_attention_check = true AND NOT c.attention_ch
 ```sql
 -- Duplicate session token (should fail)
 INSERT INTO sessions (session_id, session_token, experiment_id, status)
-VALUES (gen_random_uuid(), 'existing-token', 
-        (SELECT experiment_id FROM experiments LIMIT 1), 'in_progress');
+VALUES (gen_random_uuid, 'existing-token', 
+ (SELECT experiment_id FROM experiments LIMIT 1), 'in_progress');
 ```
 
 Expected: `ERROR: duplicate key value violates unique constraint`
@@ -1563,8 +1561,8 @@ Expected: `ERROR: duplicate key value violates unique constraint`
 ```sql
 -- Try to insert choice for non-existent session
 INSERT INTO choices (choice_id, session_id, trial_number, stimulus_a_id, stimulus_b_id, chosen_stimulus_id)
-VALUES (gen_random_uuid(), gen_random_uuid(), 1, 
-        gen_random_uuid(), gen_random_uuid(), gen_random_uuid());
+VALUES (gen_random_uuid, gen_random_uuid, 1, 
+ gen_random_uuid, gen_random_uuid, gen_random_uuid);
 ```
 
 Expected: `ERROR: violates foreign key constraint`
@@ -1573,7 +1571,7 @@ Expected: `ERROR: violates foreign key constraint`
 ```sql
 -- Try to create experiment without name
 INSERT INTO experiments (experiment_id, num_stimuli, max_trials)
-VALUES (gen_random_uuid(), 10, 50);
+VALUES (gen_random_uuid, 10, 50);
 ```
 
 Expected: `ERROR: null value in column "name" violates not-null constraint`
@@ -1608,10 +1606,10 @@ Create a document (Google Doc or Markdown) with these sections:
 
 ### Section 1: Executive Summary
 
-**System Name**: Adaptive Preference Testing System v3.5.11  
-**Tested By**: [Your Name]  
-**Testing Period**: [Start Date] - [End Date]  
-**Total Testing Hours**: [X hours]  
+**System Name**: Adaptive Preference Testing System v3.5.11 
+**Tested By**: [Your Name] 
+**Testing Period**: [Start Date] - [End Date] 
+**Total Testing Hours**: [X hours] 
 
 **Overall Assessment**: [Ready for Production / Needs Minor Fixes / Needs Major Fixes / Not Ready]
 
@@ -1647,8 +1645,8 @@ Create a document (Google Doc or Markdown) with these sections:
 - **Severity**: Critical / High / Medium / Low
 - **Description**: [What's broken?]
 - **Steps to Reproduce**:
-  1. [Step 1]
-  2. [Step 2]
+ 1. [Step 1]
+ 2. [Step 2]
 - **Expected Behavior**: [What should happen?]
 - **Actual Behavior**: [What happens instead?]
 - **Impact**: [How does this affect research?]
@@ -1769,11 +1767,11 @@ Create a document (Google Doc or Markdown) with these sections:
 
 **Certification**: 
 
-☐ I certify this system is ready for IRB submission and research use  
-☐ I certify this system needs minor fixes before research use  
+☐ I certify this system is ready for IRB submission and research use 
+☐ I certify this system needs minor fixes before research use 
 ☐ I cannot certify this system for research use due to critical issues
 
-**Signed**: [Your Name]  
+**Signed**: [Your Name] 
 **Date**: [Date]
 
 ---
@@ -1785,9 +1783,9 @@ Submit via email:
 1. **Testing Report** (Google Doc or PDF)
 2. **Screenshots Folder** (ZIP with all screenshots)
 3. **Database Dumps**:
-   ```bash
-   pg_dump adaptive_testing > adaptive_testing_backup.sql
-   ```
+ ```bash
+ pg_dump adaptive_testing > adaptive_testing_backup.sql
+ ```
 4. **Session Data**: Your completed 50-trial session CSV
 5. **Convergence Plots**: Rating evolution, uncertainty reduction
 6. **Bug Report**: Separate document if critical bugs found
@@ -1848,24 +1846,24 @@ If other students need to understand adaptive preference testing before using th
 **For Experimenters (Researchers Creating Studies)**:
 
 1. **Tutorial Document Needed**: "Introduction to Adaptive Preference Testing"
-   - What is pairwise comparison?
-   - Why adaptive instead of exhaustive?
-   - When to use this vs Likert scales?
-   - How to interpret results?
+ - What is pairwise comparison?
+ - Why adaptive instead of exhaustive?
+ - When to use this vs Likert scales?
+ - How to interpret results?
 
 2. **Practical Guide Needed**: "Creating Your First Experiment"
-   - Step-by-step with screenshots
-   - Common mistakes to avoid
-   - Best practices for instruction writing
-   - Image selection guidelines
+ - Step-by-step with screenshots
+ - Common mistakes to avoid
+ - Best practices for instruction writing
+ - Image selection guidelines
 
 **For Subjects (Research Participants)**:
 
 1. **Participant Information Sheet Needed**:
-   - What is this study about?
-   - How long will it take?
-   - What will I be doing?
-   - How is my data used?
+ - What is this study about?
+ - How long will it take?
+ - What will I be doing?
+ - How is my data used?
 
 **Prompt for Creating These Materials**:
 
@@ -1873,26 +1871,26 @@ If other students need to understand adaptive preference testing before using th
 I need educational materials for a Bayesian adaptive preference testing system. Please create:
 
 1. A 2-page "Experimenter's Quick Start Guide" explaining:
-   - What adaptive testing is (vs traditional methods)
-   - When to use pairwise comparisons vs ratings
-   - How the Bayesian algorithm works (conceptually, not mathematically)
-   - Best practices for stimulus selection
-   - How to interpret Bradley-Terry ratings
-   Target audience: Graduate students in psychology/cognitive science
+ - What adaptive testing is (vs traditional methods)
+ - When to use pairwise comparisons vs ratings
+ - How the Bayesian algorithm works (conceptually, not mathematically)
+ - Best practices for stimulus selection
+ - How to interpret Bradley-Terry ratings
+ Target audience: Graduate students in psychology/cognitive science
 
 2. A 1-page "Participant Information Sheet" explaining:
-   - What happens during a session
-   - Why they see certain image pairs
-   - How long it takes
-   - What data is collected
-   Target audience: Undergraduate research participants (lay audience)
+ - What happens during a session
+ - Why they see certain image pairs
+ - How long it takes
+ - What data is collected
+ Target audience: Undergraduate research participants (lay audience)
 
 3. A 3-page "Technical Deep Dive" explaining:
-   - Bradley-Terry model mathematics
-   - Bayesian inference for pairwise comparisons
-   - Information gain maximization
-   - Sherman-Morrison covariance updates
-   Target audience: Advanced students with linear algebra background
+ - Bradley-Terry model mathematics
+ - Bayesian inference for pairwise comparisons
+ - Information gain maximization
+ - Sherman-Morrison covariance updates
+ Target audience: Advanced students with linear algebra background
 
 Please make these concrete, practical, and example-driven.
 ```

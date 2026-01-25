@@ -40,7 +40,7 @@ At runtime, the preferred provider is resolved in this order:
 2. The `VLM_PROVIDER` environment variable, if set.
 3. Automatic detection based on available keys, with priority:
 
-   `Gemini → OpenAI → Anthropic → Stub`.
+ `Gemini → OpenAI → Anthropic → Stub`.
 
 The Admin Cockpit writes a small JSON file at:
 
@@ -81,12 +81,12 @@ keys exist.
 ## 5. Cost and safety notes
 
 - VLM calls are network-bound and relatively expensive; start by testing on a
-  single image from the Admin Cockpit before running large batches.
+ single image from the Admin Cockpit before running large batches.
 - For student or classroom use, you can run in **Stub** mode (no keys) and
-  still exercise the full pipeline shape.
+ still exercise the full pipeline shape.
 - When providing real keys, prefer the most cost-effective model (e.g.
-  Gemini 1.5 Flash or OpenAI gpt-4o-mini) for bulk tagging; reserve more
-  expensive models for research-grade runs.
+ Gemini 1.5 Flash or OpenAI gpt-4o-mini) for bulk tagging; reserve more
+ expensive models for research-grade runs.
 
 ## 6. Quick sanity test
 
@@ -94,8 +94,8 @@ keys exist.
 2. In the Admin Cockpit → **VLM Engine**, set a provider and save.
 3. Enter a small image ID (e.g. `1`) and click **Test VLM**.
 4. Confirm that:
-   - `engine` reports the expected backend (Gemini / OpenAI / Anthropic / Stub).
-   - The response JSON includes the five keys above.
+ - `engine` reports the expected backend (Gemini / OpenAI / Anthropic / Stub).
+ - The response JSON includes the five keys above.
 
 If that works, you can now treat the cognitive metrics as part of the standard
 attribute set for export, BN construction, and dashboards.
@@ -106,11 +106,11 @@ attribute set for export, BN construction, and dashboards.
 In addition to the five core cognitive/environmental metrics, the VLM prompt
 now asks for five affective tone dimensions:
 
-- `cozy`      – how cozy / snug / intimate the space feels
+- `cozy` – how cozy / snug / intimate the space feels
 - `welcoming` – how welcoming / socially inviting it feels
-- `tranquil`  – how calm / tranquil it feels
-- `scary`     – how scary / threatening it feels
-- `jarring`   – how visually or affectively jarring it feels
+- `tranquil` – how calm / tranquil it feels
+- `scary` – how scary / threatening it feels
+- `jarring` – how visually or affectively jarring it feels
 
 These are written into the attribute store as:
 

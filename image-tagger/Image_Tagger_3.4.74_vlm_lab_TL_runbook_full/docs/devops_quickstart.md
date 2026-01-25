@@ -16,25 +16,24 @@ You do **not** need a system-wide PostgreSQL install; the database is run in a D
 1. Ensure Docker Desktop is running.
 2. From the repository root, make the install script executable (once per clone):
 
-   ```bash
-   chmod +x install.sh
-   ```
+ ```bash
+ chmod +x install.sh
+ ```
 
 3. Run the installer:
 
-   ```bash
-   ./install.sh
-   ```
+ ```bash./install.sh
+ ```
 
-   By default this will:
+ By default this will:
 
-   - Build Docker images for the API, database and frontend (using `deploy/docker-compose.yml`).
-   - Run seeding scripts:
-     - `backend/scripts/seed_tool_configs.py`
-     - `backend/scripts/seed_attributes.py`
-   - Run smoke tests:
-     - `scripts/smoke_api.py`
-     - `scripts/smoke_science.py`
+ - Build Docker images for the API, database and frontend (using `deploy/docker-compose.yml`).
+ - Run seeding scripts:
+ - `backend/scripts/seed_tool_configs.py`
+ - `backend/scripts/seed_attributes.py`
+ - Run smoke tests:
+ - `scripts/smoke_api.py`
+ - `scripts/smoke_science.py`
 
 If any step fails, the script prints an error message and exits with a non-zero status code.
 
@@ -44,25 +43,25 @@ After `./install.sh` completes successfully:
 
 1. Open a browser and navigate to the frontend portal (for example):
 
-   - `http://localhost:8000/index.html` or
-   - `http://localhost:8080/index.html`
+ - `http://localhost:8000/index.html` or
+ - `http://localhost:8080/index.html`
 
-   The exact port depends on your `deploy/docker-compose.yml` configuration.
+ The exact port depends on your `deploy/docker-compose.yml` configuration.
 
 2. You should see the **Role Portal**, with links to:
 
-   - Tagger Workbench
-   - Supervisor Monitor
-   - Admin Cockpit
-   - Research Explorer
+ - Tagger Workbench
+ - Supervisor Monitor
+ - Admin Cockpit
+ - Research Explorer
 
 3. Check the API health endpoint in a browser or via `curl`:
 
-   ```bash
-   curl http://localhost:8000/health
-   ```
+ ```bash
+ curl http://localhost:8000/health
+ ```
 
-   A simple JSON response indicates the API is up.
+ A simple JSON response indicates the API is up.
 
 ## 4. Authentication and roles in dev mode
 
@@ -84,18 +83,18 @@ defaults and have your infrastructure inject the appropriate headers.
 
 ## 5. Common issues
 
-- **Docker not running**  
-  Symptoms: `docker-compose` commands fail or hang.  
-  Fix: Start Docker Desktop and re-run `./install.sh`.
+- **Docker not running** 
+ Symptoms: `docker-compose` commands fail or hang. 
+ Fix: Start Docker Desktop and re-run `./install.sh`.
 
-- **Port already in use**  
-  Symptoms: API or frontend container fails to bind to a port (for example 8000).  
-  Fix: Stop any process using that port or adjust ports in `deploy/docker-compose.yml`.
+- **Port already in use** 
+ Symptoms: API or frontend container fails to bind to a port (for example 8000). 
+ Fix: Stop any process using that port or adjust ports in `deploy/docker-compose.yml`.
 
-- **Database container failing**  
-  Symptoms: API logs show connection errors to the DB.  
-  Fix: Check Docker Desktop logs for the DB container; ensure volumes and environment
-  variables in `deploy/docker-compose.yml` are correct.
+- **Database container failing** 
+ Symptoms: API logs show connection errors to the DB. 
+ Fix: Check Docker Desktop logs for the DB container; ensure volumes and environment
+ variables in `deploy/docker-compose.yml` are correct.
 
 ## 6. Running tests
 
@@ -103,16 +102,16 @@ The repository includes basic API smoketests under `tests/` plus smoke scripts u
 
 - To run Python tests (outside Docker):
 
-  ```bash
-  pip install -r requirements.txt
-  pytest -q
-  ```
+ ```bash
+ pip install -r requirements.txt
+ pytest -q
+ ```
 
 - To run tests against the Dockerised API, you can use a pattern such as:
 
-  ```bash
-  docker-compose -f deploy/docker-compose.yml exec -T api pytest -q
-  ```
+ ```bash
+ docker-compose -f deploy/docker-compose.yml exec -T api pytest -q
+ ```
 
 ## 7. CI workflow
 
@@ -120,9 +119,9 @@ The CI recipe (`.github/workflows/ci_v3.yml`) is designed to:
 
 1. Install Python dependencies.
 2. Run governance verification:
-   - `python scripts/guardian.py verify`
+ - `python scripts/guardian.py verify`
 3. Run API smoketests:
-   - `pytest tests/test_v3_api.py`
+ - `pytest tests/test_v3_api.py`
 4. Optionally run `scripts/smoke_science.py` as an advisory check.
 
 Teams can adapt this workflow to their own CI provider. The key idea is that every
@@ -135,9 +134,9 @@ The script `scripts/smoke_frontend.py` is a lightweight end-to-end check
 that the portal is reachable and rendering the main shell.
 
 - If Playwright is installed, it will launch a headless Chromium instance
-  and wait for the page to reach a network-idle state.
+ and wait for the page to reach a network-idle state.
 - Otherwise it falls back to a simple HTTP GET and inspects the HTML
-  response body.
+ response body.
 
 The smoketest looks for at least one of a small set of key phrases, such as
 "image tagger", "tagger workbench", "admin cockpit", or "research explorer".
@@ -156,7 +155,7 @@ The BN / DB health checker verifies two things:
 
 - Every ``Validation.attribute_key`` has a corresponding row in ``attributes.key``.
 - Every BN candidate key exposed by the science index catalog also has a
-  corresponding Attribute row.
+ corresponding Attribute row.
 
 To run the checker inside the Docker stack:
 

@@ -1,6 +1,6 @@
 # Phase 5 Log
 
-Date: 2025-12-20
+Date: 
 Phase: 5 - Polish and Final Verification
 
 ## Pre-flight
@@ -26,7 +26,7 @@ Phase: 5 - Polish and Final Verification
 ## Verification
 - `python3 scripts/gate_check.py 5` PASS
 - `./scripts/verify_all.sh all` PASS
-- `. .venv/bin/activate && python -m unittest integration.tests.test_auth integration.tests.test_events integration.tests.test_api_client integration.tests.test_integration` PASS
+- `..venv/bin/activate && python -m unittest integration.tests.test_auth integration.tests.test_events integration.tests.test_api_client integration.tests.test_integration` PASS
 
 ## Update: Redis Dependency Setup
 - Added `integration/requirements.txt` with redis-py.

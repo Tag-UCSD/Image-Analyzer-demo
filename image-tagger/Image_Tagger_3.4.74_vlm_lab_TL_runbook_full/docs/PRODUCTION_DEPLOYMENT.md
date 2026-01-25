@@ -32,10 +32,10 @@ In the default Docker setup:
 - `deploy/Dockerfile.backend` builds the backend image.
 - `deploy/Dockerfile.frontend` (or equivalent) builds the frontend.
 - `deploy/docker-compose.yml` defines services:
-  - `backend`
-  - `frontend`
-  - `db` (Postgres)
-  - optional reverse proxy (nginx) in front.
+ - `backend`
+ - `frontend`
+ - `db` (Postgres)
+ - optional reverse proxy (nginx) in front.
 
 ---
 
@@ -45,26 +45,26 @@ These are the most important environment variables for a production-like setup.
 
 ### 2.1 Security / auth
 
-- `API_SECRET`  
-  - Used to sign JWT tokens.
-  - **Production rule:** never use the default development key.
-  - Generate a long random string, e.g.:
+- `API_SECRET` 
+ - Used to sign JWT tokens.
+ - **Production rule:** never use the default development key.
+ - Generate a long random string, e.g.:
 
-    ```bash
-    python - << 'EOF'
-    import secrets
-    print(secrets.token_urlsafe(64))
-    EOF
-    ```
+ ```bash
+ python - << 'EOF'
+ import secrets
+ print(secrets.token_urlsafe(64))
+ EOF
+ ```
 
-  - Set it in your environment (or `.env`) before running Docker:
+ - Set it in your environment (or `.env`) before running Docker:
 
-    ```bash
-    export API_SECRET="your-long-random-secret"
-    ```
+ ```bash
+ export API_SECRET="your-long-random-secret"
+ ```
 
-- `ADMIN_EMAIL`, `ADMIN_PASSWORD` (if supported in seeding / setup scripts)  
-  - Use non-trivial values; do not reuse personal passwords.
+- `ADMIN_EMAIL`, `ADMIN_PASSWORD` (if supported in seeding / setup scripts) 
+ - Use non-trivial values; do not reuse personal passwords.
 
 ### 2.2 Database
 
@@ -87,9 +87,9 @@ Rules:
 
 - Never commit these keys to the repository.
 - Prefer `.env` files or deployment-specific secret stores (e.g. Docker secrets,
-  Kubernetes secrets, or a password manager).
+ Kubernetes secrets, or a password manager).
 - Remember that VLM calls cost money. Use batch size and sampling strategies
-  appropriate for your budget.
+ appropriate for your budget.
 
 ---
 
@@ -104,35 +104,35 @@ For a production-like deployment:
 
 1. Ensure these volumes are backed up.
 2. Prefer **named volumes** or explicit host paths, not anonymous volumes, so
-   that data survives container recreation.
+ that data survives container recreation.
 
 Example snippet:
 
 ```yaml
 services:
-  db:
-    image: postgres:16
-    environment:
-      POSTGRES_DB: itagger
-      POSTGRES_USER: itagger
-      POSTGRES_PASSWORD: change_me
-    volumes:
-      - pgdata:/var/lib/postgresql/data
+ db:
+ image: postgres:16
+ environment:
+ POSTGRES_DB: itagger
+ POSTGRES_USER: itagger
+ POSTGRES_PASSWORD: change_me
+ volumes:
+ - pgdata:/var/lib/postgresql/data
 
-  backend:
-    build:
-      context: ..
-      dockerfile: deploy/Dockerfile.backend
-    environment:
-      API_SECRET: ${API_SECRET}
-      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
-      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
-    volumes:
-      - data_store:/app/data_store
+ backend:
+ build:
+ context:..
+ dockerfile: deploy/Dockerfile.backend
+ environment:
+ API_SECRET: ${API_SECRET}
+ OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+ ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
+ volumes:
+ - data_store:/app/data_store
 
 volumes:
-  pgdata:
-  data_store:
+ pgdata:
+ data_store:
 ```
 
 ---
@@ -146,38 +146,38 @@ Typical pattern:
 
 - nginx listens on ports 80/443.
 - nginx proxies:
-  - `/api/` → backend container
-  - `/` → frontend container (static assets)
+ - `/api/` → backend container
+ - `/` → frontend container (static assets)
 
 High-level nginx sketch:
 
 ```nginx
 server {
-    listen 80;
-    server_name your.domain.edu;
+ listen 80;
+ server_name your.domain.edu;
 
-    # Redirect HTTP → HTTPS
-    return 301 https://$host$request_uri;
+ # Redirect HTTP → HTTPS
+ return 301 https://$host$request_uri;
 }
 
 server {
-    listen 443 ssl;
-    server_name your.domain.edu;
+ listen 443 ssl;
+ server_name your.domain.edu;
 
-    ssl_certificate     /etc/letsencrypt/live/your.domain.edu/fullchain.pem;
-    ssl_certificate_key /etc/letsencrypt/live/your.domain.edu/privkey.pem;
+ ssl_certificate /etc/letsencrypt/live/your.domain.edu/fullchain.pem;
+ ssl_certificate_key /etc/letsencrypt/live/your.domain.edu/privkey.pem;
 
-    location /api/ {
-        proxy_pass         http://backend:8000/api/;
-        proxy_set_header   Host $host;
-        proxy_set_header   X-Real-IP $remote_addr;
-    }
+ location /api/ {
+ proxy_pass http://backend:8000/api/;
+ proxy_set_header Host $host;
+ proxy_set_header X-Real-IP $remote_addr;
+ }
 
-    location / {
-        root   /usr/share/nginx/html;
-        index  index.html;
-        try_files $uri /index.html;
-    }
+ location / {
+ root /usr/share/nginx/html;
+ index index.html;
+ try_files $uri /index.html;
+ }
 }
 ```
 
@@ -194,15 +194,15 @@ A simple default deployment is:
 
 ```bash
 cd deploy
-# Make sure .env contains API_SECRET and DB credentials
+# Make sure.env contains API_SECRET and DB credentials
 docker compose up --build -d
 ```
 
 Once containers are healthy:
 
 - Visit the frontend URL in a browser, e.g.:
-  - `http://localhost:8080/` (direct)
-  - or `https://your.domain.edu/` (via nginx).
+ - `http://localhost:8080/` (direct)
+ - or `https://your.domain.edu/` (via nginx).
 
 Use the **Admin Cockpit** to:
 
@@ -220,16 +220,16 @@ When a new Image Tagger version is released (e.g. v3.4.9 → v3.4.9):
 2. Replace the backend/frontend image build context with the new repo.
 3. Rebuild containers:
 
-   ```bash
-   cd deploy
-   docker compose build backend frontend
-   docker compose up -d
-   ```
+ ```bash
+ cd deploy
+ docker compose build backend frontend
+ docker compose up -d
+ ```
 
 4. Run smoke tests:
-   - `scripts/smoke_science.py`
-   - `scripts/smoke_frontend.py`
-   - basic manual exploration in the browser.
+ - `scripts/smoke_science.py`
+ - `scripts/smoke_frontend.py`
+ - basic manual exploration in the browser.
 
 If anything fails:
 

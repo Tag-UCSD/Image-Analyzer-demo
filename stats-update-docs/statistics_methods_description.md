@@ -1,13 +1,13 @@
 ---
 editor_options: 
-  markdown: 
-    wrap: 72
+ markdown: 
+ wrap: 72
 ---
 
 Image-to-Psychology System: Complete Statistical Specifications A
 Practical, Scientifically Valid Architecture for Evidence-Based Design
 Target Audience: Second-year undergraduates with basic statistics and
-programming Version: 1.0 Date: November 2025
+programming Version: 1.0 Date: 
 
 Table of Contents
 
@@ -16,7 +16,7 @@ Principles) Data Collection Requirements Model Architecture
 Implementation Roadmap Experimental Validation Program Limitations and
 Assumptions Cost and Time Estimates Glossary
 
-1.  Executive Summary 1.1 What We're Building A system that:
+1. Executive Summary 1.1 What We're Building A system that:
 
 Takes an image of an interior space (office, living room, hospital)
 Extracts visual features (amount of wood, daylight level, spatial
@@ -65,31 +65,31 @@ mediators) and expand incrementally ✓ We use Goldilocks framework to
 reduce functional complexity ✓ We run experiments first to validate
 causal structure ✓ We're honest about uncertainty (no false precision)
 
-2.  System Overview 2.1 The Three-Layer Architecture
-    ┌─────────────────────────────────────────────────────────┐ │ INPUT:
-    IMAGE │ │ (photo of interior space) │
-    └────────────────┬────────────────────────────────────────┘ │ ▼
-    ┌─────────────────────────────────────────────────────────┐ │ LAYER
-    1: ATTRIBUTES │ │ (Physical/visual features extracted from image) │
-    │ │ │ Examples: │ │ • wood_coverage = 35% │ │ • daylight_lux = 450 │
-    │ • plant_density = 8% │ │ • spatial_entropy = 2.1 bits │ │ •
-    color_temperature = 4200K │ │ │ │ Status: OBSERVABLE via computer
-    vision │ └────────────────┬────────────────────────────────────────┘
-    │ ▼ ┌─────────────────────────────────────────────────────────┐ │
-    LAYER 2: MEDIATORS │ │ (Psychological perceptions/experiences) │ │ │
-    │ Examples: │ │ • perceived_warmth = 6.2/10 │ │ • cognitive_load =
-    4.8/10 │ │ • acoustic_comfort = 5.5/10 │ │ • spatial_comfort =
-    7.1/10 │ │ │ │ Status: MEASURED via human ratings │
-    └────────────────┬────────────────────────────────────────┘ │ ▼
-    ┌─────────────────────────────────────────────────────────┐ │ LAYER
-    3: OUTCOMES │ │ (Psychological states we care about) │ │ │ │
-    Examples: │ │ • stress_level = 4.2/10 │ │ • focus_ability = 6.8/10 │
-    │ • satisfaction = 7.5/10 │ │ • social_comfort = 6.0/10 │ │ │ │
-    Status: MEASURED via human ratings + experiments │
-    └─────────────────────────────────────────────────────────┘ 2.2
-    Information Flow Forward Prediction (Image → Outcomes): Image →
-    [Computer Vision] → Attributes → [Model A] → Mediators → [Model B] →
-    Outcomes Model A: Attributes → Mediators
+2. System Overview 2.1 The Three-Layer Architecture
+ ┌─────────────────────────────────────────────────────────┐ │ INPUT:
+ IMAGE │ │ (photo of interior space) │
+ └────────────────┬────────────────────────────────────────┘ │ ▼
+ ┌─────────────────────────────────────────────────────────┐ │ LAYER
+ 1: ATTRIBUTES │ │ (Physical/visual features extracted from image) │
+ │ │ │ Examples: │ │ • wood_coverage = 35% │ │ • daylight_lux = 450 │
+ │ • plant_density = 8% │ │ • spatial_entropy = 2.1 bits │ │ •
+ color_temperature = 4200K │ │ │ │ Status: OBSERVABLE via computer
+ vision │ └────────────────┬────────────────────────────────────────┘
+ │ ▼ ┌─────────────────────────────────────────────────────────┐ │
+ LAYER 2: MEDIATORS │ │ (Psychological perceptions/experiences) │ │ │
+ │ Examples: │ │ • perceived_warmth = 6.2/10 │ │ • cognitive_load =
+ 4.8/10 │ │ • acoustic_comfort = 5.5/10 │ │ • spatial_comfort =
+ 7.1/10 │ │ │ │ Status: MEASURED via human ratings │
+ └────────────────┬────────────────────────────────────────┘ │ ▼
+ ┌─────────────────────────────────────────────────────────┐ │ LAYER
+ 3: OUTCOMES │ │ (Psychological states we care about) │ │ │ │
+ Examples: │ │ • stress_level = 4.2/10 │ │ • focus_ability = 6.8/10 │
+ │ • satisfaction = 7.5/10 │ │ • social_comfort = 6.0/10 │ │ │ │
+ Status: MEASURED via human ratings + experiments │
+ └─────────────────────────────────────────────────────────┘ 2.2
+ Information Flow Forward Prediction (Image → Outcomes): Image →
+ [Computer Vision] → Attributes → [Model A] → Mediators → [Model B] →
+ Outcomes Model A: Attributes → Mediators
 
 Statistical model: Regression with Goldilocks functions Input: Image
 attributes (continuous values) Output: Predicted mediator ratings with
@@ -124,16 +124,16 @@ answer: "Why does this image score high on stress?" Can explain: "Wood
 matters because it affects perceived warmth (mediator), which reduces
 stress (outcome)"
 
-3.  Statistical Foundations (From First Principles) This section builds
-    up all the statistical concepts you need to understand the system.
-    If you're already comfortable with regression, Bayesian inference,
-    and causal graphs, you can skim this. If not, read carefully—this is
-    your foundation. 3.1 Regression: Predicting One Variable From Others
-    The Basic Idea: Suppose you want to predict a person's height (Y)
-    from their age (X). You collect data from 100 people and plot it:
-    Height \^ \| ● \| ● ● \| ● ● ● \| ● ● ● ● \|● ● ● ●
-    +─────────────────\> Age A regression finds the best-fit line
-    through these points: Y = β₀ + β₁ × X + ε
+3. Statistical Foundations (From First Principles) This section builds
+ up all the statistical concepts you need to understand the system.
+ If you're already comfortable with regression, Bayesian inference,
+ and causal graphs, you can skim this. If not, read carefully—this is
+ your foundation. 3.1 Regression: Predicting One Variable From Others
+ The Basic Idea: Suppose you want to predict a person's height (Y)
+ from their age (X). You collect data from 100 people and plot it:
+ Height \^ \| ● \| ● ● \| ● ● ● \| ● ● ● ● \|● ● ● ●
+ +─────────────────\> Age A regression finds the best-fit line
+ through these points: Y = β₀ + β₁ × X + ε
 
 Where: - Y = height (what we want to predict) - X = age (what we know) -
 β₀ = intercept (height when age = 0, usually meaningless) - β₁ = slope
@@ -147,7 +147,7 @@ attribute X increases by 1 unit, mediator Y changes by β units." Key
 Assumption: The relationship is linear (or we transform it to be
 linear). For Goldilocks attributes, we use a nonlinear function but
 still fit via regression: perceived_warmth = β₀ + β₁×goldilocks(wood,
-optimal=40%, width=15%) + ...
+optimal=40%, width=15%) +...
 
 Where goldilocks(x, optimal, width) = exp(-(x - optimal)² / (2×width²))
 This is a Gaussian curve centered at the optimal point. 3.2 Why We Need
@@ -261,7 +261,7 @@ Intervention: P(Warmth \| do(Wood=50%)) — "Warmth if we forced wood to
 
 This is the causal effect, as if we did an experiment
 
-Do-Calculus (Pearl, 1995): A set of rules for computing interventional
+Do-Calculus (Pearl,): A set of rules for computing interventional
 probabilities from observational data + causal graph. Key Insight: If
 you know the causal graph and measure enough variables, you can answer
 intervention questions without experiments. Example: Graph: Lighting →
@@ -277,16 +277,16 @@ daylight from 300 to 600 lux, what happens to focus?"
 
 Implementation: pythondef intervention_query(graph, intervention,
 outcome): \# Set intervention node to fixed value graph_do =
-graph.copy() graph_do.remove_incoming_edges(intervention)
+graph.copy graph_do.remove_incoming_edges(intervention)
 graph_do.set_value(intervention, value)
 
-```         
+``` 
 # Propagate through model
 predicted_outcome = graph_do.predict(outcome)
 return predicted_outcome
 ```
 
-```         
+``` 
 
 ### 3.6 Why We DON'T Do Counterfactuals
 
@@ -332,7 +332,7 @@ comfortable here")
 Where: - M = true latent "perceived warmth" - λ = factor loading (how
 strongly each item relates to M) - ε = measurement error
 
-```         
+``` 
 
 **Why This Matters:**
 
@@ -357,7 +357,7 @@ Many environmental attributes affect outcomes via inverted-U:
 Outcome \^ \| ●●● \| ● ● \| ● ● \| ● ● \|● ● +─────────────────────\>
 Attribute low optimal high
 
-```         
+``` 
 
 **Examples:**
 - **Visual complexity:** Too little = boring; too much = overwhelming; moderate = engaging
@@ -382,9 +382,9 @@ arousal theory, cognitive load theory Interpretable: Can tell designers
 In Our System: We identify \~15-20 Strong Goldilocks attributes and
 model them with this functional form.
 
-4.  Data Collection Requirements 4.1 Image Corpus Purpose: Train
-    computer vision models to extract attributes; provide stimuli for
-    human rating. Specifications: Phase 1 (Minimum Viable):
+4. Data Collection Requirements 4.1 Image Corpus Purpose: Train
+ computer vision models to extract attributes; provide stimuli for
+ human rating. Specifications: Phase 1 (Minimum Viable):
 
 N = 200 images Coverage: Diverse interior types
 
@@ -449,7 +449,7 @@ ratios No ML needed: Standard image processing
 
 Example attribute computations: python# Wood coverage wood_mask =
 segmentation_model.predict(image, class='wood') wood_coverage =
-wood_mask.sum() / image.size \# → 0.35 (35%)
+wood_mask.sum / image.size \# → 0.35 (35%)
 
 # Spatial entropy
 
@@ -462,7 +462,7 @@ histogram(depth_discrete)) \# → 2.1 bits
 edges = canny_edges(image) fractal_dim = box_counting_dimension(edges)
 \# → 1.45
 
-```         
+``` 
 
 **Validation:**
 - **Ground truth:** Manually label 50 images with high precision
@@ -499,30 +499,30 @@ edges = canny_edges(image) fractal_dim = box_counting_dimension(edges)
 
 Instructions: Rate your immediate impression of this space.
 
-1.  This space feels warm and inviting. [1=Strongly Disagree] ───
-    [7=Strongly Agree]
+1. This space feels warm and inviting. [1=Strongly Disagree] ───
+ [7=Strongly Agree]
 
-2.  This environment seems cozy and comfortable. [1=Strongly Disagree]
-    ─── [7=Strongly Agree]
+2. This environment seems cozy and comfortable. [1=Strongly Disagree]
+ ─── [7=Strongly Agree]
 
-3.  I would feel at ease spending time here. [1=Strongly Disagree] ───
-    [7=Strongly Agree]
+3. I would feel at ease spending time here. [1=Strongly Disagree] ───
+ [7=Strongly Agree]
 
-```         
+``` 
 
 **Example: Cognitive Load Scale**
 ```
 
-1.  This space feels visually complex. [1=Very Simple] ─── [7=Very
-    Complex]
+1. This space feels visually complex. [1=Very Simple] ─── [7=Very
+ Complex]
 
-2.  Processing the visual information in this space would be:
-    [1=Effortless] ─── [7=Demanding]
+2. Processing the visual information in this space would be:
+ [1=Effortless] ─── [7=Demanding]
 
-3.  This environment seems: [1=Clear and organized] ─── [7=Cluttered and
-    chaotic]
+3. This environment seems: [1=Clear and organized] ─── [7=Cluttered and
+ chaotic]
 
-```         
+``` 
 
 **For restorativeness:** Use validated **Perceived Restorativeness Scale (PRS-11)** short form.
 
@@ -572,17 +572,17 @@ Instructions: Rate your immediate impression of this space.
 **Outcomes to Measure (Phase 1: 3-4 outcomes):**
 
 1. **Stress/Relaxation**
-   - Single item: "This space would make me feel:" [1=Very Stressed ─── 7=Very Relaxed]
-   - Or STAI-6 brief anxiety inventory
+ - Single item: "This space would make me feel:" [1=Very Stressed ─── 7=Very Relaxed]
+ - Or STAI-6 brief anxiety inventory
 
 2. **Focus Ability**
-   - "I could focus on complex work in this space:" [1=Not at all ─── 7=Very well]
+ - "I could focus on complex work in this space:" [1=Not at all ─── 7=Very well]
 
 3. **Satisfaction**
-   - "Overall, I would be satisfied with this space:" [1=Very Dissatisfied ─── 7=Very Satisfied]
+ - "Overall, I would be satisfied with this space:" [1=Very Dissatisfied ─── 7=Very Satisfied]
 
 4. **Social Comfort** (if measuring social mediator)
-   - "This space would be comfortable for social interaction:" [1=Very Uncomfortable ─── 7=Very Comfortable]
+ - "This space would be comfortable for social interaction:" [1=Very Uncomfortable ─── 7=Very Comfortable]
 
 **Collection:** Same protocol as mediators (included in same survey).
 
@@ -607,7 +607,7 @@ Where: - M_j = mediator rating (mean across raters) - Attribute_i = wood
 coverage, daylight, plants, etc. - f(·) = functional form (linear or
 Goldilocks) - ε \~ Normal(0, σ²) = residual error
 
-```         
+``` 
 
 **Goldilocks Attributes:**
 
@@ -618,7 +618,7 @@ f(X) = goldilocks(X, θ, τ) = exp(-(X - θ)² / (2τ²))
 
 Where: - θ = optimal value (learned) - τ = tolerance width (learned)
 
-```         
+``` 
 
 **Linear Attributes:**
 
@@ -627,7 +627,7 @@ For monotonic relationships:
 
 f(X) = X
 
-```         
+``` 
 
 **Example Model for Affective Quality:**
 ```
@@ -637,7 +637,7 @@ Affective_Quality = β₀ + β₁ × goldilocks(wood_coverage, θ_wood,
 goldilocks(color_saturation, θ_sat, τ_sat) + β₄ × daylight_lux (linear:
 more is better) + β₅ × concrete_coverage (linear: more is worse) + ε
 
-```         
+``` 
 
 **Hierarchical Structure:**
 
@@ -650,7 +650,7 @@ Goldilocks optimal points: θ_wood \~ Normal(μ_natural_materials,
 Effect sizes: β_wood \~ Normal(μ_affective_effects, σ²_affective)
 β_plant \~ Normal(μ_affective_effects, σ²_affective)
 
-```         
+``` 
 
 **Priors (from literature):**
 
@@ -698,38 +698,36 @@ calibration curves Feature importance: Which attributes matter most?
 
 Implementation (Python pseudocode): pythonimport pymc as pm
 
-with pm.Model() as model_A: \# Priors β₀ = pm.Normal('intercept', mu=0,
+with pm.Model as model_A: \# Priors β₀ = pm.Normal('intercept', mu=0,
 sigma=1)
 
-```         
+``` 
 # Goldilocks parameters
 θ_wood = pm.Normal('optimal_wood', mu=0.4, sigma=0.1)
 τ_wood = pm.HalfNormal('tolerance_wood', sigma=0.15)
 β_wood = pm.Normal('effect_wood', mu=0.3, sigma=0.2)
 
-# ... (repeat for other attributes)
+#... (repeat for other attributes)
 
 # Goldilocks function
-wood_effect = β_wood * pm.math.exp(
-    -(attributes['wood'] - θ_wood)**2 / (2 * τ_wood**2)
-)
+wood_effect = β_wood * pm.math.exp(-(attributes['wood'] - θ_wood)**2 / (2 * τ_wood**2))
 
 # Linear function
 daylight_effect = β_daylight * attributes['daylight']
 
 # Combine
-μ = β₀ + wood_effect + daylight_effect + ...
+μ = β₀ + wood_effect + daylight_effect +...
 
 # Likelihood
 σ = pm.HalfNormal('error', sigma=1)
 observed = pm.Normal('affective_quality', mu=μ, sigma=σ, 
-                     observed=mediator_ratings)
+ observed=mediator_ratings)
 
 # Inference
-trace = pm.sample(2000, tune=1000, return_inferencedata=True)
+trace = pm.sample(, tune=1000, return_inferencedata=True)
 ```
 
-```         
+``` 
 
 **Time/Cost:**
 
@@ -747,9 +745,9 @@ trace = pm.sample(2000, tune=1000, return_inferencedata=True)
 Initial structure based on theory:
 ```
 
-```         
-       ┌──→ Stress
-       │
+``` 
+ ┌──→ Stress
+ │
 ```
 
 Affective ─┼──→ Satisfaction │ └──→ Social_Comfort
@@ -762,7 +760,7 @@ Acoustic ──┬──→ Focus_Ability │ └──→ Stress
 
 Restorative→ Stress (via restoration)
 
-```         
+``` 
 
 **Statistical Form:**
 
@@ -775,7 +773,7 @@ Where: - Mediator_j = affective quality, cognitive load, etc. -
 Confounds = attributes not mediated (direct effects) - ε \~ Normal(0,
 σ²)
 
-```         
+``` 
 
 **Example for Stress:**
 ```
@@ -787,7 +785,7 @@ stress) + β_restorative × Restorativeness (negative: restoration reduces
 stress) + β_direct_glare × glare_risk (direct effect not via
 mediators) + ε
 
-```         
+``` 
 
 **Handling Confounding:**
 
@@ -815,10 +813,10 @@ From literature, set directional priors:
 Estimation: Same Bayesian approach as Model A (PyMC/Stan).
 Interventional Queries: To answer "What if Affective_Quality increased
 by 1 point?": pythondef intervention_query(mediator, change, graph): \#
-Set mediator to new value new_mediators = mediators.copy()
+Set mediator to new value new_mediators = mediators.copy
 new_mediators[mediator] += change
 
-```         
+``` 
 # Predict outcomes
 new_outcomes = graph.predict(new_mediators)
 
@@ -827,7 +825,7 @@ delta = new_outcomes - original_outcomes
 return delta
 ```
 
-```         
+``` 
 
 **Validation:**
 
@@ -874,7 +872,7 @@ Stress \~ Normal(4.5, 0.8)
 Interpretation: - Best guess: 4.5 - 95% interval: [3.1, 5.9] - Reflects
 all sources of uncertainty
 
-```         
+``` 
 
 **Sensitivity Analysis:**
 
@@ -907,7 +905,7 @@ mean = np.mean(samples)
 
 print(f"Stress: {mean:.1f} [95% CI: {lower:.1f}, {upper:.1f}]")
 
-```         
+``` 
 
 ---
 
@@ -923,21 +921,21 @@ print(f"Stress: {mean:.1f} [95% CI: {lower:.1f}, {upper:.1f}]")
 **Tasks:**
 
 1. **Team hiring:**
-   - 1 FTE Data Scientist (modeling, statistics)
-   - 0.5 FTE Computer Vision Engineer (part-time or contractor)
-   - 0.25 FTE Psychometrician (consultant)
-   - 1 FTE Research Coordinator (data collection, experiments)
+ - 1 FTE Data Scientist (modeling, statistics)
+ - 0.5 FTE Computer Vision Engineer (part-time or contractor)
+ - 0.25 FTE Psychometrician (consultant)
+ - 1 FTE Research Coordinator (data collection, experiments)
 
 2. **Infrastructure:**
-   - Cloud compute (AWS/GCP): $200/month
-   - Storage: S3/Cloud Storage for images
-   - Software licenses: PyMC, Qualtrics, experiment platforms
-   - IRB approval for human subjects research
+ - Cloud compute (AWS/GCP): $200/month
+ - Storage: S3/Cloud Storage for images
+ - Software licenses: PyMC, Qualtrics, experiment platforms
+ - IRB approval for human subjects research
 
 3. **Documentation:**
-   - Finalize attribute taxonomy (list of 50-100 attributes)
-   - Finalize mediator scales (3-5 items each, validated)
-   - Create annotation guidelines
+ - Finalize attribute taxonomy (list of 50-100 attributes)
+ - Finalize mediator scales (3-5 items each, validated)
+ - Create annotation guidelines
 
 **Deliverables:**
 - Team in place
@@ -1011,9 +1009,9 @@ print(f"Stress: {mean:.1f} [95% CI: {lower:.1f}, {upper:.1f}]")
 - Fit using MCMC (may take days for convergence)
 - Check diagnostics: R-hat <1.01, ESS >1000
 - Validate:
-  - Out-of-sample R² (160 train, 40 test)
-  - Calibration curves
-  - Residual analysis
+ - Out-of-sample R² (160 train, 40 test)
+ - Calibration curves
+ - Residual analysis
 
 **Expected outcomes:**
 - R² = 0.4-0.6 for most mediators (moderate prediction)
@@ -1026,13 +1024,13 @@ print(f"Stress: {mean:.1f} [95% CI: {lower:.1f}, {upper:.1f}]")
 - Include confounders (direct attribute effects)
 - Fit models for each outcome
 - Validate:
-  - Out-of-sample R²
-  - Check if directionality makes sense (affective → stress negative? ✓)
+ - Out-of-sample R²
+ - Check if directionality makes sense (affective → stress negative? ✓)
 
 **Month 8: Integration + Intervention Functions**
 
 - Combine Models A and B into full pipeline
-- Implement `intervention_query()` function
+- Implement `intervention_query` function
 - Test: "Increase wood by 10% → predict mediator changes → predict outcome changes"
 - Build uncertainty propagation (sample from Model A posterior, feed to Model B)
 
@@ -1059,10 +1057,10 @@ print(f"Stress: {mean:.1f} [95% CI: {lower:.1f}, {upper:.1f}]")
 **Design:** Manipulate perceived warmth via matched stimuli
 
 - Create photorealistic renders of same room with:
-  - Condition A: Warm materials (wood, warm colors) — high affective quality
-  - Condition B: Cool materials (metal, concrete, cool colors) — low affective quality
-  - **Matched on:** Complexity, daylight, spatial layout, plants
-  
+ - Condition A: Warm materials (wood, warm colors) — high affective quality
+ - Condition B: Cool materials (metal, concrete, cool colors) — low affective quality
+ - **Matched on:** Complexity, daylight, spatial layout, plants
+ 
 **Manipulation check:** Measure affective quality ratings to confirm successful manipulation
 
 **Outcomes:**
@@ -1120,7 +1118,7 @@ Goal: Build production system with user-facing interface. Components:
 Backend API: pythonPOST /predict Input: {image_url: "..."} Output: {
 attributes: {...}, mediators: {...}, outcomes: { stress: {mean: 4.5,
 ci_lower: 3.8, ci_upper: 5.2}, focus: {mean: 6.2, ci_lower: 5.6,
-ci_upper: 6.8}, ... }, provenance: [...] }
+ci_upper: 6.8},... }, provenance: [...] }
 
 POST /intervene Input: { image_url: "...", intervention: {wood_coverage:
 +0.10} } Output: { original_outcomes: {...}, new_outcomes: {...}, delta:
@@ -1165,10 +1163,10 @@ uncertainty reduction: 60% │ │ │ │ [Generate Protocol] [Export Stimuli]
 
 **Implementation:**
 
--   **Framework:** React (frontend), FastAPI (backend)
--   **Deployment:** Docker containers, AWS/GCP
--   **Inference:** Precomputed for fast queries (recompute when models
-    update)
+- **Framework:** React (frontend), FastAPI (backend)
+- **Deployment:** Docker containers, AWS/GCP
+- **Inference:** Precomputed for fast queries (recompute when models
+ update)
 
 **Timeline:** - API: 2 months, 1 FTE - UI: 2-3 months, 1 FTE frontend
 developer - Testing: 1 month - **Total: 6 months, 1-2 FTE**
@@ -1183,12 +1181,12 @@ experiments
 
 **Tasks:**
 
--   Active learning: Model identifies most informative images to rate
-    next
--   Expand to new contexts (healthcare, education, retail)
--   Crowdsource experiments (partner with firms to run in real
-    buildings)
--   Add physiological outcomes (if feasible: HRV, cortisol)
+- Active learning: Model identifies most informative images to rate
+ next
+- Expand to new contexts (healthcare, education, retail)
+- Crowdsource experiments (partner with firms to run in real
+ buildings)
+- Add physiological outcomes (if feasible: HRV, cortisol)
 
 **Cost:** \$50-100K **Timeline:** 6-12 months
 
@@ -1256,14 +1254,14 @@ absorption, or (c) cultural associations?
 
 **Design: 2×2×2 factorial**
 
-| Condition | Visual Wood | Acoustic Absorption | Label          |
+| Condition | Visual Wood | Acoustic Absorption | Label |
 |-----------|-------------|---------------------|----------------|
-| 1         | No          | No                  | "Synthetic"    |
-| 2         | Yes         | No                  | "Wood veneer"  |
-| 3         | No          | Yes                 | "Fabric"       |
-| 4         | Yes         | Yes                 | "Solid wood"   |
-| 5         | No          | No                  | "Natural wood" |
-| 6         | Yes         | No                  | "Natural wood" |
+| 1 | No | No | "Synthetic" |
+| 2 | Yes | No | "Wood veneer" |
+| 3 | No | Yes | "Fabric" |
+| 4 | Yes | Yes | "Solid wood" |
+| 5 | No | No | "Natural wood" |
+| 6 | Yes | No | "Natural wood" |
 
 (Simplified: may need fewer cells or within-subjects design)
 
@@ -1291,8 +1289,8 @@ drywall, neutral colors - **Condition C (Medium-High Affective):** Light
 wood, warm beige - **Condition D (High Affective):** Rich wood, warm
 terracotta, textiles
 
-3.  **Hold constant:** Layout, furniture, daylight, plants, ceiling
-    height
+3. **Hold constant:** Layout, furniture, daylight, plants, ceiling
+ height
 
 **Manipulation Check (Pilot, N=40):** - Rate all 4 conditions on
 Affective Quality - Confirm: A \< B \< C \< D (statistically significant
@@ -1525,7 +1523,7 @@ not long-term satisfaction
 | **2** | **Model Development** | 4 mo | \$24K (scientist) | \$1K (compute) | **\$25K** |
 | **3** | **Experiments** | 7 mo | \$14K (coord) | \$5K (participants) | **\$19K** |
 | **4** | **System/UI** | 6 mo | \$30K (dev) | \$3K (hosting) | **\$33K** |
-|  | **TOTAL** | **18 mo** | **\$81K** | **\$18.5K** | **\$99.5K** |
+| | **TOTAL** | **18 mo** | **\$81K** | **\$18.5K** | **\$99.5K** |
 
 **Labor breakdown:** - Data Scientist: \$50K/year × 1.5 FTE-years =
 \$75K - Research Coordinator: \$40K/year × 0.5 FTE-years = \$20K -
@@ -1558,10 +1556,10 @@ cortisol, EEG).
 
 **Field Experiments (Real Buildings):**
 
-| Type                  | Sites | Duration    | Cost Range |
+| Type | Sites | Duration | Cost Range |
 |-----------------------|-------|-------------|------------|
-| Pre/Post Redesign     | 2-3   | 6-12 months | \$10-30K   |
-| Longitudinal Tracking | 5-10  | 12 months   | \$30-60K   |
+| Pre/Post Redesign | 2-3 | 6-12 months | \$10-30K |
+| Longitudinal Tracking | 5-10 | 12 months | \$30-60K |
 
 Field studies expensive but provide ecological validity.
 
@@ -1572,13 +1570,13 @@ validate key findings in lab/field.
 
 **After MVP Launch:**
 
-| Component                        | Monthly Cost      | Annual Cost    |
+| Component | Monthly Cost | Annual Cost |
 |----------------------------------|-------------------|----------------|
-| Hosting (AWS/GCP)                | \$200-500         | \$2,400-6,000  |
-| Maintenance (developer, 10% FTE) | \$500             | \$6,000        |
-| Data collection (expand corpus)  | \$500-1,000       | \$6,000-12,000 |
-| Experiments (2-4 per year)       | \$500-1,000       | \$6,000-12,000 |
-| **TOTAL**                        | **\$1,700-3,000** | **\$20-36K**   |
+| Hosting (AWS/GCP) | \$200-500 | \$2,400-6,000 |
+| Maintenance (developer, 10% FTE) | \$500 | \$6,000 |
+| Data collection (expand corpus) | \$500-1,000 | \$6,000-12,000 |
+| Experiments (2-4 per year) | \$500-1,000 | \$6,000-12,000 |
+| **TOTAL** | **\$1,700-3,000** | **\$20-36K** |
 
 **Scalability:** - Cost grows sublinearly with user base (hosting scales
 cheaply) - Main costs: Data collection, model updates, experiments
@@ -1587,29 +1585,29 @@ cheaply) - Main costs: Data collection, model updates, experiments
 
 **Use Case 1: Design Firm (100 projects/year)**
 
--   Current: Ad-hoc literature review + designer intuition
--   With system: Evidence-based predictions + experiments for key
-    decisions
--   **Value:**
-    -   Avoid 1 costly mistake per year (e.g., open office that kills
-        productivity) = \$100K+ saved
-    -   Faster design iterations (don't need to build mockups to test) =
-        10 hours/project × 100 = 1000 hours = \$100K
-    -   Differentiation (evidence-based design) = More clients, higher
-        fees = \$50K+
--   **ROI: \$250K value vs. \$30K system cost = 8× return**
+- Current: Ad-hoc literature review + designer intuition
+- With system: Evidence-based predictions + experiments for key
+ decisions
+- **Value:**
+ - Avoid 1 costly mistake per year (e.g., open office that kills
+ productivity) = \$100K+ saved
+ - Faster design iterations (don't need to build mockups to test) =
+ 10 hours/project × 100 = 1000 hours = \$100K
+ - Differentiation (evidence-based design) = More clients, higher
+ fees = \$50K+
+- **ROI: \$250K value vs. \$30K system cost = 8× return**
 
 **Use Case 2: Research Lab**
 
--   Systematizes literature, accelerates research
--   Publications (10+ papers from experiments) = Career advancement
--   Grants enabled by tool = \$500K+ over 5 years
+- Systematizes literature, accelerates research
+- Publications (10+ papers from experiments) = Career advancement
+- Grants enabled by tool = \$500K+ over 5 years
 
 **Use Case 3: Policy/Standards Bodies**
 
--   Evidence base for building codes (e.g., minimum daylight, max noise)
--   Public health impact (better buildings → less stress) = Societal
-    value in millions
+- Evidence base for building codes (e.g., minimum daylight, max noise)
+- Public health impact (better buildings → less stress) = Societal
+ value in millions
 
 ------------------------------------------------------------------------
 
@@ -1704,19 +1702,19 @@ accuracy for speed (used for interactive UI).
 
 ### Appendix A: Mathematical Notation Guide
 
--   **X** = Attribute (image feature)
--   **M** = Mediator (psychological perception)
--   **Y** = Outcome (psychological state)
--   **β** = Effect size (regression coefficient)
--   **θ** = Optimal point (for Goldilocks functions)
--   **τ** = Tolerance width (for Goldilocks functions)
--   **σ** = Standard deviation (uncertainty)
--   **ε** = Error term (unexplained variance)
--   **\~** = "Distributed as" (X \~ Normal means X follows a normal
-    distribution)
--   **\|** = "Given" or "conditional on" (P(Y\|X) = probability of Y
-    given X)
--   **Σ** = Sum (Σᵢ βᵢXᵢ = β₁X₁ + β₂X₂ + ...)
+- **X** = Attribute (image feature)
+- **M** = Mediator (psychological perception)
+- **Y** = Outcome (psychological state)
+- **β** = Effect size (regression coefficient)
+- **θ** = Optimal point (for Goldilocks functions)
+- **τ** = Tolerance width (for Goldilocks functions)
+- **σ** = Standard deviation (uncertainty)
+- **ε** = Error term (unexplained variance)
+- **\~** = "Distributed as" (X \~ Normal means X follows a normal
+ distribution)
+- **\|** = "Given" or "conditional on" (P(Y\|X) = probability of Y
+ given X)
+- **Σ** = Sum (Σᵢ βᵢXᵢ = β₁X₁ + β₂X₂ +...)
 
 ### Appendix B: Software/Tools Required
 
@@ -1740,26 +1738,25 @@ validation) - pandas, numpy (data manipulation)
 
 ### Appendix C: Key Papers to Read
 
-**Foundational Theory:** 1. Kaplan & Kaplan (1989). *The Experience of
-Nature*. (Complexity-coherence framework) 2. Ulrich (1983). Aesthetic
+**Foundational Theory:** 1. Kaplan & Kaplan. *The Experience of
+Nature*. (Complexity-coherence framework) 2. Ulrich. Aesthetic
 and affective response to natural environment. *Human Behavior &
-Environment*, 6. 3. Berlyne (1971). *Aesthetics and Psychobiology*.
+Environment*, 6. 3. Berlyne. *Aesthetics and Psychobiology*.
 (Arousal theory)
 
-**Causal Inference:** 4. Pearl (2009). *Causality* (Chapters 1-3: Basics
-of causal graphs) 5. Pearl & Mackenzie (2018). *The Book of Why*
+**Causal Inference:** 4. Pearl. *Causality* (Chapters 1-3: Basics
+of causal graphs) 5. Pearl & Mackenzie. *The Book of Why*
 (Accessible introduction)
 
-**Bayesian Statistics:** 6. McElreath (2020). *Statistical Rethinking*
-(Chapters 1-5: Bayesian basics, regression, causality) 7. Gelman et al.
-(2013). *Bayesian Data Analysis* (Reference, more advanced)
+**Bayesian Statistics:** 6. McElreath. *Statistical Rethinking*
+(Chapters 1-5: Bayesian basics, regression, causality) 7. Gelman et al.. *Bayesian Data Analysis* (Reference, more advanced)
 
-**Environmental Psychology Methods:** 8. Stamps (2004). Mystery,
+**Environmental Psychology Methods:** 8. Stamps. Mystery,
 complexity, legibility and coherence: A meta-analysis. *J Environ
-Psychology*. 9. Vartanian et al. (2015). Architectural design and the
+Psychology*. 9. Vartanian et al.. Architectural design and the
 brain. *J Environ Psychology*.
 
-**Goldilocks Principle:** 10. Taylor et al. (2011). Perceptual and
+**Goldilocks Principle:** 10. Taylor et al.. Perceptual and
 physiological responses to Jackson Pollock's fractals. *Front Human
 Neurosci*.
 
@@ -1772,37 +1769,35 @@ import pymc as pm
 import numpy as np
 
 # Data: 200 images
-wood_coverage = np.array([...])  # 200 values, 0-1 scale
-affective_ratings = np.array([...])  # 200 mean ratings, 1-7 scale
+wood_coverage = np.array([...]) # 200 values, 0-1 scale
+affective_ratings = np.array([...]) # 200 mean ratings, 1-7 scale
 
-with pm.Model() as model:
-    # Priors
-    β₀ = pm.Normal('intercept', mu=4, sigma=1)
-    β_wood = pm.Normal('effect_wood', mu=0.3, sigma=0.2)
-    θ_wood = pm.Normal('optimal_wood', mu=0.4, sigma=0.1)
-    τ_wood = pm.HalfNormal('tolerance_wood', sigma=0.15)
-    
-    # Goldilocks function
-    wood_effect = β_wood * pm.math.exp(
-        -(wood_coverage - θ_wood)**2 / (2 * τ_wood**2)
-    )
-    
-    # Linear predictor
-    μ = β₀ + wood_effect
-    
-    # Likelihood
-    σ = pm.HalfNormal('sigma', sigma=0.5)
-    y_obs = pm.Normal('affective', mu=μ, sigma=σ, 
-                      observed=affective_ratings)
-    
-    # Sample posterior
-    trace = pm.sample(2000, tune=1000, return_inferencedata=True)
-    
+with pm.Model as model:
+ # Priors
+ β₀ = pm.Normal('intercept', mu=4, sigma=1)
+ β_wood = pm.Normal('effect_wood', mu=0.3, sigma=0.2)
+ θ_wood = pm.Normal('optimal_wood', mu=0.4, sigma=0.1)
+ τ_wood = pm.HalfNormal('tolerance_wood', sigma=0.15)
+ 
+ # Goldilocks function
+ wood_effect = β_wood * pm.math.exp(-(wood_coverage - θ_wood)**2 / (2 * τ_wood**2))
+ 
+ # Linear predictor
+ μ = β₀ + wood_effect
+ 
+ # Likelihood
+ σ = pm.HalfNormal('sigma', sigma=0.5)
+ y_obs = pm.Normal('affective', mu=μ, sigma=σ, 
+ observed=affective_ratings)
+ 
+ # Sample posterior
+ trace = pm.sample(, tune=1000, return_inferencedata=True)
+ 
 # Inspect results
 print(pm.summary(trace, var_names=['effect_wood', 'optimal_wood']))
 
 # Posterior mean of optimal wood coverage
-optimal = trace.posterior['optimal_wood'].mean().values
+optimal = trace.posterior['optimal_wood'].mean.values
 print(f"Optimal wood coverage: {optimal:.1%}")
 ```
 
@@ -1812,28 +1807,28 @@ print(f"Optimal wood coverage: {optimal:.1%}")
 
 ### For Immediate Start (Month 1):
 
-1.  **Assemble team:**
-    -   Hire 1 FTE data scientist (Bayesian modeling, causal inference)
-    -   Hire 0.5 FTE computer vision engineer (contract OK)
-    -   Recruit psychometrician consultant (part-time)
-2.  **Finalize scope:**
-    -   Select 10-15 attributes (from Goldilocks framework, prioritize
-        Strong tier)
-    -   Select 4-6 mediators (affective, cognitive, acoustic, spatial)
-    -   Select 3-4 outcomes (stress, focus, satisfaction)
-3.  **Begin data collection prep:**
+1. **Assemble team:**
+ - Hire 1 FTE data scientist (Bayesian modeling, causal inference)
+ - Hire 0.5 FTE computer vision engineer (contract OK)
+ - Recruit psychometrician consultant (part-time)
+2. **Finalize scope:**
+ - Select 10-15 attributes (from Goldilocks framework, prioritize
+ Strong tier)
+ - Select 4-6 mediators (affective, cognitive, acoustic, spatial)
+ - Select 3-4 outcomes (stress, focus, satisfaction)
+3. **Begin data collection prep:**
 
 Source 200 images (stratified sampling) Write IRB protocol Draft
 mediator/outcome scales
 
-4.  **Budget approval:**
+4. **Budget approval:**
 
 Phase 1-2: \$40K (data + models) Phase 3: \$20K (experiments) Phase 4:
 \$35K (system) Total: \$95-100K, 18 months
 
 ### Critical Success Factors:
 
-✓ Start small (200 images, not 2000) ✓ Measure mediators (don't skip
+✓ Start small (200 images, not) ✓ Measure mediators (don't skip
 this step) ✓ Run experiments early (don't wait until "model is perfect")
 ✓ Be honest about uncertainty (wide intervals, not false precision) ✓
 Track provenance (every claim → evidence source) ✓ Iterate (update
@@ -1898,9 +1893,9 @@ With mediators, you can decompose: Wood → Perceived Warmth → Stress
 you know: 67% of effect is visual, 33% is acoustic. You can design
 targeted interventions.
 
-2.  Generalization to New Attributes With mediators: Once you validate
-    "Perceived Warmth → Stress", you can predict effects of ANY
-    attribute that affects warmth:
+2. Generalization to New Attributes With mediators: Once you validate
+ "Perceived Warmth → Stress", you can predict effects of ANY
+ attribute that affects warmth:
 
 Wood? ✓ Tested Warm paint colors? New, but if it increases warmth, it
 should reduce stress Textiles (rugs, curtains)? New, but same logic
@@ -1918,8 +1913,8 @@ With 50 experiments, you might validate 10 mediators → You can now
 predict effects of 100+ attributes Without mediators, 50 experiments
 give you 50 attribute-outcome pairs → No generalization
 
-3.  Efficiency in Experimentation Suppose you want to test 10 attributes
-    on 5 outcomes = 50 relationships. Without mediators:
+3. Efficiency in Experimentation Suppose you want to test 10 attributes
+ on 5 outcomes = 50 relationships. Without mediators:
 
 50 separate experiments (or 1 massive factorial with 10 variables) Cost:
 \$50K+ Time: Years
@@ -1937,7 +1932,7 @@ Attributes → Mediators: Can test multiple attributes per experiment
 Mediators → Outcomes: Universal tests (once you validate "warmth →
 stress", it applies to all sources of warmth)
 
-4.  Handles Complex Interactions Real design scenario:
+4. Handles Complex Interactions Real design scenario:
 
 Open office with high visual connectivity Could increase stress (lack of
 privacy) OR decrease stress (social support) Which dominates?
@@ -1951,8 +1946,8 @@ Visual Connectivity → Stress (+0.1) You see a small positive effect but
 don't understand why. You can't design interventions because you don't
 know which mechanism to target.
 
-5.  Individual and Context Differences With mediators: You can model
-    heterogeneity at the mediator level:
+5. Individual and Context Differences With mediators: You can model
+ heterogeneity at the mediator level:
 
 Introverts: Visual Connectivity → Privacy concerns (high sensitivity)
 Extroverts: Visual Connectivity → Social comfort (high value)
@@ -1964,7 +1959,7 @@ Stress = g(Perceived_Privacy) Without mediators: You must model
 attribute × personality interactions directly: pythonStress =
 f(Visual_Connectivity, Introversion, Visual_Connectivity × Introversion)
 
-```         
+``` 
 
 This requires **much more data** to identify (3-way interactions proliferate) and doesn't explain the mechanism.
 
@@ -1983,7 +1978,7 @@ ALTERNATIVES (same mechanism): │ │ • Warm paint colors (terra cotta) │ �
 WHAT WON'T WORK: │ │ • Cool-toned wood (gray stain) │ │ → Doesn't
 increase warmth │ └─────────────────────────────────────────┘
 
-```         
+``` 
 
 **Without mediators:**
 ```
@@ -1994,7 +1989,7 @@ Elements │ ├─────────────────────�
 │ │ │ │ We don't know why, so we can't suggest │ │ alternatives. Try
 wood and see. │ └─────────────────────────────────────────┘
 
-```         
+``` 
 
 Designers want **actionable principles** ("increase warmth"), not just attribute lists ("use wood").
 
@@ -2055,14 +2050,14 @@ You hypothesize:
 
 Wood → Perceived Warmth → Stress
 
-```         
+``` 
 
 But in reality:
 ```
 
 Wood → (Some unmeasured factor: nostalgia? status?) → Stress
 
-```         
+``` 
 
 Your measured "Perceived Warmth" doesn't capture the true mediator. Your model will:
 - Underestimate the total effect of wood
@@ -2200,7 +2195,7 @@ causal) B) Warmth → Naturalness → Stress (chain) C) Naturalness → Warmth
 → Stress (reverse chain) D) Both caused by unmeasured "General
 Pleasantness" → Stress
 
-```         
+``` 
 
 **From observational data alone, you cannot distinguish these.**
 
@@ -2242,7 +2237,7 @@ But if you're going to run those experiments anyway, **why not just test attribu
 Stress = β_wood × Wood + β_context × Context + β_interaction × Wood ×
 Context
 
-```         
+``` 
 
 ---
 
@@ -2495,7 +2490,7 @@ most of its value without them.
 ### article extraction details to support mediator identification
 
 1.1 Extract Pathway Information from Literature What to code from each
-paper: Paper: Smith et al. (2018) Attribute: Wood exposure Mediator:
+paper: Paper: Smith et al. Attribute: Wood exposure Mediator:
 [Explicitly mentioned? Y/N] - If yes: Which? "Perceived naturalness" -
 If no: Is mechanism discussed? "Authors speculate acoustic properties"
 Outcome: Stress reduction Study design: RCT with manipulation check on
@@ -2510,45 +2505,45 @@ structured database:pythonliterature_db = [ { 'paper_id': 'Smith2018',
 'Jones2020', 'attribute': 'wood_coverage', 'mediator_measured': None, \#
 Direct effect only 'mediator_speculated': ['visual_warmth'], \# Authors
 guess 'outcome': 'stress', 'mediation_proportion': None,
-'study_quality': 'medium', \# Observational }, \# ... more papers]
+'study_quality': 'medium', \# Observational }, \#... more papers]
 
 Algorithm: Score each candidate mediator pythondef
 score_mediator_importance(mediator_name, literature_db): """ Score a
 mediator on how often it appears and is validated in literature """
 score = 0
 
-```         
+``` 
 # 1. Frequency: How many papers mention it?
 mentions = sum(1 for p in literature_db 
-               if mediator_name in p.get('mediator_measured', [])
-                  or mediator_name in p.get('mediator_speculated', []))
+ if mediator_name in p.get('mediator_measured', [])
+ or mediator_name in p.get('mediator_speculated', []))
 score += mentions * 1.0
 
 # 2. Validation: How many actually test and confirm it?
 confirmations = sum(1 for p in literature_db 
-                    if mediator_name in p.get('mediator_confirmed', []))
-score += confirmations * 3.0  # Weight confirmed 3x higher
+ if mediator_name in p.get('mediator_confirmed', []))
+score += confirmations * 3.0 # Weight confirmed 3x higher
 
 # 3. Study quality: Weight by design quality
 quality_weights = {'high': 3, 'medium': 2, 'low': 1}
 quality_score = sum(quality_weights[p['study_quality']] 
-                    for p in literature_db 
-                    if mediator_name in p.get('mediator_confirmed', []))
+ for p in literature_db 
+ if mediator_name in p.get('mediator_confirmed', []))
 score += quality_score * 2.0
 
 # 4. Breadth: How many different attributes does it mediate?
 unique_attributes = len(set(p['attribute'] for p in literature_db
-                            if mediator_name in p.get('mediator_confirmed', [])))
-score += unique_attributes * 2.0  # Reward generality
+ if mediator_name in p.get('mediator_confirmed', [])))
+score += unique_attributes * 2.0 # Reward generality
 
 # 5. Proportion mediated: When tested, how much does it explain?
 mediation_props = [p['mediation_proportion'] 
-                   for p in literature_db 
-                   if mediator_name in p.get('mediator_confirmed', [])
-                      and p['mediation_proportion'] is not None]
+ for p in literature_db 
+ if mediator_name in p.get('mediator_confirmed', [])
+ and p['mediation_proportion'] is not None]
 if mediation_props:
-    avg_mediation = np.mean(mediation_props)
-    score += avg_mediation * 5.0  # Strong mediators get bonus
+ avg_mediation = np.mean(mediation_props)
+ score += avg_mediation * 5.0 # Strong mediators get bonus
 
 return score
 ```
@@ -2559,13 +2554,13 @@ Score all candidate mediators mediators = ['perceived_warmth',
 'privacy', 'social_affordance']
 
 scores = {m: score_mediator_importance(m, literature_db) for m in
-mediators} ranked = sorted(scores.items(), key=lambda x: x[1],
+mediators} ranked = sorted(scores.items, key=lambda x: x[1],
 reverse=True)
 
 print("Mediator Priority Ranking:") for mediator, score in ranked[:6]:
 print(f"{mediator}: {score:.1f}")
 
-```         
+``` 
 
 **Expected output:**
 ```
@@ -2635,16 +2630,16 @@ Model Attributes as a Causal Graph Don't treat attributes as
 independent. Build a DAG among attributes that captures their
 relationships:
 
-```         
-            Natural Textures (wood, plants)
-                   ↓
-            Fractal Dimension (1.3-1.7)
-                   ↓
-              Mediators
-            (Naturalness, Perceptual Fluency)
-                   ↓
-                Outcomes
-            (Restoration, Preference)
+``` 
+ Natural Textures (wood, plants)
+ ↓
+ Fractal Dimension (1.3-1.7)
+ ↓
+ Mediators
+ (Naturalness, Perceptual Fluency)
+ ↓
+ Outcomes
+ (Restoration, Preference)
 ```
 
 Formal specification:
@@ -2662,7 +2657,7 @@ g2(fractal_dimension, ε_fluency)
 
 restoration = h(naturalness, perceptual_fluency, ε_restoration)
 
-```         
+``` 
 
 **Key insight:** Fractal dimension is **caused by** natural textures, not independent of them.
 
@@ -2685,17 +2680,16 @@ Implementation:
 
 python import pymc as pm
 
-with pm.Model() as hierarchical_model: \# Exogenous attributes (directly
+with pm.Model as hierarchical_model: \# Exogenous attributes (directly
 measurable) natural_textures = data['natural_coverage'] \# 0-1 scale
 
-```         
+``` 
 # Fractal dimension is CAUSED by natural textures
 β_nat_to_frac = pm.Normal('nat_to_frac', mu=0.4, sigma=0.1)
 fractal_baseline = pm.Normal('frac_baseline', mu=1.3, sigma=0.1)
 
 fractal_dim = pm.Deterministic('fractal_dim',
-    fractal_baseline + β_nat_to_frac * natural_textures
-)
+ fractal_baseline + β_nat_to_frac * natural_textures)
 # Note: This is deterministic (no error term) if fractals are 
 # perfectly determined by naturalness, or add noise if not
 
@@ -2703,27 +2697,24 @@ fractal_dim = pm.Deterministic('fractal_dim',
 # Naturalness depends on natural textures (direct perception)
 β_nat_textures = pm.Normal('beta_nat_textures', mu=0.5, sigma=0.1)
 naturalness = pm.Normal('naturalness',
-    mu=β_nat_textures * natural_textures,
-    sigma=0.5
-)
+ mu=β_nat_textures * natural_textures,
+ sigma=0.5)
 
 # Perceptual fluency depends on fractal dimension (processing ease)
 β_fractal = pm.Normal('beta_fractal', mu=0.3, sigma=0.1)
-optimal_fractal = 1.5  # Peak of Goldilocks curve
+optimal_fractal = 1.5 # Peak of Goldilocks curve
 fluency = pm.Normal('fluency',
-    mu=β_fractal * pm.math.exp(-(fractal_dim - optimal_fractal)**2 / 0.2),
-    sigma=0.5
-)
+ mu=β_fractal * pm.math.exp(-(fractal_dim - optimal_fractal)**2 / 0.2),
+ sigma=0.5)
 
 # Outcome: Restoration depends on both mediators
 β_nat_to_rest = pm.Normal('beta_nat_to_rest', mu=0.3, sigma=0.1)
 β_fluency_to_rest = pm.Normal('beta_fluency_to_rest', mu=0.2, sigma=0.1)
 
 restoration = pm.Normal('restoration',
-    mu=β_nat_to_rest * naturalness + β_fluency_to_rest * fluency,
-    sigma=0.3,
-    observed=data['restoration']
-)
+ mu=β_nat_to_rest * naturalness + β_fluency_to_rest * fluency,
+ sigma=0.3,
+ observed=data['restoration'])
 ```
 
 Now you can compute path-specific effects:
@@ -2743,7 +2734,7 @@ total_effect = direct_effect + indirect_effect \# → 0.15 + 0.024 = 0.174
 print(f"Wood effect on restoration: {total_effect:.3f}") print(f" 86%
 via naturalness pathway") print(f" 14% via fractal/fluency pathway")
 
-```         
+``` 
 
 ---
 
@@ -2794,7 +2785,7 @@ print(f"Natural coverage → Fractal dimension:") print(f" β = {β:.3f}, R²
 
 Method 3: Literature + Theory
 
-Taylor et al. (2011): Natural objects have D=1.3-1.7 Mandelbrot (1982):
+Taylor et al.: Natural objects have D=1.3-1.7 Mandelbrot:
 Fractals are characteristic of natural forms (trees, coastlines, clouds)
 Theory: Fractals are a property of natural textures, not independent
 Method 4: Intervention Logic
@@ -2822,7 +2813,7 @@ biophilic_score = aggregate(biophilic_properties,
 method='weighted_mean') \# Or use PCA/factor analysis on these
 correlated features
 
-```         
+``` 
 
 **Then model:**
 ```
@@ -2830,7 +2821,7 @@ correlated features
 Biophilic Score → Naturalness → Restoration ↘ Perceptual Fluency →
 Restoration
 
-```         
+``` 
 
 **Benefits:**
 - Simpler model (one attribute instead of many correlated ones)
@@ -2867,7 +2858,7 @@ LinearRegression
 
 # Step 1: Regress fractal_dim on natural_textures
 
-model = LinearRegression() model.fit(data[['natural_coverage']],
+model = LinearRegression model.fit(data[['natural_coverage']],
 data['fractal_dimension'])
 
 fractal_predicted = model.predict(data[['natural_coverage']])
@@ -2877,13 +2868,13 @@ fractal_residual = data['fractal_dimension'] - fractal_predicted
 
 # fractal_residual captures "pure fractal effect" beyond naturalness
 
-outcome_model = LinearRegression() X = data[['natural_coverage',
+outcome_model = LinearRegression X = data[['natural_coverage',
 'fractal_residual']] y = data['restoration'] outcome_model.fit(X, y)
 
 print(f"Natural coverage effect: {outcome_model.coef\_[0]:.3f}")
 print(f"Pure fractal effect (residual): {outcome_model.coef\_[1]:.3f}")
 
-```         
+``` 
 
 **Interpretation:**
 - `β_natural`: Effect of naturalness (includes its typical fractals)
@@ -2897,7 +2888,7 @@ Natural coverage effect: 0.28 (strong) Pure fractal effect: 0.05 (weak)
 Interpretation: Most of fractal benefit comes via natural textures.
 Adding artificial fractals (Pollock painting) would only add 0.05.
 
-```         
+``` 
 
 ---
 
@@ -2948,7 +2939,7 @@ If β_interaction \> 0: → Fractals work BETTER in natural materials
 If β_material \>\> β_fractal: → Naturalness dominates, fractals are
 secondary
 
-```         
+``` 
 
 **This definitively answers:** "Can fractals work without naturalness?"
 
@@ -2964,7 +2955,7 @@ Apply fractal texture pattern to plastic (Perlin noise, D=1.5) Condition
 C: Real wood photograph (D=1.5 measured) Condition D: Polished wood
 (high gloss, removes texture)
 
-```         
+``` 
 
 **Cost:** $1,500-2,000 (N=240, between-subjects)
 
@@ -2982,7 +2973,7 @@ Interpretation: - Natural material provides restoration via
 fractals in natural materials have SYNERGY (0.12 extra) → Wood with
 fractals: 0.25 + 0.08 + 0.12 = 0.45 total effect
 
-```         
+``` 
 
 ---
 
@@ -2993,10 +2984,10 @@ fractals: 0.25 + 0.08 + 0.12 = 0.45 total effect
 **Hypothesis:** Natural textures and fractals are both **indicators** of an underlying construct.
 ```
 
-```         
-     Latent: Biophilic Character
-           /    |    \
-          /     |     \
+``` 
+ Latent: Biophilic Character
+ / | \
+ / | \
 ```
 
 Natural Fractal Organic (Observed attributes) Textures Dimension Forms
@@ -3015,9 +3006,9 @@ organic_forms
 Naturalness \~ BiophilicCharacter PerceptualFluency \~
 BiophilicCharacter Restoration \~ Naturalness + PerceptualFluency """
 
-model = Model(model_spec) model.fit(data) print(model.inspect())
+model = Model(model_spec) model.fit(data) print(model.inspect)
 
-```         
+``` 
 
 **Interpretation:**
 - If loadings are high (>0.7), natural_textures and fractals both measure "biophilic character"
@@ -3052,45 +3043,40 @@ Tier 3: Mediators (psychological) - Perceived Naturalness \~ Natural
 Materials + Color - Perceptual Fluency \~ Fractal Dimension - Cognitive
 Load \~ Visual Information Density
 
-Tier 4: Outcomes - Restoration \~ Naturalness + Perceptual Fluency + ...
+Tier 4: Outcomes - Restoration \~ Naturalness + Perceptual Fluency +...
 Model specification:
 
-python with pm.Model() as hybrid_model: \# Tier 1: Exogenous
+python with pm.Model as hybrid_model: \# Tier 1: Exogenous
 natural_materials = data['natural_coverage']
 
-```         
+``` 
 # Tier 2: Computed (deterministic or near-deterministic)
 fractal_dim = pm.Deterministic('fractal_dim',
-    1.1 + 0.4 * natural_materials  # Wood → fractals
-)
+ 1.1 + 0.4 * natural_materials # Wood → fractals)
 
 # Tier 3: Mediators
 # Naturalness from direct perception of materials
 naturalness = pm.Normal('naturalness',
-    mu=β_natural * natural_materials,
-    sigma=σ_natural
-)
+ mu=β_natural * natural_materials,
+ sigma=σ_natural)
 
 # Fluency from fractal processing (with residual)
 # Option A: Use fractal_dim directly (includes naturalness effect)
 fluency_A = pm.Normal('fluency',
-    mu=β_fractal * goldilocks(fractal_dim, optimal=1.5, width=0.2),
-    sigma=σ_fluency
-)
+ mu=β_fractal * goldilocks(fractal_dim, optimal=1.5, width=0.2),
+ sigma=σ_fluency)
 
 # Option B: Use fractal_residual (pure fractal effect)
 fractal_residual = data['fractal_dim'] - (1.1 + 0.4 * natural_materials)
 fluency_B = pm.Normal('fluency',
-    mu=β_fractal_resid * goldilocks(fractal_residual, optimal=0, width=0.2),
-    sigma=σ_fluency
-)
+ mu=β_fractal_resid * goldilocks(fractal_residual, optimal=0, width=0.2),
+ sigma=σ_fluency)
 
 # Tier 4: Outcome
 restoration = pm.Normal('restoration',
-    mu=β_nat * naturalness + β_flu * fluency,
-    sigma=σ_rest,
-    observed=data['restoration']
-)
+ mu=β_nat * naturalness + β_flu * fluency,
+ sigma=σ_rest,
+ observed=data['restoration'])
 ```
 
 Decision: Option A vs. B
@@ -3111,25 +3097,25 @@ python attribute_dag = { 'natural_materials': { 'causes':
 ['fractal_dimension', 'color_naturalness'], 'deterministic': False, \#
 Natural materials → fractals (not perfect) 'r_squared': 0.62 },
 'glazing_ratio': { 'causes': ['daylight_illuminance'], 'deterministic':
-True, \# Physics-based 'r_squared': 0.95 }, \# ... etc }
+True, \# Physics-based 'r_squared': 0.95 }, \#... etc }
 
-```         
+``` 
 
 **Phase 2: Decide on Model Structure (Month 2)**
 
 For each hierarchical relationship, choose:
 
 - **Fully hierarchical** (X causes Y, model Y as function of X)
-  - Use when: R² >0.7, strong theory, deterministic relationship
-  - Example: Glazing → Daylight
-  
+ - Use when: R² >0.7, strong theory, deterministic relationship
+ - Example: Glazing → Daylight
+ 
 - **Residual approach** (X and Y residual both included)
-  - Use when: R² =0.4-0.7, want to separate effects
-  - Example: Natural materials and fractal residual
-  
+ - Use when: R² =0.4-0.7, want to separate effects
+ - Example: Natural materials and fractal residual
+ 
 - **Composite** (Bundle X and Y into single score)
-  - Use when: R² >0.8, no need to separate
-  - Example: Merge all biophilic features
+ - Use when: R² >0.8, no need to separate
+ - Example: Merge all biophilic features
 
 **Phase 3: Validate with Experiments (Months 8-12)**
 
@@ -3194,7 +3180,7 @@ print(f"Natural textures → Restoration:") print(f"
 {prop_via_naturalness*100:.0f}% via naturalness perception") print(f"
 {prop_via_fractals*100:.0f}% via fractal fluency")
 
-```         
+``` 
 
 **Expected result:**
 ```
@@ -3233,7 +3219,7 @@ test unique effects beyond their shared variance ✓ Both plausibly causal
 (unclear which causes which)
 
 Implementation Roadmap Month 1-2: Build Attribute DAG python \# 1.
-Compute all pairwise correlations corr_matrix = data[attributes].corr()
+Compute all pairwise correlations corr_matrix = data[attributes].corr
 
 # 2. For highly correlated pairs (r \> 0.6), test causality
 
@@ -3243,9 +3229,9 @@ attr2 in enumerate(attributes[i+1:]): if corr_matrix.loc[attr1, attr2]
 test_predictive_relationship(attr1, attr2, data) \# Test: Causal logic
 causal = expert_rating(f"Does {attr1} cause {attr2}?")
 
-```         
-        if r2 > 0.5 and causal > 0.7:
-            hierarchical_pairs.append((attr1, attr2, r2))
+``` 
+ if r2 > 0.5 and causal > 0.7:
+ hierarchical_pairs.append((attr1, attr2, r2))
 ```
 
 # 3. Build DAG
@@ -3255,19 +3241,19 @@ Month 3-6: Fit Hierarchical Model python \# Implement full hierarchical
 Bayesian model \# with computed attributes as functions of exogenous
 attributes
 
-with pm.Model() as model: \# Exogenous attributes (Tier 1) exogenous =
+with pm.Model as model: \# Exogenous attributes (Tier 1) exogenous =
 {name: data[name] for name in tier1_attributes}
 
-```         
+``` 
 # Computed attributes (Tier 2)
-for attr, parents in attribute_dag.items():
-    if parents:
-        # This attribute is caused by others
-        pred = sum(β[p] * exogenous[p] for p in parents)
-        computed[attr] = pm.Deterministic(attr, pred)
-    else:
-        # This is exogenous
-        exogenous[attr] = data[attr]
+for attr, parents in attribute_dag.items:
+ if parents:
+ # This attribute is caused by others
+ pred = sum(β[p] * exogenous[p] for p in parents)
+ computed[attr] = pm.Deterministic(attr, pred)
+ else:
+ # This is exogenous
+ exogenous[attr] = data[attr]
 
 # Mediators (Tier 3) - as before
 # Outcomes (Tier 4) - as before

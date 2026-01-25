@@ -19,9 +19,9 @@ Model. The revised contract will represent:
 - Hierarchical taxonomies for attributes, latents, mediators, outcomes.
 - Marker nodes (building typology, room type) and activity affordances.
 - Rule and evidence structures that encode uncertainty classes
-  (pi, gamma, tau^2, sigma^2, phi, kappa/GRADE).
+ (pi, gamma, tau^2, sigma^2, phi, kappa/GRADE).
 - Detection confidence and extractability tiers derived from visual
-  evidence limitations.
+ evidence limitations.
 
 This plan is an architectural and data integration roadmap. It does not
 implement code changes. Implementation should follow this plan as the
@@ -34,27 +34,27 @@ source of truth.
 ### Current Data Structure Mismatch
 
 1. **Image Tagger**
-   - Outputs visual attributes and tags but does not use the new
-     hierarchical taxonomy IDs (e.g., V1-xxx, Lxx, Mxx).
-   - Lacks explicit confidence classes for detectable vs inferred tags.
-   - Does not encode marker nodes or activity affordances.
+ - Outputs visual attributes and tags but does not use the new
+ hierarchical taxonomy IDs (e.g., V1-xxx, Lxx, Mxx).
+ - Lacks explicit confidence classes for detectable vs inferred tags.
+ - Does not encode marker nodes or activity affordances.
 
 2. **Article Eater**
-   - BN export schema provides nodes/edges but does not carry the new
-     uncertainty classes (pi, gamma, tau^2, sigma^2, phi, kappa).
-   - Rules are not normalized to the updated antecedent/consequent
-     taxonomy paths defined in the new hierarchy sheets.
+ - BN export schema provides nodes/edges but does not carry the new
+ uncertainty classes (pi, gamma, tau^2, sigma^2, phi, kappa).
+ - Rules are not normalized to the updated antecedent/consequent
+ taxonomy paths defined in the new hierarchy sheets.
 
 3. **Knowledge Graph UI**
-   - Demo-only in-memory graph with no taxonomy alignment.
-   - No representation of uncertainty classes, evidence tier, or GRADE.
+ - Demo-only in-memory graph with no taxonomy alignment.
+ - No representation of uncertainty classes, evidence tier, or GRADE.
 
 4. **Graphical Model**
-   - Uses the three-layer structure but lacks explicit mapping to the
-     hierarchical attribute DAG and updated mediator/outcome taxonomy.
-   - Uncertainty is currently modeled as posterior distributions but is
-     not segmented into structural, causal, heterogeneity, parametric,
-     and specification uncertainty classes.
+ - Uses the three-layer structure but lacks explicit mapping to the
+ hierarchical attribute DAG and updated mediator/outcome taxonomy.
+ - Uncertainty is currently modeled as posterior distributions but is
+ not segmented into structural, causal, heterogeneity, parametric,
+ and specification uncertainty classes.
 
 ### Target Outcome
 
@@ -72,33 +72,33 @@ A unified data model that:
 ### Core Entities
 
 1. **Marker Nodes**
-   - Building typology (e.g., BT01 Residential)
-   - Room type (e.g., RT02 Living Room / Lounge)
-   - Purpose: prior context and moderation for activities and rules.
+ - Building typology (e.g., BT01 Residential)
+ - Room type (e.g., RT02 Living Room / Lounge)
+ - Purpose: prior context and moderation for activities and rules.
 
 2. **Environmental Attributes**
-   - IDs: V1-xxx (from Env_Attributes sheet).
-   - Fields: domain, subdomain, extractability, evidence strength.
-   - Distinguish exogenous vs computed attributes (hierarchical DAG).
+ - IDs: V1-xxx (from Env_Attributes sheet).
+ - Fields: domain, subdomain, extractability, evidence strength.
+ - Distinguish exogenous vs computed attributes (hierarchical DAG).
 
 3. **Latent Variables**
-   - IDs: Lxx (from Latent_Variables sheet).
-   - Fields: observable cues, indicators, judgability, tier.
+ - IDs: Lxx (from Latent_Variables sheet).
+ - Fields: observable cues, indicators, judgability, tier.
 
 4. **Mediators**
-   - IDs: Mxx (from Mediators sheet).
-   - Fields: definition, cues, recommended measures.
+ - IDs: Mxx (from Mediators sheet).
+ - Fields: definition, cues, recommended measures.
 
 5. **Outcomes**
-   - Outcome constructs and measurement instruments.
+ - Outcome constructs and measurement instruments.
 
 6. **Activity Affordances**
-   - IDs: L0xx activity latents with RoomType priors.
-   - Fields: family, cues, strength priors.
+ - IDs: L0xx activity latents with RoomType priors.
+ - Fields: family, cues, strength priors.
 
 7. **Rules and Interactions**
-   - Antecedent/Consequent paths from Rules_Classification sheet.
-   - Support multiple antecedents and interactions.
+ - Antecedent/Consequent paths from Rules_Classification sheet.
+ - Support multiple antecedents and interactions.
 
 ### Uncertainty Classes (Edge and Rule Level)
 
@@ -120,7 +120,7 @@ Each detected tag or attribute must include:
 - **detection_class**: detected | computed | inferred | proxy_only.
 - **extractability**: 2d_high | 2d_partial | 3d_partial | sensor_only.
 - **confidence_gamma**: approximate reliability class
-  (0.80-0.85 high, 0.60-0.75 medium, 0.40-0.65 low).
+ (0.80-0.85 high, 0.60-0.75 medium, 0.40-0.65 low).
 - **method**: detector/algorithm (e.g., Places365, segmentation, depth).
 
 These align with `tagging-update-docs/tag detection ideas.md`.
@@ -141,23 +141,23 @@ activity affordance priors.
 - Output activity affordance priors using RoomType_to_Activity mapping.
 - Tag each output with detection_class, extractability, confidence_gamma.
 - Distinguish:
-  - **Detected**: room type, objects, materials, lighting (high).
-  - **Computed**: complexity, entropy, prospect/refuge (medium).
-  - **Inferred**: psychological latents (low, explicit uncertainty).
-  - **Proxy-only**: acoustic/thermal/olfactory (very low).
+ - **Detected**: room type, objects, materials, lighting (high).
+ - **Computed**: complexity, entropy, prospect/refuge (medium).
+ - **Inferred**: psychological latents (low, explicit uncertainty).
+ - **Proxy-only**: acoustic/thermal/olfactory (very low).
 
 **Data expectations:**
 
 ```
 image_id
-  marker_nodes: [BTxx, RTxx]
-  attributes: [
-    { attribute_id: V1-001, value: 320, detection_class: "computed",
-      extractability: "2d_partial", confidence_gamma: 0.65 }
-  ]
-  activity_affordances: [
-    { activity_id: L060, prior: 0.75, basis: "RoomType" }
-  ]
+ marker_nodes: [BTxx, RTxx]
+ attributes: [
+ { attribute_id: V1-001, value: 320, detection_class: "computed",
+ extractability: "2d_partial", confidence_gamma: 0.65 }
+ ]
+ activity_affordances: [
+ { activity_id: L060, prior: 0.75, basis: "RoomType" }
+ ]
 ```
 
 ### 2. Article Eater (Evidence and Rule Producer)
@@ -168,28 +168,28 @@ antecedents and consequents.
 **Required data changes:**
 
 - Normalize rules to antecedent/consequent paths in
-  `Rules_Classification_and_Interactions_v1.xlsx`.
+ `Rules_Classification_and_Interactions_v1.xlsx`.
 - For each rule edge, populate uncertainty classes: pi, gamma, tau2,
-  sigma2, phi, kappa.
+ sigma2, phi, kappa.
 - Emit evidence tier classification (Tier 1/2/3 study types).
 - Preserve existing BN export but add:
-  - `evidence_quality` (kappa).
-  - `uncertainty` block with pi/gamma/tau2/sigma2/phi.
+ - `evidence_quality` (kappa).
+ - `uncertainty` block with pi/gamma/tau2/sigma2/phi.
 
 **Rule edge schema extension (BN export):**
 
 ```
 {
-  "edge_id": "ARCv4_5_000002",
-  "antecedent_path": "Acoustics > Speech Privacy > STI (index)",
-  "consequent_path": "Social/Interpersonal > Communication Quality > ...",
-  "direction": "decreases",
-  "polarity": "negative",
-  "uncertainty": {
-    "pi": 0.70, "gamma": 0.35, "tau2": 0.08, "sigma2": 0.04, "phi": 0.80
-  },
-  "kappa": "C",
-  "evidence_tier": "Tier3_CrossSectional"
+ "edge_id": "ARCv4_5_000002",
+ "antecedent_path": "Acoustics > Speech Privacy > STI (index)",
+ "consequent_path": "Social/Interpersonal > Communication Quality >...",
+ "direction": "decreases",
+ "polarity": "negative",
+ "uncertainty": {
+ "pi": 0.70, "gamma": 0.35, "tau2": 0.08, "sigma2": 0.04, "phi": 0.80
+ },
+ "kappa": "C",
+ "evidence_tier": "Tier3_CrossSectional"
 }
 ```
 
@@ -200,13 +200,13 @@ antecedents and consequents.
 **Required data changes:**
 
 - Replace demo graph with taxonomy-aligned graph nodes:
-  - Markers (BTxx, RTxx) and attributes (V1-xxx).
-  - Latents (Lxx) and mediators (Mxx).
-  - Outcomes with measurement references.
+ - Markers (BTxx, RTxx) and attributes (V1-xxx).
+ - Latents (Lxx) and mediators (Mxx).
+ - Outcomes with measurement references.
 - Display uncertainty classes per edge:
-  - pi/gamma/tau2/sigma2/phi/kappa.
+ - pi/gamma/tau2/sigma2/phi/kappa.
 - Provide filtering by:
-  - evidence tier, kappa, detection_class, extractability.
+ - evidence tier, kappa, detection_class, extractability.
 
 **UI expectations:**
 
@@ -224,23 +224,23 @@ to generate predictions with honest uncertainty.
 - Incorporate attribute DAG (exogenous vs computed attributes).
 - Accept marker nodes and activity affordances as priors/moderators.
 - Propagate uncertainty via:
-  - structural (pi), causal (gamma), heterogeneity (tau2),
-  - parametric (sigma2), functional form (phi).
+ - structural (pi), causal (gamma), heterogeneity (tau2),
+ - parametric (sigma2), functional form (phi).
 - Implement model specification selection for Goldilocks attributes:
-  - phi controls the probability of using correct functional form.
+ - phi controls the probability of using correct functional form.
 
 **Prediction output expectations:**
 
 ```
 outcome: stress_level
-  mean: 4.1
-  ci_95: [3.3, 5.0]
-  uncertainty_breakdown:
-    pi: 0.10
-    gamma: 0.20
-    tau2: 0.25
-    sigma2: 0.15
-    phi: 0.10
+ mean: 4.1
+ ci_95: [3.3, 5.0]
+ uncertainty_breakdown:
+ pi: 0.10
+ gamma: 0.20
+ tau2: 0.25
+ sigma2: 0.15
+ phi: 0.10
 ```
 
 ---
@@ -249,15 +249,15 @@ outcome: stress_level
 
 ```mermaid
 flowchart LR
-    AE[Article Eater\nRules + Evidence\n(pi,gamma,tau2,sigma2,phi,kappa)]
-    IT[Image Tagger\nMarkers + Attributes\n(detection_class, extractability)]
-    KG[Knowledge Graph\nTaxonomy + Evidence Graph]
-    GM[Graphical Model\nHierarchical Causal Inference]
+ AE[Article Eater\nRules + Evidence\n(pi,gamma,tau2,sigma2,phi,kappa)]
+ IT[Image Tagger\nMarkers + Attributes\n(detection_class, extractability)]
+ KG[Knowledge Graph\nTaxonomy + Evidence Graph]
+ GM[Graphical Model\nHierarchical Causal Inference]
 
-    AE --> KG
-    IT --> GM
-    KG --> GM
-    GM --> KG
+ AE --> KG
+ IT --> GM
+ KG --> GM
+ GM --> KG
 ```
 
 ---
@@ -356,9 +356,9 @@ Deliverables:
 
 - Existing outputs should continue to work during a deprecation window.
 - Provide a translation layer for:
-  - legacy attribute names -> V1-xxx IDs
-  - legacy mediator names -> Mxx IDs
-  - legacy outcome labels -> Outcome_Measures.
+ - legacy attribute names -> V1-xxx IDs
+ - legacy mediator names -> Mxx IDs
+ - legacy outcome labels -> Outcome_Measures.
 - Implement a version field in all module payloads.
 
 ---
@@ -366,18 +366,18 @@ Deliverables:
 ## Risks and Mitigations
 
 1. **Taxonomy Drift**
-   - Mitigation: Centralize IDs and provide a schema validator.
+ - Mitigation: Centralize IDs and provide a schema validator.
 
 2. **Incomplete Extractability**
-   - Mitigation: Encode detection_class and confidence_gamma explicitly;
-     avoid false precision in predictions.
+ - Mitigation: Encode detection_class and confidence_gamma explicitly;
+ avoid false precision in predictions.
 
 3. **Uncertainty Misinterpretation**
-   - Mitigation: Provide UI tooltips and API docs for pi/gamma/tau2/etc.
+ - Mitigation: Provide UI tooltips and API docs for pi/gamma/tau2/etc.
 
 4. **Overloaded Models**
-   - Mitigation: Use hierarchical modeling and composite attributes
-     where correlations are high.
+ - Mitigation: Use hierarchical modeling and composite attributes
+ where correlations are high.
 
 ---
 

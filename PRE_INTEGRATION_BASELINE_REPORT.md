@@ -1,7 +1,6 @@
 # Pre-Integration Baseline Report
 ## Data Flow Integration - Starting Point
 
-**Date:** January 19, 2026
 **Purpose:** Document infrastructure state before beginning DATA_FLOW_INTEGRATION_PLAN.md
 **Status:** Infrastructure complete, all modules isolated
 
@@ -36,15 +35,15 @@ This matches exactly what DATA_FLOW_INTEGRATION_PLAN.md documents.
 ### Docker Services - All Healthy
 
 ```
-SERVICE                 STATUS    PORT     HEALTH
+SERVICE STATUS PORT HEALTH
 -------------------------------------------------
-postgres                Up        5432     ✅ healthy
-redis                   Up        6379     ✅ healthy
-graphical-model         Up        8001     ✅ healthy
-image-tagger            Up        8002     ✅ healthy
-article-eater           Up        8003     ✅ healthy
-knowledge-graph         Up        8004     ✅ healthy
-nginx                   Failed    8080     ❌ DNS resolution issue
+postgres Up 5432 ✅ healthy
+redis Up 6379 ✅ healthy
+graphical-model Up 8001 ✅ healthy
+image-tagger Up 8002 ✅ healthy
+article-eater Up 8003 ✅ healthy
+knowledge-graph Up 8004 ✅ healthy
+nginx Failed 8080 ❌ DNS resolution issue
 ```
 
 ### Backend Health Check Results
@@ -70,7 +69,7 @@ Response: {"status":"ok","version":"19.0.0","features":{...}}
 # knowledge-graph (port 8004)
 GET /health
 Response: {"status":"ok","module":"knowledge-graph-ui","database":"unavailable"}
-⚠️  PASS (but database unavailable - expected, not yet integrated)
+⚠️ PASS (but database unavailable - expected, not yet integrated)
 ```
 
 ### Nginx Gateway Issue
@@ -95,41 +94,41 @@ nginx: [emerg] host not found in upstream "graphical-model:8001"
 ### Schemas Created ✅
 
 ```sql
-Schema: core       (shared entities)
-Schema: tagger     (image-tagger)
-Schema: evidence   (article-eater)
-Schema: graphical  (graphical-model)
-Schema: graph      (knowledge-graph)
+Schema: core (shared entities)
+Schema: tagger (image-tagger)
+Schema: evidence (article-eater)
+Schema: graphical (graphical-model)
+Schema: graph (knowledge-graph)
 ```
 
 ### Tables Created ✅
 
 ```
 CORE SCHEMA (3 tables):
-  - users
-  - images
-  - literature_sources
+ - users
+ - images
+ - literature_sources
 
 TAGGER SCHEMA (3 tables):
-  - raters
-  - attributes
-  - tags
+ - raters
+ - attributes
+ - tags
 
 EVIDENCE SCHEMA (4 tables):
-  - articles
-  - findings
-  - rules
-  - rule_evidence
+ - articles
+ - findings
+ - rules
+ - rule_evidence
 
 GRAPHICAL SCHEMA (3 tables):
-  - model_runs
-  - predictions
-  - edge_priors
+ - model_runs
+ - predictions
+ - edge_priors
 
 GRAPH SCHEMA (3 tables):
-  - nodes
-  - edges
-  - edge_evidence
+ - nodes
+ - edges
+ - edge_evidence
 ```
 
 ### Data Status ❌
@@ -237,7 +236,7 @@ Before starting DATA_FLOW_INTEGRATION_PLAN.md Phase 1:
 - ✅ All backend services are healthy
 - ✅ Frontend shell exists (even if iframe-based)
 - ✅ Contract schemas are defined
-- ⚠️  Nginx has DNS issue (can be fixed or worked around)
+- ⚠️ Nginx has DNS issue (can be fixed or worked around)
 - ✅ Baseline documentation complete
 - ✅ Old integration docs archived
 

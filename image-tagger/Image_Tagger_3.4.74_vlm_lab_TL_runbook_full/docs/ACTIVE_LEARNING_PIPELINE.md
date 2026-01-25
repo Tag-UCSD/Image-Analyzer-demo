@@ -3,12 +3,12 @@
 This document describes the workflow for refining AI models using human validation data.
 
 ## 1. The Loop
-1.  **Inference**: System predicts labels (e.g., "Modern: 0.9") using `gemini-1.5-flash`.
-2.  **Correction**: Human tagger in Workbench changes value to "Modern: 0.4".
-3.  **Capture**: System flags this Region/Image as `is_training_candidate=True`.
-4.  **Export**: Admin exports candidates via `POST /api/training/export`.
-5.  **Fine-Tuning**: Data is sent to OpenAI/Google fine-tuning endpoint.
-6.  **Deployment**: New model ID is updated in `ToolConfig` via the Admin Panel.
+1. **Inference**: System predicts labels (e.g., "Modern: 0.9") using `gemini-1.5-flash`.
+2. **Correction**: Human tagger in Workbench changes value to "Modern: 0.4".
+3. **Capture**: System flags this Region/Image as `is_training_candidate=True`.
+4. **Export**: Admin exports candidates via `POST /api/training/export`.
+5. **Fine-Tuning**: Data is sent to OpenAI/Google fine-tuning endpoint.
+6. **Deployment**: New model ID is updated in `ToolConfig` via the Admin Panel.
 
 ## 2. Export Format (JSONL)
 The system exports data in standard JSONL format for fine-tuning:

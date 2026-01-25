@@ -21,18 +21,17 @@ If you already have PostgreSQL installed and running, the minimum steps are:
 ```bash
 cd Adaptive_Preference_GUI/Adaptive_Preference\ _3.5.11_Handoff\ /COMPLETE_v3.5.11_SYSTEM
 
-rm -rf backend/venv     # remove the broken included venv
-chmod +x install.sh
-./install.sh            # sets up new .venv and installs requirements
+rm -rf backend/venv # remove the broken included venv
+chmod +x install.sh./install.sh # sets up new.venv and installs requirements
 
-nano backend/.env       # ensure DATABASE_URL matches your system
+nano backend/.env # ensure DATABASE_URL matches your system
 createdb adaptive_testing
 
-source .venv/bin/activate
+source.venv/bin/activate
 export $(grep -v '^#' backend/.env | xargs)
 psql "$DATABASE_URL" -f database/schema.sql
 
-python backend/api.py   # start backend
+python backend/api.py # start backend
 ```
 
 Then in another terminal:
@@ -55,28 +54,28 @@ Then in browser:
 ```
 COMPLETE_v3.5.11_SYSTEM/
 │
-├── backend/          # Python API (Flask)
-│   ├── api.py
-│   ├── auth.py
-│   ├── bayesian_adaptive.py
-│   ├── .env          <-- your local environment file
-│   └── (DELETE THIS IF YOU SEE IT) venv/
+├── backend/ # Python API (Flask)
+│ ├── api.py
+│ ├── auth.py
+│ ├── bayesian_adaptive.py
+│ ├──.env <-- your local environment file
+│ └── (DELETE THIS IF YOU SEE IT) venv/
 │
-├── frontend/         # HTML/JS GUIs
-│   ├── admin_PATCHED.html
-│   ├── experimenter_dashboard_improved.html
-│   ├── stimulus_library.html
-│   ├── results_dashboard.html
-│   ├── subject_interface_complete.html
-│   └── docs/
+├── frontend/ # HTML/JS GUIs
+│ ├── admin_PATCHED.html
+│ ├── experimenter_dashboard_improved.html
+│ ├── stimulus_library.html
+│ ├── results_dashboard.html
+│ ├── subject_interface_complete.html
+│ └── docs/
 │
 ├── database/
-│   └── schema.sql    # PostgreSQL definition
+│ └── schema.sql # PostgreSQL definition
 │
-├── scripts/          # Governance, integrity guards
-│   └── ...py
+├── scripts/ # Governance, integrity guards
+│ └──...py
 │
-├── install.sh        # Sets up .venv & installs all requirements
+├── install.sh # Sets up.venv & installs all requirements
 ├── requirements.txt
 └── v3_governance.yml
 ```
@@ -117,11 +116,10 @@ rm -rf backend/venv
 
 ---
 
-# 5. RUN THE INSTALLER (CREATES A NEW .venv)
+# 5. RUN THE INSTALLER (CREATES A NEW.venv)
 
 ```bash
-chmod +x install.sh
-./install.sh
+chmod +x install.sh./install.sh
 ```
 
 This creates:
@@ -177,7 +175,7 @@ Save file & exit.
 Activate environment:
 
 ```bash
-source .venv/bin/activate
+source.venv/bin/activate
 ```
 
 Load env vars:
@@ -209,7 +207,7 @@ This creates tables:
 # 8. START THE BACKEND API
 
 ```bash
-source .venv/bin/activate
+source.venv/bin/activate
 set -a; source backend/.env; set +a
 python backend/api.py
 ```
@@ -334,7 +332,7 @@ psql "$DATABASE_URL" -f database/schema.sql
 - Move files out of `backend/`
 - Move HTML out of `frontend/`
 - Flatten the repo
-- Commit .venv/ or backend/.env
+- Commit.venv/ or backend/.env
 - Rename folders
 
 ### ✔ Do:
@@ -350,17 +348,15 @@ psql "$DATABASE_URL" -f database/schema.sql
 
 ## Do NOT push these:
 
-```
-.venv/
+```.venv/
 backend/venv/
 backend/.env
 __pycache__/
 ```
 
-Add to .gitignore:
+Add to.gitignore:
 
-```gitignore
-.venv/
+```gitignore.venv/
 backend/venv/
 backend/.env
 __pycache__/
@@ -382,7 +378,7 @@ Create `dev_run.sh`:
 ```bash
 #!/bin/bash
 cd "$(dirname "$0")"
-source .venv/bin/activate
+source.venv/bin/activate
 set -a; source backend/.env; set +a
 python backend/api.py
 ```
@@ -395,8 +391,7 @@ chmod +x dev_run.sh
 
 Run backend with:
 
-```bash
-./dev_run.sh
+```bash./dev_run.sh
 ```
 
 ---

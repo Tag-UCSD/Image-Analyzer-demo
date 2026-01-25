@@ -1,7 +1,7 @@
 # Adaptive Preference Testing System (GUI + Backend) — Repository Documentation
 
-**Package:** `COMPLETE_v3.5.11_SYSTEM`  
-**Date (doc generated):** December 12, 2025  
+**Package:** `COMPLETE_v3.5.11_SYSTEM` 
+**Date (doc generated):** 
 **What’s in this repo:** A complete end‑to‑end system for running *pairwise* adaptive preference experiments (stimulus A vs stimulus B), including:
 - A Flask + PostgreSQL backend API
 - A “pure” Bayesian adaptive pair-selection engine
@@ -50,8 +50,8 @@ The backend maintains a **Bayesian belief** over each stimulus’ “utility” 
 
 - Let each stimulus have a latent utility \(u_i\).
 - The system maintains a Gaussian belief:
-  - Mean vector **μ**: current best estimate of utilities
-  - Covariance **Σ**: uncertainty and correlations between utilities
+ - Mean vector **μ**: current best estimate of utilities
+ - Covariance **Σ**: uncertainty and correlations between utilities
 
 When the participant chooses between stimulus *i* and *j*, the model uses a **Bradley–Terry / probit-like** likelihood to update μ and Σ.
 
@@ -65,10 +65,10 @@ Then it picks the pair with the maximum score.
 
 **Where implemented:**
 - `backend/bayesian_adaptive.py`
-  - `BayesianPreferenceState` stores μ, Σ, and a comparison matrix.
-  - `PureBayesianAdaptiveSelector.select_next_pair()` chooses the next pair.
-  - `PureBayesianAdaptiveSelector.update_beliefs()` updates μ, Σ after a choice.
-  - `check_convergence()` can stop early when uncertainty is low.
+ - `BayesianPreferenceState` stores μ, Σ, and a comparison matrix.
+ - `PureBayesianAdaptiveSelector.select_next_pair` chooses the next pair.
+ - `PureBayesianAdaptiveSelector.update_beliefs` updates μ, Σ after a choice.
+ - `check_convergence` can stop early when uncertainty is low.
 
 ---
 
@@ -76,27 +76,27 @@ Then it picks the pair with the maximum score.
 
 ```mermaid
 flowchart LR
-  subgraph Frontend (static HTML/JS)
-    E[Experimenter Dashboard] -->|REST| API
-    A[Admin Dashboard] -->|REST| API
-    S[Subject Interface] -->|REST| API
-    R[Results Dashboard] -->|REST| API
-  end
+ subgraph Frontend (static HTML/JS)
+ E[Experimenter Dashboard] -->|REST| API
+ A[Admin Dashboard] -->|REST| API
+ S[Subject Interface] -->|REST| API
+ R[Results Dashboard] -->|REST| API
+ end
 
-  subgraph Backend (Flask)
-    API[backend/api.py]
-    ALG[backend/bayesian_adaptive.py]
-    AUTH[backend/auth.py]
-    API --> ALG
-    API --> AUTH
-  end
+ subgraph Backend (Flask)
+ API[backend/api.py]
+ ALG[backend/bayesian_adaptive.py]
+ AUTH[backend/auth.py]
+ API --> ALG
+ API --> AUTH
+ end
 
-  subgraph Database (PostgreSQL)
-    DB[(schema.sql tables)]
-  end
+ subgraph Database (PostgreSQL)
+ DB[(schema.sql tables)]
+ end
 
-  API -->|SQLAlchemy| DB
-  API -->|serves /uploads| U[(uploads/ images)]
+ API -->|SQLAlchemy| DB
+ API -->|serves /uploads| U[(uploads/ images)]
 ```
 
 ### Key data flow
@@ -109,7 +109,7 @@ flowchart LR
 ## 5) Simple step‑through (inputs → outputs)
 
 ### 5.1 Experiment creation (researcher)
-**Input:** experiment configuration + stimuli uploads  
+**Input:** experiment configuration + stimuli uploads 
 **Process:**
 1. Experimenter opens `frontend/experimenter_dashboard_improved.html`.
 2. UI calls `POST /api/experiments` with config.
@@ -120,7 +120,7 @@ flowchart LR
 **Output:** a published experiment in DB + images in uploads folder + a subject URL token flow.
 
 ### 5.2 Starting a participant session
-**Input:** experiment_id + subject/session metadata (participant id, ip, etc.)  
+**Input:** experiment_id + subject/session metadata (participant id, ip, etc.) 
 **Process:**
 1. Subject opens `frontend/subject_interface_complete.html?exp=<experiment_id>` (exact parameter handling depends on the UI build).
 2. UI calls `POST /api/sessions` to create a session token.
@@ -131,26 +131,26 @@ flowchart LR
 ### 5.3 Running trials (the adaptive loop)
 For each trial t = 1..T:
 
-1. **Next pair request**  
-   UI calls: `GET /api/sessions/<session_token>/next`  
-   Backend:
-   - loads current Bayesian state
-   - calls `select_next_pair()`
-   - returns (stimulus A, stimulus B) + a **pair_token** JWT encoding session_id + trial + the shown pair
+1. **Next pair request** 
+ UI calls: `GET /api/sessions/<session_token>/next` 
+ Backend:
+ - loads current Bayesian state
+ - calls `select_next_pair`
+ - returns (stimulus A, stimulus B) + a **pair_token** JWT encoding session_id + trial + the shown pair
 
-2. **Choice submission**  
-   UI calls: `POST /api/sessions/<session_token>/choice` with:
-   - which stimulus was chosen
-   - the **pair_token** to prove the choice corresponds to the shown pair  
-   Backend:
-   - validates the pair_token (prevents mismatch / replay)
-   - updates Bayesian state via `update_beliefs()`
-   - stores the choice row in `choices`
+2. **Choice submission** 
+ UI calls: `POST /api/sessions/<session_token>/choice` with:
+ - which stimulus was chosen
+ - the **pair_token** to prove the choice corresponds to the shown pair 
+ Backend:
+ - validates the pair_token (prevents mismatch / replay)
+ - updates Bayesian state via `update_beliefs`
+ - stores the choice row in `choices`
 
-**Output:** growing choice dataset + refined μ/Σ.  
+**Output:** growing choice dataset + refined μ/Σ. 
 
 ### 5.4 Results + export
-**Input:** experiment_id  
+**Input:** experiment_id 
 **Process:** Results dashboard calls:
 - `GET /api/experiments/<experiment_id>/results`
 - `GET /api/experiments/<experiment_id>/export_choices_csv`
@@ -163,7 +163,7 @@ For each trial t = 1..T:
 ## 6) The GUIs (what they are + how they map to APIs)
 
 ### 6.1 Experimenter Dashboard
-**File:** `frontend/experimenter_dashboard_improved.html`  
+**File:** `frontend/experimenter_dashboard_improved.html` 
 **Purpose:** create/edit experiments, manage stimuli, publish, and navigate to results/admin.
 
 **Typical API calls:**
@@ -176,8 +176,8 @@ For each trial t = 1..T:
 - `POST /api/experiments/<experiment_id>/publish`
 
 ### 6.2 Subject Interface
-**File:** `frontend/subject_interface_complete.html`  
-**Purpose:** consent → pairwise trials → debrief.  
+**File:** `frontend/subject_interface_complete.html` 
+**Purpose:** consent → pairwise trials → debrief. 
 Includes robustness features like retry/backoff, offline banner, and queued requests (as described in README).
 
 **Typical API calls:**
@@ -188,7 +188,7 @@ Includes robustness features like retry/backoff, offline banner, and queued requ
 - `GET /api/debrief`
 
 ### 6.3 Admin Dashboard
-**File:** `frontend/admin_PATCHED.html`  
+**File:** `frontend/admin_PATCHED.html` 
 **Purpose:** admin operations, bulk views, doc uploads, shortcuts.
 
 **Typical API calls:**
@@ -197,7 +197,7 @@ Includes robustness features like retry/backoff, offline banner, and queued requ
 - `GET /api/experiments/all`
 
 ### 6.4 Results Dashboard
-**File:** `frontend/results_dashboard.html`  
+**File:** `frontend/results_dashboard.html` 
 **Purpose:** show results for a selected experiment + export CSV.
 
 **Typical API calls:**
@@ -226,7 +226,7 @@ Includes robustness features like retry/backoff, offline banner, and queued requ
 
 ## 8) Backend API overview (important endpoints)
 
-**Server:** `backend/api.py`  
+**Server:** `backend/api.py` 
 **Base path:** `/api`
 
 ### Stimuli
@@ -274,7 +274,7 @@ Includes robustness features like retry/backoff, offline banner, and queued requ
 Two concepts exist in this system:
 
 ### 9.1 Researcher/admin auth
-`require_auth` + `require_roles` support Bearer JWTs issued with `ADAPTIVE_PREF_JWT_SECRET`.  
+`require_auth` + `require_roles` support Bearer JWTs issued with `ADAPTIVE_PREF_JWT_SECRET`. 
 There is also a dev helper endpoint:
 - `POST /api/auth/dev_issue_token` — issues a token (for local development).
 
@@ -285,7 +285,7 @@ Every time the subject asks for the **next pair**, the backend issues a short JW
 - stimulus_a_id / stimulus_b_id
 - presentation_order
 
-When the subject submits a choice, the backend verifies that the pair_token matches the session/trial.  
+When the subject submits a choice, the backend verifies that the pair_token matches the session/trial. 
 If you ever see **“pair_token/session mismatch”**, it usually means:
 - the frontend submitted a choice from an *older* displayed pair (race condition),
 - the user refreshed mid-trial and the UI re-used stale localStorage,
@@ -297,7 +297,7 @@ If you ever see **“pair_token/session mismatch”**, it usually means:
 ## 10) Key scripts and “minimum functions” to understand
 
 ### 10.1 Installer
-- `install.sh`  
+- `install.sh` 
 Creates a `.venv`, installs requirements, then runs governance checks.
 
 ### 10.2 Governance / guard scripts (defensive tooling)
@@ -311,13 +311,13 @@ Located in `scripts/`:
 
 ### 10.3 Core algorithm objects (minimum to understand the math)
 - `BayesianPreferenceState`
-  - `mu` (means), `Sigma` (covariance), `comparison_matrix`
-  - serialization helpers `to_dict()` / `from_dict()`
+ - `mu` (means), `Sigma` (covariance), `comparison_matrix`
+ - serialization helpers `to_dict` / `from_dict`
 - `PureBayesianAdaptiveSelector`
-  - `select_next_pair(state)` — which two stimuli to show next
-  - `update_beliefs(state, i, j, winner)` — update posterior approximation after a choice
-  - `_expected_information_gain(i, j, state)` — scoring function used for selection
-  - `check_convergence(state, threshold)` — stop condition
+ - `select_next_pair(state)` — which two stimuli to show next
+ - `update_beliefs(state, i, j, winner)` — update posterior approximation after a choice
+ - `_expected_information_gain(i, j, state)` — scoring function used for selection
+ - `check_convergence(state, threshold)` — stop condition
 
 ### 10.4 Core backend functions (minimum to understand the pipeline)
 - Session creation (`POST /api/sessions`)
@@ -373,19 +373,19 @@ Open these in a browser (they are static files):
 
 ```
 backend/
-  api.py
-  bayesian_adaptive.py
-  auth.py
+ api.py
+ bayesian_adaptive.py
+ auth.py
 database/
-  schema.sql
+ schema.sql
 frontend/
-  experimenter_dashboard_improved.html
-  stimulus_library.html
-  subject_interface_complete.html
-  results_dashboard.html
-  admin_PATCHED.html
+ experimenter_dashboard_improved.html
+ stimulus_library.html
+ subject_interface_complete.html
+ results_dashboard.html
+ admin_PATCHED.html
 tests/
-  conftest.py
-  test_consent_endpoint.py
-  test_csv_contract.py
+ conftest.py
+ test_consent_endpoint.py
+ test_csv_contract.py
 ```

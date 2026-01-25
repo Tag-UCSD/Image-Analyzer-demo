@@ -10,7 +10,7 @@ This document explains how we integrate diverse research findings into a coheren
 
 ## Types of Uncertainty
 
-When we read that "natural light is associated with better mood" (Boubekri et al., 2014), we might ask several distinct questions. Does any relationship exist at all? If so, does light actually *cause* mood changes, or might happier people simply choose brighter spaces? Even if causal, how large is the effect? And does this effect hold across different buildings, climates, and cultures? Each question concerns a different dimension of uncertainty.
+When we read that "natural light is associated with better mood" (Boubekri et al.,), we might ask several distinct questions. Does any relationship exist at all? If so, does light actually *cause* mood changes, or might happier people simply choose brighter spaces? Even if causal, how large is the effect? And does this effect hold across different buildings, climates, and cultures? Each question concerns a different dimension of uncertainty.
 
 **Structural Uncertainty (π)** asks whether any systematic relationship connects two variables. The Greek letter π (pi) represents the probability that an edge exists in our causal diagram—that is, the probability that Variable X and Variable Y are connected at all. Consider the question of whether ceiling height relates to creativity. If several studies find correlations (even modest ones), our confidence that *some* relationship exists increases, regardless of whether we understand the mechanism.
 
@@ -31,7 +31,7 @@ where θ_correct represents the effect estimate under the true functional form a
 
 The critical insight is that these dimensions are independent. A massive cross-sectional study has low σ² but low γ. A small randomised experiment has high σ² but high γ. Conflating them produces systematically misleading predictions.
 
-**GRADE Rating (κ)** The GRADE (Grading of Recommendations, Assessment, Development and Evaluation) system provides a standardised method for rating the certainty of evidence in systematic reviews and clinical guidelines, and it serves a complementary function within our framework. Developed initially for medical research synthesis, GRADE classifies evidence into four levels—High, Moderate, Low, and Very Low—based on factors including study design, risk of bias, inconsistency across studies, indirectness of evidence, imprecision, and publication bias (Guyatt et al., 2008). In our framework, the GRADE rating (denoted κ) functions as an integrative quality indicator that captures aspects of evidence strength not fully represented by the individual uncertainty parameters. Whilst γ specifically addresses causal identification and τ² captures heterogeneity, κ provides a holistic assessment that influences how confidently we should interpret the entire evidence package for a given relationship. Randomised controlled trials begin at "High" certainty and may be downgraded if poorly executed, whilst observational studies begin at "Low" and may be upgraded under specific conditions such as large effect sizes or dose-response gradients. The GRADE-CERQual extension (Lewin et al., 2018) adapts these principles for qualitative evidence, assessing methodological limitations, coherence, adequacy of data, and relevance. Within the Image Analyser's statistical engine, κ serves as both a summary communication device—allowing users to quickly gauge evidence quality—and a factor in determining how aggressively we update our priors when new evidence arrives. Evidence rated "Very Low" warrants more conservative updating than evidence rated "High," even when holding study design constant, because κ captures implementation quality that design classification alone cannot reflect.
+**GRADE Rating (κ)** The GRADE (Grading of Recommendations, Assessment, Development and Evaluation) system provides a standardised method for rating the certainty of evidence in systematic reviews and clinical guidelines, and it serves a complementary function within our framework. Developed initially for medical research synthesis, GRADE classifies evidence into four levels—High, Moderate, Low, and Very Low—based on factors including study design, risk of bias, inconsistency across studies, indirectness of evidence, imprecision, and publication bias (Guyatt et al.,). In our framework, the GRADE rating (denoted κ) functions as an integrative quality indicator that captures aspects of evidence strength not fully represented by the individual uncertainty parameters. Whilst γ specifically addresses causal identification and τ² captures heterogeneity, κ provides a holistic assessment that influences how confidently we should interpret the entire evidence package for a given relationship. Randomised controlled trials begin at "High" certainty and may be downgraded if poorly executed, whilst observational studies begin at "Low" and may be upgraded under specific conditions such as large effect sizes or dose-response gradients. The GRADE-CERQual extension (Lewin et al.,) adapts these principles for qualitative evidence, assessing methodological limitations, coherence, adequacy of data, and relevance. Within the Image Analyser's statistical engine, κ serves as both a summary communication device—allowing users to quickly gauge evidence quality—and a factor in determining how aggressively we update our priors when new evidence arrives. Evidence rated "Very Low" warrants more conservative updating than evidence rated "High," even when holding study design constant, because κ captures implementation quality that design classification alone cannot reflect.
 
 ---
 
@@ -47,7 +47,7 @@ Research designs vary in what they can tell us. The following classification org
 | Crossover | Participants experience both conditions in sequence | 0.80–0.90 | High | γ, θ, π, ψ |
 | Validated VR | Virtual reality with behavioural validation | 0.75–0.85 | Moderate | γ, θ, π |
 
-Randomised controlled trials (RCTs) achieve high γ because random assignment ensures that, on average, groups differ only in the manipulated variable. Kwallek et al. (2007) randomly assigned workers to offices painted different colours and measured productivity—this design permits strong causal inference because pre-existing differences between people were balanced by randomisation.
+Randomised controlled trials (RCTs) achieve high γ because random assignment ensures that, on average, groups differ only in the manipulated variable. Kwallek et al. randomly assigned workers to offices painted different colours and measured productivity—this design permits strong causal inference because pre-existing differences between people were balanced by randomisation.
 
 **Tier 2: Moderate Causal Identification (γ = 0.45–0.80)**
 
@@ -70,7 +70,7 @@ These quasi-experimental designs approach randomisation through clever use of na
 | Post-Occupancy Evaluation | Comprehensive multi-method assessment | 0.30–0.45 | Low–Moderate | π, θ, mechanisms |
 | Before-After (no control) | Pre-post without comparison | 0.25–0.40 | Low | θ (biased), π |
 
-Cross-sectional surveys, however large and carefully conducted, cannot establish causation because they measure exposure and outcome simultaneously. When Newsham et al. (2009) found that workers near windows reported higher satisfaction, this could reflect a causal effect of daylight, or it could reflect that senior employees (who differ in many ways) receive window seats.
+Cross-sectional surveys, however large and carefully conducted, cannot establish causation because they measure exposure and outcome simultaneously. When Newsham et al. found that workers near windows reported higher satisfaction, this could reflect a causal effect of daylight, or it could reflect that senior employees (who differ in many ways) receive window seats.
 
 A crucial point deserves emphasis: **sample size affects σ² but not γ**. A cross-sectional survey with 5,000 participants has the same causal identification strength as one with 50 participants. The larger study estimates the association more precisely, but precision about an association is not evidence for causation.
 
@@ -87,7 +87,7 @@ Qualitative studies contribute differently to our uncertainty framework. Rather 
 | Phenomenological | Deep exploration of lived experience | Moderate: post-hoc rationalisation risk | π, mechanism hypotheses |
 | Case Study | In-depth single or multiple cases | Moderate–Strong: depends on process tracing | π, boundary conditions |
 
-Consider Ulrich's (1984) hospital window study, which found that patients recovering from surgery healed faster when their window faced trees rather than a brick wall. Supplementary qualitative interviews might reveal *why*—perhaps patients reported feeling less confined, or found the view distracting from pain. Such mechanism evidence strengthens causal interpretation even when the quantitative design alone permits alternative explanations.
+Consider Ulrich's hospital window study, which found that patients recovering from surgery healed faster when their window faced trees rather than a brick wall. Supplementary qualitative interviews might reveal *why*—perhaps patients reported feeling less confined, or found the view distracting from pain. Such mechanism evidence strengthens causal interpretation even when the quantitative design alone permits alternative explanations.
 
 Qualitative evidence updates our probability that an edge exists (π) through Bayes factors. When a careful ethnography reveals plausible mechanisms, this constitutes evidence that the relationship is real:
 
@@ -99,7 +99,7 @@ Qualitative evidence updates our probability that an edge exists (π) through Ba
 
 ## Triangulation
 
-A powerful strategy for strengthening causal inference involves triangulation: combining evidence from multiple study types with different bias structures (Munafò & Davey Smith, 2018). The logic is probabilistic. If a cross-sectional study could be biased by confounding, and a natural experiment could be biased by selection, but both find the same effect, the probability that both are biased in the same direction decreases multiplicatively.
+A powerful strategy for strengthening causal inference involves triangulation: combining evidence from multiple study types with different bias structures (Munafò & Davey Smith,). The logic is probabilistic. If a cross-sectional study could be biased by confounding, and a natural experiment could be biased by selection, but both find the same effect, the probability that both are biased in the same direction decreases multiplicatively.
 
 Formally, if different studies provide independent information about causality with individual γ values, the triangulated estimate is:
 
@@ -119,11 +119,11 @@ The statistical engine assigns parameters to each edge (relationship) in our cau
 
 When five or more studies exist with at least one experimental design, we conduct formal meta-analysis. The effect size θ and heterogeneity τ² emerge from random-effects models. The causal identification γ begins with the value from the best available design and may be adjusted upward if multiple designs converge (triangulation) or if mechanisms are well-documented.
 
-For example, the relationship between indoor plants and stress reduction has been examined in RCTs (Lohr et al., 1996), quasi-experiments, and surveys. Meta-analysis provides a pooled effect estimate, and the convergence across designs supports higher γ than any single study type would warrant.
+For example, the relationship between indoor plants and stress reduction has been examined in RCTs (Lohr et al.,), quasi-experiments, and surveys. Meta-analysis provides a pooled effect estimate, and the convergence across designs supports higher γ than any single study type would warrant.
 
 **Tier 2: Limited Quantitative Studies**
 
-With fewer than five studies, we supplement empirical estimates with informed prior distributions. Effect sizes in environmental psychology tend to be modest—Gignac and Szodorai (2016) found a median correlation of r = 0.19 across psychology. We use such base rates to construct reasonable priors that are then updated by the available data.
+With fewer than five studies, we supplement empirical estimates with informed prior distributions. Effect sizes in environmental psychology tend to be modest—Gignac and Szodorai found a median correlation of r = 0.19 across psychology. We use such base rates to construct reasonable priors that are then updated by the available data.
 
 **Tier 3: Qualitative Evidence Only**
 
@@ -222,30 +222,30 @@ The Image Analyser's statistical engine implements these principles to bridge th
 
 ## References
 
-Boubekri, M., Cheung, I. N., Reid, K. J., Wang, C. H., & Zee, P. C. (2014). Impact of windows and daylight exposure on overall health and sleep quality of office workers: A case-control pilot study. *Journal of Clinical Sleep Medicine, 10*(6), 603–611. https://doi.org/10.5664/jcsm.3780
+Boubekri, M., Cheung, I. N., Reid, K. J., Wang, C. H., & Zee, P. C.. Impact of windows and daylight exposure on overall health and sleep quality of office workers: A case-control pilot study. *Journal of Clinical Sleep Medicine, 10*(6), 603–611. https://doi.org/10.5664/jcsm.3780
 
-Evans, R. J., & Didelez, V. (2024). Parameterizing and simulating from causal models. *Journal of the Royal Statistical Society Series B: Statistical Methodology, 86*(3), 535–568. https://doi.org/10.1093/jrsssb/qkad058
+Evans, R. J., & Didelez, V.. Parameterizing and simulating from causal models. *Journal of the Royal Statistical Society Series B: Statistical Methodology, 86*(3), 535–568. https://doi.org/10.1093/jrsssb/qkad058
 
-Ferguson, K. D., McCann, M., Katikireddi, S. V., Thomson, H., Green, M. J., Smith, D. J., & Lewsey, J. D. (2020). Evidence synthesis for constructing directed acyclic graphs (ESC-DAGs): A novel and systematic method for building directed acyclic graphs. *International Journal of Epidemiology, 49*(1), 322–329. https://doi.org/10.1093/ije/dyz150
+Ferguson, K. D., McCann, M., Katikireddi, S. V., Thomson, H., Green, M. J., Smith, D. J., & Lewsey, J. D.. Evidence synthesis for constructing directed acyclic graphs (ESC-DAGs): A novel and systematic method for building directed acyclic graphs. *International Journal of Epidemiology, 49*(1), 322–329. https://doi.org/10.1093/ije/dyz150
 
-Gignac, G. E., & Szodorai, E. T. (2016). Effect size guidelines for individual differences researchers. *Personality and Individual Differences, 102*, 74–78. https://doi.org/10.1016/j.paid.2016.06.069
+Gignac, G. E., & Szodorai, E. T.. Effect size guidelines for individual differences researchers. *Personality and Individual Differences, 102*, 74–78. https://doi.org/10.1016/j.paid..06.069
 
-Kwallek, N., Soon, K., & Lewis, C. M. (2007). Work week productivity, visual complexity, and individual environmental sensitivity in three offices of different color interiors. *Color Research & Application, 32*(2), 130–143. https://doi.org/10.1002/col.20298
+Kwallek, N., Soon, K., & Lewis, C. M.. Work week productivity, visual complexity, and individual environmental sensitivity in three offices of different color interiors. *Color Research & Application, 32*(2), 130–143. https://doi.org/10.1002/col.20298
 
-Lawlor, D. A., Tilling, K., & Davey Smith, G. (2016). Triangulation in aetiological epidemiology. *International Journal of Epidemiology, 45*(6), 1866–1886. https://doi.org/10.1093/ije/dyw314
+Lawlor, D. A., Tilling, K., & Davey Smith, G.. Triangulation in aetiological epidemiology. *International Journal of Epidemiology, 45*(6), 1866–1886. https://doi.org/10.1093/ije/dyw314
 
-Lewin, S., Booth, A., Glenton, C., Munthe-Kaas, H., Rashidian, A., Wainwright, M., ... & Noyes, J. (2018). Applying GRADE-CERQual to qualitative evidence synthesis findings: Introduction to the series. *Implementation Science, 13*(Suppl 1), 2. https://doi.org/10.1186/s13012-017-0688-3
+Lewin, S., Booth, A., Glenton, C., Munthe-Kaas, H., Rashidian, A., Wainwright, M.,... & Noyes, J.. Applying GRADE-CERQual to qualitative evidence synthesis findings: Introduction to the series. *Implementation Science, 13*(Suppl 1), 2. https://doi.org/10.1186/s13012-017-0688-3
 
-Lohr, V. I., Pearson-Mims, C. H., & Goodwin, G. K. (1996). Interior plants may improve worker productivity and reduce stress in a windowless environment. *Journal of Environmental Horticulture, 14*(2), 97–100. https://doi.org/10.24266/0738-2898-14.2.97
+Lohr, V. I., Pearson-Mims, C. H., & Goodwin, G. K.. Interior plants may improve worker productivity and reduce stress in a windowless environment. *Journal of Environmental Horticulture, 14*(2), 97–100. https://doi.org/10.24266/0738-2898-14.2.97
 
-Munafò, M. R., & Davey Smith, G. (2018). Robust research needs many lines of evidence. *Nature, 553*(7689), 399–401. https://doi.org/10.1038/d41586-018-01023-3
+Munafò, M. R., & Davey Smith, G.. Robust research needs many lines of evidence. *Nature, 553*(7689), 399–401. https://doi.org/10.1038/d41586-018-01023-3
 
-Newsham, G. R., Veitch, J. A., Arsenault, C. D., & Duval, C. L. (2009). Effect of dimming control on office worker satisfaction and performance. *Proceedings of the IESNA Annual Conference*, 1–13.
+Newsham, G. R., Veitch, J. A., Arsenault, C. D., & Duval, C. L.. Effect of dimming control on office worker satisfaction and performance. *Proceedings of the IESNA Annual Conference*, 1–13.
 
-Pearl, J. (2009). *Causality: Models, reasoning, and inference* (2nd ed.). Cambridge University Press.
+Pearl, J.. *Causality: Models, reasoning, and inference* (2nd ed.). Cambridge University Press.
 
-Ulrich, R. S. (1984). View through a window may influence recovery from surgery. *Science, 224*(4647), 420–421. https://doi.org/10.1126/science.6143402
+Ulrich, R. S.. View through a window may influence recovery from surgery. *Science, 224*(4647), 420–421. https://doi.org/10.1126/science.6143402
 
-Voils, C. I., Sandelowski, M., Barroso, J., & Hasselblad, V. (2009). Making sense of qualitative and quantitative findings in mixed research synthesis studies. *Field Methods, 21*(1), 3–25. https://doi.org/10.1177/1525822X07307463
+Voils, C. I., Sandelowski, M., Barroso, J., & Hasselblad, V.. Making sense of qualitative and quantitative findings in mixed research synthesis studies. *Field Methods, 21*(1), 3–25. https://doi.org/10.1177/1525822X07307463
 
-Zondervan-Zwijnenburg, M. A., Veldkamp, S. A., Nelemans, S. A., Bøe, T., & Beijers, R. (2024). Introduction to Bayesian evidence synthesis. *Behavior Research Methods, 56*(3), 2176–2188. https://doi.org/10.3758/s13428-023-02257-0
+Zondervan-Zwijnenburg, M. A., Veldkamp, S. A., Nelemans, S. A., Bøe, T., & Beijers, R.. Introduction to Bayesian evidence synthesis. *Behavior Research Methods, 56*(3), 2176–2188. https://doi.org/10.3758/s13428-023-02257-0

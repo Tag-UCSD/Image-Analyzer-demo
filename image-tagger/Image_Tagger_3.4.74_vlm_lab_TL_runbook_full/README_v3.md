@@ -9,23 +9,23 @@ This is the production-ready, micro-frontend architecture for the Image Tagger s
 
 ## 🚀 Quick Start (The "Enterprise Go")
 
-1.  **Ensure Docker is installed.**
-2.  **Run:**
-    ```bash
-    cd deploy
-    docker-compose up --build
-    ```
-3.  **Access the GUIs:**
-    * **Research Explorer:** [http://localhost:8080/explorer](http://localhost:8080/explorer)
-    * **Tagger Workbench:** [http://localhost:8080/workbench](http://localhost:8080/workbench)
-    * **Supervisor Monitor:** [http://localhost:8080/monitor](http://localhost:8080/monitor)
-    * **Admin Cockpit:** [http://localhost:8080/admin](http://localhost:8080/admin)
+1. **Ensure Docker is installed.**
+2. **Run:**
+ ```bash
+ cd deploy
+ docker-compose up --build
+ ```
+3. **Access the GUIs:**
+ * **Research Explorer:** [http://localhost:8080/explorer](http://localhost:8080/explorer)
+ * **Tagger Workbench:** [http://localhost:8080/workbench](http://localhost:8080/workbench)
+ * **Supervisor Monitor:** [http://localhost:8080/monitor](http://localhost:8080/monitor)
+ * **Admin Cockpit:** [http://localhost:8080/admin](http://localhost:8080/admin)
 
 ## 🧪 Running Tests
 
 To verify the API logic without Docker:
-1.  `pip install pytest httpx`
-2.  `pytest tests/test_v3_api.py`
+1. `pip install pytest httpx`
+2. `pytest tests/test_v3_api.py`
 
 ## 🤖 AI Collaboration Workflow
 
@@ -41,19 +41,18 @@ governance rules — see:
 From the repository root:
 
 ```bash
-# Build containers, run seeds, and execute smoketests
-./install.sh
+# Build containers, run seeds, and execute smoketests./install.sh
 ```
 
 The install script is intentionally small and opinionated. In the default configuration it will:
 
 1. Build the containers (API, DB, frontend) using the `deploy/` Dockerfiles.
 2. Run seeding scripts to populate core configuration:
-   - `backend/scripts/seed_tool_configs.py`
-   - `backend/scripts/seed_attributes.py`
+ - `backend/scripts/seed_tool_configs.py`
+ - `backend/scripts/seed_attributes.py`
 3. Run cheap smoketests:
-   - `scripts/smoke_api.py` (basic API shape)
-   - `scripts/smoke_science.py` (science pipeline + composite indices and bins)
+ - `scripts/smoke_api.py` (basic API shape)
+ - `scripts/smoke_science.py` (science pipeline + composite indices and bins)
 
 If any step fails, the script prints a clear message and returns a non-zero exit code.
 
@@ -72,9 +71,9 @@ This v3 line is designed as a teachable, inspectable system rather than a fully 
 - **Composite indices and bins** (for example, `science.visual_richness[_bin]`, `science.organized_complexity[_bin]`) are deliberately simple and intended as a starting point for BN and downstream modeling, not final scientific truth.
 - **CI workflow** is included as a template. It shows how to wire Guardian and basic tests but may require adaptation to your specific infrastructure (Python versions, DB configuration, secrets).
 - **Empty dashboards** in Monitor / Explorer generally mean you have not yet:
-  - Run the seeding scripts, and
-  - Processed any images through the science pipeline, or
-  - Collected enough validation data for IRR / Tag Inspector to be informative.
+ - Run the seeding scripts, and
+ - Processed any images through the science pipeline, or
+ - Collected enough validation data for IRR / Tag Inspector to be informative.
 
 ## CI Skeleton
 

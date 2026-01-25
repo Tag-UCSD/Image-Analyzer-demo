@@ -23,10 +23,10 @@ Confirm all modules are reachable and isolated behavior is known.
 ### Checks
 - `python3 scripts/baseline_check.py`
 - Record baseline health endpoints:
-  - `http://localhost:8001/api/v1/health`
-  - `http://localhost:8002/health`
-  - `http://localhost:8003/health`
-  - `http://localhost:8004/health`
+ - `http://localhost:8001/api/v1/health`
+ - `http://localhost:8002/health`
+ - `http://localhost:8003/health`
+ - `http://localhost:8004/health`
 
 ### Gate Criteria
 - All modules reachable.
@@ -120,9 +120,9 @@ Frontend surfaces real data and full data flow is verified.
 - `scripts/run_integration_tests.sh`
 - `./scripts/verify_all.sh all`
 - Optional manual flow:
-  - Submit paper → knowledge-graph update
-  - Tag image → model update
-  - Graphical-model posterior visible in knowledge-graph
+ - Submit paper → knowledge-graph update
+ - Tag image → model update
+ - Graphical-model posterior visible in knowledge-graph
 
 ### Gate Criteria
 - All automated tests pass.

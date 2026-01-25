@@ -51,17 +51,17 @@ cd graphical-model
 python -c "import fastapi" 2>/dev/null && echo "✓ FastAPI importable" || echo "✗ FastAPI not installed"
 
 # 2. image-tagger
-cd ../image-tagger/Image_Tagger_3.4.74_vlm_lab_TL_runbook_full
+cd../image-tagger/Image_Tagger_3.4.74_vlm_lab_TL_runbook_full
 [ -f backend/main.py ] && echo "✓ Backend entry point exists"
 [ -f deploy/docker-compose.yml ] && echo "✓ Docker compose exists"
 
 # 3. article-eater
-cd ../../article-eater/Article_Eater_v20_7_43_repo
+cd../../article-eater/Article_Eater_v20_7_43_repo
 [ -f app/main.py ] && echo "✓ API entry point exists"
 [ -f requirements.txt ] && echo "✓ requirements.txt exists"
 
 # 4. knowledge-graph-ui
-cd ../../knowledge-graph-ui/GraphExplorer_Static_v3
+cd../../knowledge-graph-ui/GraphExplorer_Static_v3
 [ -f backend/app/main.py ] && echo "✓ API entry point exists"
 [ -f static-frontend/index.html ] && echo "✓ Frontend exists"
 ```
@@ -88,79 +88,79 @@ import sys
 from pathlib import Path
 
 MODULES = {
-    "graphical-model": {
-        "path": "graphical-model",
-        "api_file": "api/main.py",
-        "requirements": "requirements.txt",
-        "docker": "docker-compose.yml"
-    },
-    "image-tagger": {
-        "path": "image-tagger/Image_Tagger_3.4.74_vlm_lab_TL_runbook_full",
-        "api_file": "backend/main.py",
-        "requirements": "requirements.txt",
-        "docker": "deploy/docker-compose.yml"
-    },
-    "article-eater": {
-        "path": "article-eater/Article_Eater_v20_7_43_repo",
-        "api_file": "app/main.py",
-        "requirements": "requirements.txt",
-        "docker": None
-    },
-    "knowledge-graph-ui": {
-        "path": "knowledge-graph-ui/GraphExplorer_Static_v3",
-        "api_file": "backend/app/main.py",
-        "requirements": "backend/requirements.txt",
-        "docker": None
-    }
+ "graphical-model": {
+ "path": "graphical-model",
+ "api_file": "api/main.py",
+ "requirements": "requirements.txt",
+ "docker": "docker-compose.yml"
+ },
+ "image-tagger": {
+ "path": "image-tagger/Image_Tagger_3.4.74_vlm_lab_TL_runbook_full",
+ "api_file": "backend/main.py",
+ "requirements": "requirements.txt",
+ "docker": "deploy/docker-compose.yml"
+ },
+ "article-eater": {
+ "path": "article-eater/Article_Eater_v20_7_43_repo",
+ "api_file": "app/main.py",
+ "requirements": "requirements.txt",
+ "docker": None
+ },
+ "knowledge-graph-ui": {
+ "path": "knowledge-graph-ui/GraphExplorer_Static_v3",
+ "api_file": "backend/app/main.py",
+ "requirements": "backend/requirements.txt",
+ "docker": None
+ }
 }
 
 def check_module(name, config):
-    """Check if a module's key files exist."""
-    base = Path(config["path"])
-    results = {"name": name, "exists": base.exists(), "files": {}}
+ """Check if a module's key files exist."""
+ base = Path(config["path"])
+ results = {"name": name, "exists": base.exists, "files": {}}
 
-    if not base.exists():
-        return results
+ if not base.exists:
+ return results
 
-    for key in ["api_file", "requirements", "docker"]:
-        if config[key]:
-            file_path = base / config[key]
-            results["files"][key] = file_path.exists()
+ for key in ["api_file", "requirements", "docker"]:
+ if config[key]:
+ file_path = base / config[key]
+ results["files"][key] = file_path.exists
 
-    return results
+ return results
 
-def main():
-    print("=" * 60)
-    print("BASELINE CHECK - Module State Verification")
-    print("=" * 60)
+def main:
+ print("=" * 60)
+ print("BASELINE CHECK - Module State Verification")
+ print("=" * 60)
 
-    all_pass = True
-    for name, config in MODULES.items():
-        result = check_module(name, config)
-        status = "✓" if result["exists"] else "✗"
-        print(f"\n{status} {name}")
+ all_pass = True
+ for name, config in MODULES.items:
+ result = check_module(name, config)
+ status = "✓" if result["exists"] else "✗"
+ print(f"\n{status} {name}")
 
-        if result["exists"]:
-            for file_type, exists in result["files"].items():
-                file_status = "✓" if exists else "✗"
-                print(f"  {file_status} {file_type}: {config[file_type]}")
-                if not exists:
-                    all_pass = False
-        else:
-            all_pass = False
-            print(f"  ✗ Directory not found: {config['path']}")
+ if result["exists"]:
+ for file_type, exists in result["files"].items:
+ file_status = "✓" if exists else "✗"
+ print(f" {file_status} {file_type}: {config[file_type]}")
+ if not exists:
+ all_pass = False
+ else:
+ all_pass = False
+ print(f" ✗ Directory not found: {config['path']}")
 
-    print("\n" + "=" * 60)
-    if all_pass:
-        print("BASELINE CHECK PASSED - All modules ready for integration")
-    else:
-        print("BASELINE CHECK FAILED - Fix issues before proceeding")
-    print("=" * 60)
+ print("\n" + "=" * 60)
+ if all_pass:
+ print("BASELINE CHECK PASSED - All modules ready for integration")
+ else:
+ print("BASELINE CHECK FAILED - Fix issues before proceeding")
+ print("=" * 60)
 
-    return 0 if all_pass else 1
+ return 0 if all_pass else 1
 
 if __name__ == "__main__":
-    sys.exit(main())
+ sys.exit(main)
 ```
 
 ### Gate Check
@@ -307,17 +307,17 @@ Modify each backend to use shared database and standardized API prefixes.
 docker-compose -f integration/docker-compose.unified.yml up -d graphical-model
 
 # Health check
-curl -s http://localhost:8001/health | jq .
-# Expected: {"status": "ok", ...}
+curl -s http://localhost:8001/health | jq.
+# Expected: {"status": "ok",...}
 
 # API endpoint check
-curl -s http://localhost:8001/api/v1/graphical/status | jq .
+curl -s http://localhost:8001/api/v1/graphical/status | jq.
 # Expected: Valid response
 
 # Database connectivity
 docker exec integration-graphical-model python -c "
 from database import get_db
-db = next(get_db())
+db = next(get_db)
 print('DB connection: OK')
 "
 ```
@@ -326,8 +326,8 @@ print('DB connection: OK')
 
 **Verification:**
 ```bash
-curl -s http://localhost:8002/health | jq .
-curl -s http://localhost:8002/api/v1/tagger/status | jq .
+curl -s http://localhost:8002/health | jq.
+curl -s http://localhost:8002/api/v1/tagger/status | jq.
 ```
 
 #### Step 2.3: article-eater Backend
@@ -336,8 +336,8 @@ curl -s http://localhost:8002/api/v1/tagger/status | jq .
 
 **Verification:**
 ```bash
-curl -s http://localhost:8003/health | jq .
-curl -s http://localhost:8003/api/v1/article/status | jq .
+curl -s http://localhost:8003/health | jq.
+curl -s http://localhost:8003/api/v1/article/status | jq.
 ```
 
 #### Step 2.4: knowledge-graph-ui Backend
@@ -346,8 +346,8 @@ curl -s http://localhost:8003/api/v1/article/status | jq .
 
 **Verification:**
 ```bash
-curl -s http://localhost:8004/health | jq .
-curl -s http://localhost:8004/api/v1/graph/status | jq .
+curl -s http://localhost:8004/health | jq.
+curl -s http://localhost:8004/api/v1/graph/status | jq.
 ```
 
 ### Cross-Backend Verification
@@ -360,38 +360,38 @@ import requests
 import sys
 
 BACKENDS = {
-    "graphical-model": {"port": 8001, "prefix": "/api/v1/graphical"},
-    "image-tagger": {"port": 8002, "prefix": "/api/v1/tagger"},
-    "article-eater": {"port": 8003, "prefix": "/api/v1/article"},
-    "knowledge-graph-ui": {"port": 8004, "prefix": "/api/v1/graph"},
+ "graphical-model": {"port": 8001, "prefix": "/api/v1/graphical"},
+ "image-tagger": {"port": 8002, "prefix": "/api/v1/tagger"},
+ "article-eater": {"port": 8003, "prefix": "/api/v1/article"},
+ "knowledge-graph-ui": {"port": 8004, "prefix": "/api/v1/graph"},
 }
 
 def check_backend(name, config):
-    """Check if backend is accessible."""
-    url = f"http://localhost:{config['port']}/health"
-    try:
-        resp = requests.get(url, timeout=5)
-        return resp.status_code == 200
-    except requests.RequestException:
-        return False
+ """Check if backend is accessible."""
+ url = f"http://localhost:{config['port']}/health"
+ try:
+ resp = requests.get(url, timeout=5)
+ return resp.status_code == 200
+ except requests.RequestException:
+ return False
 
-def main():
-    print("Backend Verification")
-    print("=" * 40)
+def main:
+ print("Backend Verification")
+ print("=" * 40)
 
-    all_pass = True
-    for name, config in BACKENDS.items():
-        status = check_backend(name, config)
-        icon = "✓" if status else "✗"
-        print(f"{icon} {name} (port {config['port']})")
-        if not status:
-            all_pass = False
+ all_pass = True
+ for name, config in BACKENDS.items:
+ status = check_backend(name, config)
+ icon = "✓" if status else "✗"
+ print(f"{icon} {name} (port {config['port']})")
+ if not status:
+ all_pass = False
 
-    print("=" * 40)
-    return 0 if all_pass else 1
+ print("=" * 40)
+ return 0 if all_pass else 1
 
 if __name__ == "__main__":
-    sys.exit(main())
+ sys.exit(main)
 ```
 
 ### Gate Check
@@ -436,10 +436,10 @@ Create unified frontend shell with navigation between modules.
 **Verification:**
 ```bash
 # Test routing through gateway
-curl -s http://localhost:8080/api/graphical/health | jq .
-curl -s http://localhost:8080/api/tagger/health | jq .
-curl -s http://localhost:8080/api/article/health | jq .
-curl -s http://localhost:8080/api/graph/health | jq .
+curl -s http://localhost:8080/api/graphical/health | jq.
+curl -s http://localhost:8080/api/tagger/health | jq.
+curl -s http://localhost:8080/api/article/health | jq.
+curl -s http://localhost:8080/api/graph/health | jq.
 
 # All should return valid health responses
 ```
@@ -473,20 +473,20 @@ ls -la dist/
 
 import requests
 
-def main():
-    # Check main page loads
-    resp = requests.get("http://localhost:8080/")
-    assert resp.status_code == 200, "Main page failed to load"
-    assert "<!DOCTYPE html>" in resp.text, "Not HTML response"
+def main:
+ # Check main page loads
+ resp = requests.get("http://localhost:8080/")
+ assert resp.status_code == 200, "Main page failed to load"
+ assert "<!DOCTYPE html>" in resp.text, "Not HTML response"
 
-    # Check static assets
-    resp = requests.get("http://localhost:8080/assets/main.js")
-    assert resp.status_code == 200, "JS assets not loading"
+ # Check static assets
+ resp = requests.get("http://localhost:8080/assets/main.js")
+ assert resp.status_code == 200, "JS assets not loading"
 
-    print("✓ Frontend verification passed")
+ print("✓ Frontend verification passed")
 
 if __name__ == "__main__":
-    main()
+ main
 ```
 
 ### Gate Check
@@ -534,17 +534,17 @@ r = redis.Redis(host='localhost', port=6379, db=0)
 
 received = []
 
-def subscriber():
-    pubsub = r.pubsub()
-    pubsub.subscribe('test_channel')
-    for message in pubsub.listen():
-        if message['type'] == 'message':
-            received.append(json.loads(message['data']))
-            break
+def subscriber:
+ pubsub = r.pubsub
+ pubsub.subscribe('test_channel')
+ for message in pubsub.listen:
+ if message['type'] == 'message':
+ received.append(json.loads(message['data']))
+ break
 
 # Start subscriber in thread
 t = threading.Thread(target=subscriber)
-t.start()
+t.start
 
 time.sleep(0.5)
 
@@ -573,17 +573,17 @@ import time
 
 # 1. Create test data in image-tagger
 resp = requests.post("http://localhost:8080/api/tagger/images", json={
-    "url": "test://image.jpg",
-    "tags": ["test_tag"]
+ "url": "test://image.jpg",
+ "tags": ["test_tag"]
 })
-image_id = resp.json()["id"]
+image_id = resp.json["id"]
 
 # 2. Wait for event propagation
 time.sleep(2)
 
 # 3. Check if knowledge-graph has the data
 resp = requests.get(f"http://localhost:8080/api/graph/nodes")
-nodes = resp.json()["nodes"]
+nodes = resp.json["nodes"]
 
 # Verify integration worked
 found = any(n.get("source_id") == image_id for n in nodes)
@@ -625,148 +625,144 @@ import time
 import sys
 
 class IntegrationTests:
-    def __init__(self):
-        self.base_url = "http://localhost:8080"
-        self.results = []
+ def __init__(self):
+ self.base_url = "http://localhost:8080"
+ self.results = []
 
-    def test(self, name, func):
-        """Run a test and record result."""
-        try:
-            func()
-            self.results.append((name, True, None))
-            print(f"  ✓ {name}")
-        except AssertionError as e:
-            self.results.append((name, False, str(e)))
-            print(f"  ✗ {name}: {e}")
-        except Exception as e:
-            self.results.append((name, False, str(e)))
-            print(f"  ✗ {name}: {e}")
+ def test(self, name, func):
+ """Run a test and record result."""
+ try:
+ func
+ self.results.append((name, True, None))
+ print(f" ✓ {name}")
+ except AssertionError as e:
+ self.results.append((name, False, str(e)))
+ print(f" ✗ {name}: {e}")
+ except Exception as e:
+ self.results.append((name, False, str(e)))
+ print(f" ✗ {name}: {e}")
 
-    def run_all(self):
-        print("\n" + "=" * 60)
-        print("FULL INTEGRATION TEST SUITE")
-        print("=" * 60)
+ def run_all(self):
+ print("\n" + "=" * 60)
+ print("FULL INTEGRATION TEST SUITE")
+ print("=" * 60)
 
-        # Infrastructure tests
-        print("\n[Infrastructure]")
-        self.test("PostgreSQL accessible", self.test_postgres)
-        self.test("Redis accessible", self.test_redis)
-        self.test("Nginx gateway running", self.test_nginx)
+ # Infrastructure tests
+ print("\n[Infrastructure]")
+ self.test("PostgreSQL accessible", self.test_postgres)
+ self.test("Redis accessible", self.test_redis)
+ self.test("Nginx gateway running", self.test_nginx)
 
-        # Backend tests
-        print("\n[Backends]")
-        self.test("graphical-model health", lambda: self.test_backend_health("graphical"))
-        self.test("image-tagger health", lambda: self.test_backend_health("tagger"))
-        self.test("article-eater health", lambda: self.test_backend_health("article"))
-        self.test("knowledge-graph health", lambda: self.test_backend_health("graph"))
+ # Backend tests
+ print("\n[Backends]")
+ self.test("graphical-model health", lambda: self.test_backend_health("graphical"))
+ self.test("image-tagger health", lambda: self.test_backend_health("tagger"))
+ self.test("article-eater health", lambda: self.test_backend_health("article"))
+ self.test("knowledge-graph health", lambda: self.test_backend_health("graph"))
 
-        # API tests
-        print("\n[API Endpoints]")
-        self.test("graphical-model predictions", self.test_graphical_api)
-        self.test("image-tagger images", self.test_tagger_api)
-        self.test("article-eater papers", self.test_article_api)
-        self.test("knowledge-graph nodes", self.test_graph_api)
+ # API tests
+ print("\n[API Endpoints]")
+ self.test("graphical-model predictions", self.test_graphical_api)
+ self.test("image-tagger images", self.test_tagger_api)
+ self.test("article-eater papers", self.test_article_api)
+ self.test("knowledge-graph nodes", self.test_graph_api)
 
-        # Integration tests
-        print("\n[Cross-Module Integration]")
-        self.test("Event bus messaging", self.test_event_bus)
-        self.test("Shared authentication", self.test_shared_auth)
-        self.test("Data flow: tagger → graph", self.test_tagger_to_graph)
+ # Integration tests
+ print("\n[Cross-Module Integration]")
+ self.test("Event bus messaging", self.test_event_bus)
+ self.test("Shared authentication", self.test_shared_auth)
+ self.test("Data flow: tagger → graph", self.test_tagger_to_graph)
 
-        # Frontend tests
-        print("\n[Frontend]")
-        self.test("Main page loads", self.test_frontend_loads)
-        self.test("Navigation works", self.test_navigation)
-        self.test("API calls from frontend", self.test_frontend_api)
+ # Frontend tests
+ print("\n[Frontend]")
+ self.test("Main page loads", self.test_frontend_loads)
+ self.test("Navigation works", self.test_navigation)
+ self.test("API calls from frontend", self.test_frontend_api)
 
-        # Summary
-        print("\n" + "=" * 60)
-        passed = sum(1 for _, success, _ in self.results if success)
-        total = len(self.results)
-        print(f"RESULTS: {passed}/{total} tests passed")
+ # Summary
+ print("\n" + "=" * 60)
+ passed = sum(1 for _, success, _ in self.results if success)
+ total = len(self.results)
+ print(f"RESULTS: {passed}/{total} tests passed")
 
-        if passed < total:
-            print("\nFailed tests:")
-            for name, success, error in self.results:
-                if not success:
-                    print(f"  - {name}: {error}")
+ if passed < total:
+ print("\nFailed tests:")
+ for name, success, error in self.results:
+ if not success:
+ print(f" - {name}: {error}")
 
-        print("=" * 60)
-        return passed == total
+ print("=" * 60)
+ return passed == total
 
-    def test_postgres(self):
-        result = subprocess.run(
-            ["docker", "exec", "integration-postgres", "pg_isready"],
-            capture_output=True, timeout=5
-        )
-        assert result.returncode == 0, "PostgreSQL not ready"
+ def test_postgres(self):
+ result = subprocess.run(["docker", "exec", "integration-postgres", "pg_isready"],
+ capture_output=True, timeout=5)
+ assert result.returncode == 0, "PostgreSQL not ready"
 
-    def test_redis(self):
-        result = subprocess.run(
-            ["docker", "exec", "integration-redis", "redis-cli", "ping"],
-            capture_output=True, timeout=5
-        )
-        assert b"PONG" in result.stdout, "Redis not responding"
+ def test_redis(self):
+ result = subprocess.run(["docker", "exec", "integration-redis", "redis-cli", "ping"],
+ capture_output=True, timeout=5)
+ assert b"PONG" in result.stdout, "Redis not responding"
 
-    def test_nginx(self):
-        resp = requests.get(f"{self.base_url}/", timeout=5)
-        assert resp.status_code in [200, 304], f"Nginx returned {resp.status_code}"
+ def test_nginx(self):
+ resp = requests.get(f"{self.base_url}/", timeout=5)
+ assert resp.status_code in [200, 304], f"Nginx returned {resp.status_code}"
 
-    def test_backend_health(self, module):
-        resp = requests.get(f"{self.base_url}/api/{module}/health", timeout=5)
-        assert resp.status_code == 200, f"Health check failed: {resp.status_code}"
+ def test_backend_health(self, module):
+ resp = requests.get(f"{self.base_url}/api/{module}/health", timeout=5)
+ assert resp.status_code == 200, f"Health check failed: {resp.status_code}"
 
-    def test_graphical_api(self):
-        resp = requests.get(f"{self.base_url}/api/graphical/status", timeout=5)
-        assert resp.status_code == 200
+ def test_graphical_api(self):
+ resp = requests.get(f"{self.base_url}/api/graphical/status", timeout=5)
+ assert resp.status_code == 200
 
-    def test_tagger_api(self):
-        resp = requests.get(f"{self.base_url}/api/tagger/images", timeout=5)
-        assert resp.status_code in [200, 401]  # 401 if auth required
+ def test_tagger_api(self):
+ resp = requests.get(f"{self.base_url}/api/tagger/images", timeout=5)
+ assert resp.status_code in [200, 401] # 401 if auth required
 
-    def test_article_api(self):
-        resp = requests.get(f"{self.base_url}/api/article/papers", timeout=5)
-        assert resp.status_code in [200, 401]
+ def test_article_api(self):
+ resp = requests.get(f"{self.base_url}/api/article/papers", timeout=5)
+ assert resp.status_code in [200, 401]
 
-    def test_graph_api(self):
-        resp = requests.get(f"{self.base_url}/api/graph/v1_demo", timeout=5)
-        assert resp.status_code == 200
+ def test_graph_api(self):
+ resp = requests.get(f"{self.base_url}/api/graph/v1_demo", timeout=5)
+ assert resp.status_code == 200
 
-    def test_event_bus(self):
-        # Simplified check - verify Redis pub/sub works
-        import redis
-        r = redis.Redis(host='localhost', port=6379)
-        r.publish('test', 'ping')
+ def test_event_bus(self):
+ # Simplified check - verify Redis pub/sub works
+ import redis
+ r = redis.Redis(host='localhost', port=6379)
+ r.publish('test', 'ping')
 
-    def test_shared_auth(self):
-        # Test that auth tokens work across modules
-        # This is a placeholder - implement based on actual auth
-        pass
+ def test_shared_auth(self):
+ # Test that auth tokens work across modules
+ # This is a placeholder - implement based on actual auth
+ pass
 
-    def test_tagger_to_graph(self):
-        # Test data flows from tagger to graph
-        # This is a placeholder - implement based on actual flow
-        pass
+ def test_tagger_to_graph(self):
+ # Test data flows from tagger to graph
+ # This is a placeholder - implement based on actual flow
+ pass
 
-    def test_frontend_loads(self):
-        resp = requests.get(f"{self.base_url}/", timeout=5)
-        assert "<!DOCTYPE html>" in resp.text or "<html" in resp.text
+ def test_frontend_loads(self):
+ resp = requests.get(f"{self.base_url}/", timeout=5)
+ assert "<!DOCTYPE html>" in resp.text or "<html" in resp.text
 
-    def test_navigation(self):
-        # Check that navigation-related assets exist
-        resp = requests.get(f"{self.base_url}/", timeout=5)
-        assert resp.status_code == 200
+ def test_navigation(self):
+ # Check that navigation-related assets exist
+ resp = requests.get(f"{self.base_url}/", timeout=5)
+ assert resp.status_code == 200
 
-    def test_frontend_api(self):
-        # Verify frontend can make API calls (CORS, etc.)
-        resp = requests.get(f"{self.base_url}/api/graphical/health", timeout=5)
-        assert "Access-Control-Allow-Origin" in resp.headers or resp.status_code == 200
+ def test_frontend_api(self):
+ # Verify frontend can make API calls (CORS, etc.)
+ resp = requests.get(f"{self.base_url}/api/graphical/health", timeout=5)
+ assert "Access-Control-Allow-Origin" in resp.headers or resp.status_code == 200
 
 
 if __name__ == "__main__":
-    tests = IntegrationTests()
-    success = tests.run_all()
-    sys.exit(0 if success else 1)
+ tests = IntegrationTests
+ success = tests.run_all
+ sys.exit(0 if success else 1)
 ```
 
 ### Final Checklist
@@ -813,14 +809,9 @@ Answer honestly:
 Quick commands to run during development:
 
 ```bash
-# Full health check
-./scripts/verify_all.sh
+# Full health check./scripts/verify_all.sh
 
-# Check specific phase
-./scripts/verify_phase.sh 1  # Infrastructure
-./scripts/verify_phase.sh 2  # Backends
-./scripts/verify_phase.sh 3  # Frontend
-./scripts/verify_phase.sh 4  # Integration
+# Check specific phase./scripts/verify_phase.sh 1 # Infrastructure./scripts/verify_phase.sh 2 # Backends./scripts/verify_phase.sh 3 # Frontend./scripts/verify_phase.sh 4 # Integration
 
 # Watch logs
 docker-compose -f integration/docker-compose.unified.yml logs -f
@@ -879,14 +870,13 @@ Use this template to document verification results:
 docker-compose down
 
 # Backup corrupted DB (for analysis)
-docker cp integration-postgres:/var/lib/postgresql/data ./db-backup-corrupted
+docker cp integration-postgres:/var/lib/postgresql/data./db-backup-corrupted
 
 # Remove volume and recreate
 docker volume rm integration_postgres_data
 docker-compose up -d postgres
 
-# Re-run migrations
-./scripts/init-db.sh
+# Re-run migrations./scripts/init-db.sh
 ```
 
 ### Container Won't Start

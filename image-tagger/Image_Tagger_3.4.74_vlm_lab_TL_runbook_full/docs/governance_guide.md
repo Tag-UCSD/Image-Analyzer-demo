@@ -13,28 +13,28 @@ The v3 line is designed to be:
 
 Key principles:
 
-1. **No silent deletions**  
-   Once a file path has existed in a release, it should not disappear in later versions.
-   If code is replaced, the old version is moved under `archive/` with a version tag.
+1. **No silent deletions** 
+ Once a file path has existed in a release, it should not disappear in later versions.
+ If code is replaced, the old version is moved under `archive/` with a version tag.
 
-2. **Minimal viable stubs**  
-   Active modules should not contain `...` placeholders or pseudo-code. If a feature is not
-   yet implemented, it should be clearly marked with comments, but the module must still
-   import and run without crashing.
+2. **Minimal viable stubs** 
+ Active modules should not contain `...` placeholders or pseudo-code. If a feature is not
+ yet implemented, it should be clearly marked with comments, but the module must still
+ import and run without crashing.
 
-3. **Reproducible releases**  
-   Each release should be shippable as:
-   - A ZIP of the full tree, and
-   - A single concatenated TXT with a `deconcat.py` header so the tree can be reconstructed.
+3. **Reproducible releases** 
+ Each release should be shippable as:
+ - A ZIP of the full tree, and
+ - A single concatenated TXT with a `deconcat.py` header so the tree can be reconstructed.
 
 ## 2. v3_governance.yml
 
 The file `v3_governance.yml` describes:
 
 - **protected_scopes** – directories and patterns that are considered critical
-  (for example `backend/science/`, `backend/api/`, `deploy/`, `scripts/guardian.py`).
+ (for example `backend/science/`, `backend/api/`, `deploy/`, `scripts/guardian.py`).
 - **critical_files** – specific files that must not be deleted or modified lightly
-  (for example main app entrypoints and governance config).
+ (for example main app entrypoints and governance config).
 
 You can read this YAML file to see which areas of the repo are most tightly controlled.
 
@@ -65,9 +65,9 @@ If `verify` reports drift, you can either:
 - The `install.sh` script may invoke Guardian to detect drift in a local checkout.
 - The CI workflow (`.github/workflows/ci_v3.yml`) is expected to run:
 
-  ```bash
-  python scripts/guardian.py verify
-  ```
+ ```bash
+ python scripts/guardian.py verify
+ ```
 
 When Guardian fails in CI:
 
@@ -79,14 +79,14 @@ When Guardian fails in CI:
 If you are a student or collaborator, please:
 
 - **Do**:
-  - Add new modules, scripts and docs as needed.
-  - Modify existing files to improve science, UX or tests.
-  - Use `archive/` to keep old versions when making major rewrites.
+ - Add new modules, scripts and docs as needed.
+ - Modify existing files to improve science, UX or tests.
+ - Use `archive/` to keep old versions when making major rewrites.
 
 - **Do not**:
-  - Delete files that shipped in a prior version without archiving them.
-  - Remove governance-related files (for example `v3_governance.yml`, `scripts/guardian.py`).
-  - Disable Guardian checks in CI without discussing it with the project lead.
+ - Delete files that shipped in a prior version without archiving them.
+ - Remove governance-related files (for example `v3_governance.yml`, `scripts/guardian.py`).
+ - Disable Guardian checks in CI without discussing it with the project lead.
 
 When in doubt, ask a TA or project lead before modifying anything under a protected scope.
 
@@ -108,29 +108,29 @@ A few common scenarios and what to do:
 
 1. **You have made local changes and want to cut a new release**
 
-   - Run `scripts/guardian.py verify` to confirm that you have not broken
-     any governance rules (e.g., file deletions in protected scopes).
-   - If you are satisfied with the state, bump `VERSION` and the visible
-     version strings in the README and backend banner.
-   - Run `scripts/guardian.py freeze` to mint a new `governance.lock`
-     baseline for this release.
+ - Run `scripts/guardian.py verify` to confirm that you have not broken
+ any governance rules (e.g., file deletions in protected scopes).
+ - If you are satisfied with the state, bump `VERSION` and the visible
+ version strings in the README and backend banner.
+ - Run `scripts/guardian.py freeze` to mint a new `governance.lock`
+ baseline for this release.
 
 2. **Guardian verification fails after some edits**
 
-   - Read the error message; it will typically say which file or scope
-     violated the rules.
-   - If you removed a protected file by mistake, restore it from version
-     control or from the last release ZIP / concatenated TXT.
-   - Re-run `scripts/guardian.py verify` until it passes.
+ - Read the error message; it will typically say which file or scope
+ violated the rules.
+ - If you removed a protected file by mistake, restore it from version
+ control or from the last release ZIP / concatenated TXT.
+ - Re-run `scripts/guardian.py verify` until it passes.
 
 3. **You are collaborating with an AI assistant**
 
-   - Instruct the assistant not to delete files and to keep historical
-     directories under `archive/` rather than removing them.
-   - Ask it to provide both a ZIP and a concatenated TXT with a `deconcat.py`
-     script so that the full repository can be reconstructed elsewhere.
-   - Use `scripts/guardian.py verify` on the result before merging it into
-     your main branch or release line.
+ - Instruct the assistant not to delete files and to keep historical
+ directories under `archive/` rather than removing them.
+ - Ask it to provide both a ZIP and a concatenated TXT with a `deconcat.py`
+ script so that the full repository can be reconstructed elsewhere.
+ - Use `scripts/guardian.py verify` on the result before merging it into
+ your main branch or release line.
 
 Guardian is deliberately conservative: if it complains, treat that as a
 signal to inspect the change rather than as an obstacle.

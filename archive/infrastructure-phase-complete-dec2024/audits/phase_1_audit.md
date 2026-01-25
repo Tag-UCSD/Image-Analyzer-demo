@@ -15,14 +15,14 @@
 - Gate check output: PASS (phase 1)
 - Results file: `scripts/gate_logs/gate_1-infrastructure_20251220_110822.json`
 - Quick validation (phase 1):
-  - `docker compose -f integration/docker-compose.unified.yml up -d` starts all services.
-  - PostgreSQL schemas present: `core`, `tagger`, `evidence`, `graphical`, `graph`.
-  - Redis ping returns `PONG`.
-  - Nginx routes return 200:
-    - `http://localhost:8080/api/graphical/health`
-    - `http://localhost:8080/api/tagger/health`
-    - `http://localhost:8080/api/article/healthz`
-    - `http://localhost:8080/api/graph/graph/v1_demo`
+ - `docker compose -f integration/docker-compose.unified.yml up -d` starts all services.
+ - PostgreSQL schemas present: `core`, `tagger`, `evidence`, `graphical`, `graph`.
+ - Redis ping returns `PONG`.
+ - Nginx routes return 200:
+ - `http://localhost:8080/api/graphical/health`
+ - `http://localhost:8080/api/tagger/health`
+ - `http://localhost:8080/api/article/healthz`
+ - `http://localhost:8080/api/graph/graph/v1_demo`
 
 ## Follow-Up Infrastructure Adjustment
 - Exposed backend ports 8001-8004 on the host to satisfy Phase 2 gate checks.

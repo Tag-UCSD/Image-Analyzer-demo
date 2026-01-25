@@ -49,7 +49,7 @@ In v3.3.7, we additionally:
 
 - Unified version strings across `VERSION`, `backend/main.py`, `install.sh`, and key docs.
 - Made `scripts/smoke_science.py` tolerant of a zero-image database (it now skips with guidance
-  instead of failing hard).
+ instead of failing hard).
 - Added pytest coverage for the Admin bulk upload endpoint and the Monitor Tag Inspector.
 - Improved empty-state messaging in the Monitor and Explorer apps.
 - Added this `WHATS_NEW_v3_3_x.md` summary and small documentation polish.
@@ -57,7 +57,7 @@ In v3.3.7, we additionally:
 ## 7. v3.3.10 debug layers and deployment guide
 
 - Added a `/v1/debug/images/{{image_id}}/edges` endpoint and wired it into Explorer
-  so that students can toggle between the original image and its edge-map view.
+ so that students can toggle between the original image and its edge-map view.
 - Introduced `docs/PRODUCTION_DEPLOYMENT.md` describing how to rotate API secrets,
-  mount persistent volumes, and front the system with HTTPS.
+ mount persistent volumes, and front the system with HTTPS.
 

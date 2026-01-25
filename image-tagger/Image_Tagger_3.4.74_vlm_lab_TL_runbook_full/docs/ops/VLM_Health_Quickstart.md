@@ -11,9 +11,9 @@ to the PI, without reading the full SOP.
 
 - You can run the normal Image Tagger pipeline end-to-end.
 - The following CSVs have already been generated for the run you care about:
-  - `reports/bn_validations_flat.csv`
-  - `reports/vlm_validations.csv`
-  - `reports/human_validations.csv`
+ - `reports/bn_validations_flat.csv`
+ - `reports/vlm_validations.csv`
+ - `reports/human_validations.csv`
 
 If you are not sure whether these exist, ask your supervisor before running
 the health checks.
@@ -31,7 +31,7 @@ make vlm-health-init
 This will:
 
 - Create a new folder under `reports/vlm_health/` named with today’s date,
-  the current VERSION file, and a default VLM profile (e.g. `main_vlm`).
+ the current VERSION file, and a default VLM profile (e.g. `main_vlm`).
 - Copy the three input CSVs into `raw/` inside that folder.
 
 You should see a message telling you which `RUN_ID` it used.
@@ -128,7 +128,7 @@ Add a short note with:
 Example sketch:
 
 ```markdown
-# VLM health log – 2025-11-27_v3.4.69_main_vlm
+# VLM health log – -11-27_v3.4.69_main_vlm
 
 - Audit CSV: derived/vlm_variance_audit.csv
 - Turing summary: derived/vlm_turing_summary.txt

@@ -2,11 +2,11 @@
 # Adaptive Preference Testing System V3.1
 ## Complete Deployment & Testing Guide
 
-**Status**: ✅ Fixed, Enterprise-Ready, Fully Integrated  
-**Date**: November 7, 2025  
-**Database**: PostgreSQL with complete schema  
-**Backend**: Flask + SQLAlchemy ORM  
-**Frontend**: Improved HTML with full usability features  
+**Status**: ✅ Fixed, Enterprise-Ready, Fully Integrated 
+**Date**: 
+**Database**: PostgreSQL with complete schema 
+**Backend**: Flask + SQLAlchemy ORM 
+**Frontend**: Improved HTML with full usability features 
 
 ---
 
@@ -94,18 +94,18 @@ psql -U postgres -d adaptive_preference -c "\dt"
 
 ### Expected Output
 ```
-                List of relations
- Schema |        Name         | Type  |  Owner   
+ List of relations
+ Schema | Name | Type | Owner 
 --------+---------------------+-------+----------
- public | algorithm_state     | table | postgres
- public | audit_log           | table | postgres
- public | choices             | table | postgres
- public | experiments         | table | postgres
- public | provenance_log      | table | postgres
- public | schema_version      | table | postgres
- public | sessions            | table | postgres
- public | stimuli             | table | postgres
- public | users               | table | postgres
+ public | algorithm_state | table | postgres
+ public | audit_log | table | postgres
+ public | choices | table | postgres
+ public | experiments | table | postgres
+ public | provenance_log | table | postgres
+ public | schema_version | table | postgres
+ public | sessions | table | postgres
+ public | stimuli | table | postgres
+ public | users | table | postgres
 (9 rows)
 ```
 
@@ -113,16 +113,16 @@ psql -U postgres -d adaptive_preference -c "\dt"
 ```sql
 -- Check foreign keys
 SELECT
-    tc.constraint_name,
-    tc.table_name,
-    kcu.column_name,
-    ccu.table_name AS foreign_table_name,
-    ccu.column_name AS foreign_column_name
+ tc.constraint_name,
+ tc.table_name,
+ kcu.column_name,
+ ccu.table_name AS foreign_table_name,
+ ccu.column_name AS foreign_column_name
 FROM information_schema.table_constraints AS tc
 JOIN information_schema.key_column_usage AS kcu
-  ON tc.constraint_name = kcu.constraint_name
+ ON tc.constraint_name = kcu.constraint_name
 JOIN information_schema.constraint_column_usage AS ccu
-  ON ccu.constraint_name = tc.constraint_name
+ ON ccu.constraint_name = tc.constraint_name
 WHERE tc.constraint_type = 'FOREIGN KEY';
 
 -- Expected: 15+ foreign key constraints
@@ -136,7 +136,7 @@ WHERE tc.constraint_type = 'FOREIGN KEY';
 ```bash
 # Create virtual environment
 python3 -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
+source venv/bin/activate # On Windows: venv\Scripts\activate
 
 # Install packages
 pip install flask flask-cors flask-sqlalchemy psycopg2-binary sqlalchemy werkzeug numpy scipy
@@ -144,8 +144,8 @@ pip install flask flask-cors flask-sqlalchemy psycopg2-binary sqlalchemy werkzeu
 
 ### Configure Environment
 ```bash
-# Create .env file
-cat > .env << 'EOF'
+# Create.env file
+cat >.env << 'EOF'
 DATABASE_URL=postgresql://postgres:password@localhost:5432/adaptive_preference
 SECRET_KEY=your-secret-key-change-in-production
 FLASK_ENV=development
@@ -153,7 +153,7 @@ UPLOAD_FOLDER=/var/www/uploads
 EOF
 
 # Load environment
-export $(cat .env | xargs)
+export $(cat.env | xargs)
 ```
 
 ### Test Backend
@@ -181,14 +181,12 @@ curl http://localhost:5000/api/health
 # Using psql
 psql -U postgres -d adaptive_preference << 'EOF'
 INSERT INTO users (email, username, password_hash, full_name, institution, role)
-VALUES (
-    'test@example.com',
-    'testuser',
-    crypt('testpassword', gen_salt('bf')),
-    'Test User',
-    'Test University',
-    'researcher'
-);
+VALUES ('test@example.com',
+ 'testuser',
+ crypt('testpassword', gen_salt('bf')),
+ 'Test User',
+ 'Test University',
+ 'researcher');
 EOF
 ```
 
@@ -278,24 +276,24 @@ pytest tests/test_integration.py::test_full_experiment_lifecycle -v
 
 ### Expected Output
 ```
-tests/test_integration.py::test_database_connection PASSED           [  5%]
-tests/test_integration.py::test_user_creation PASSED                 [ 10%]
-tests/test_integration.py::test_experiment_creation PASSED           [ 15%]
-tests/test_integration.py::test_experiment_constraints PASSED        [ 20%]
-tests/test_integration.py::test_cascade_delete PASSED                [ 25%]
-tests/test_integration.py::test_health_check PASSED                  [ 30%]
-tests/test_integration.py::test_create_experiment_api PASSED         [ 35%]
-tests/test_integration.py::test_create_experiment_validation PASSED  [ 40%]
-tests/test_integration.py::test_get_experiment PASSED                [ 45%]
-tests/test_integration.py::test_upload_stimulus PASSED               [ 50%]
-tests/test_integration.py::test_publish_experiment PASSED            [ 55%]
-tests/test_integration.py::test_create_session PASSED                [ 60%]
-tests/test_integration.py::test_session_workflow PASSED              [ 65%]
-tests/test_integration.py::test_full_experiment_lifecycle PASSED     [ 70%]
-tests/test_integration.py::test_concurrent_sessions PASSED           [ 75%]
-tests/test_integration.py::test_large_experiment PASSED              [ 80%]
-tests/test_integration.py::test_choice_constraints PASSED            [ 85%]
-tests/test_integration.py::test_audit_logging PASSED                 [ 90%]
+tests/test_integration.py::test_database_connection PASSED [ 5%]
+tests/test_integration.py::test_user_creation PASSED [ 10%]
+tests/test_integration.py::test_experiment_creation PASSED [ 15%]
+tests/test_integration.py::test_experiment_constraints PASSED [ 20%]
+tests/test_integration.py::test_cascade_delete PASSED [ 25%]
+tests/test_integration.py::test_health_check PASSED [ 30%]
+tests/test_integration.py::test_create_experiment_api PASSED [ 35%]
+tests/test_integration.py::test_create_experiment_validation PASSED [ 40%]
+tests/test_integration.py::test_get_experiment PASSED [ 45%]
+tests/test_integration.py::test_upload_stimulus PASSED [ 50%]
+tests/test_integration.py::test_publish_experiment PASSED [ 55%]
+tests/test_integration.py::test_create_session PASSED [ 60%]
+tests/test_integration.py::test_session_workflow PASSED [ 65%]
+tests/test_integration.py::test_full_experiment_lifecycle PASSED [ 70%]
+tests/test_integration.py::test_concurrent_sessions PASSED [ 75%]
+tests/test_integration.py::test_large_experiment PASSED [ 80%]
+tests/test_integration.py::test_choice_constraints PASSED [ 85%]
+tests/test_integration.py::test_audit_logging PASSED [ 90%]
 
 ==================== 18 passed in 12.34s ====================
 ```
@@ -414,23 +412,23 @@ gunicorn -w 4 -b 0.0.0.0:8000 --reload backend.api:app
 ### Nginx Configuration
 ```nginx
 server {
-    listen 80;
-    server_name example.com;
+ listen 80;
+ server_name example.com;
 
-    location / {
-        root /var/www/html;
-        index experimenter_dashboard_improved.html;
-    }
+ location / {
+ root /var/www/html;
+ index experimenter_dashboard_improved.html;
+ }
 
-    location /api {
-        proxy_pass http://localhost:8000;
-        proxy_set_header Host $host;
-        proxy_set_header X-Real-IP $remote_addr;
-    }
+ location /api {
+ proxy_pass http://localhost:8000;
+ proxy_set_header Host $host;
+ proxy_set_header X-Real-IP $remote_addr;
+ }
 
-    location /uploads {
-        alias /var/www/uploads;
-    }
+ location /uploads {
+ alias /var/www/uploads;
+ }
 }
 ```
 
@@ -444,12 +442,12 @@ WORKDIR /app
 RUN apt-get update && apt-get install -y postgresql-client
 
 # Copy requirements
-COPY requirements.txt .
+COPY requirements.txt.
 RUN pip install -r requirements.txt
 
 # Copy application
-COPY backend/ ./backend/
-COPY database/ ./database/
+COPY backend/./backend/
+COPY database/./database/
 
 # Run migrations
 CMD ["python", "backend/api.py"]
@@ -460,37 +458,37 @@ CMD ["python", "backend/api.py"]
 version: '3.8'
 
 services:
-  db:
-    image: postgres:14
-    environment:
-      POSTGRES_DB: adaptive_preference
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: password
-    volumes:
-      - ./database/schema.sql:/docker-entrypoint-initdb.d/schema.sql
-      - pgdata:/var/lib/postgresql/data
+ db:
+ image: postgres:14
+ environment:
+ POSTGRES_DB: adaptive_preference
+ POSTGRES_USER: postgres
+ POSTGRES_PASSWORD: password
+ volumes:
+ -./database/schema.sql:/docker-entrypoint-initdb.d/schema.sql
+ - pgdata:/var/lib/postgresql/data
 
-  api:
-    build: .
-    ports:
-      - "8000:8000"
-    environment:
-      DATABASE_URL: postgresql://postgres:password@db:5432/adaptive_preference
-    depends_on:
-      - db
+ api:
+ build:.
+ ports:
+ - "8000:8000"
+ environment:
+ DATABASE_URL: postgresql://postgres:password@db:5432/adaptive_preference
+ depends_on:
+ - db
 
-  nginx:
-    image: nginx:alpine
-    ports:
-      - "80:80"
-    volumes:
-      - ./frontend:/usr/share/nginx/html
-      - ./nginx.conf:/etc/nginx/nginx.conf
-    depends_on:
-      - api
+ nginx:
+ image: nginx:alpine
+ ports:
+ - "80:80"
+ volumes:
+ -./frontend:/usr/share/nginx/html
+ -./nginx.conf:/etc/nginx/nginx.conf
+ depends_on:
+ - api
 
 volumes:
-  pgdata:
+ pgdata:
 ```
 
 ---
@@ -518,7 +516,7 @@ pip list | grep -i flask
 echo $DATABASE_URL
 
 # Check port not in use
-sudo lsof -i :5000
+sudo lsof -i:5000
 
 # Run with debug
 FLASK_ENV=development python backend/api.py
@@ -604,8 +602,8 @@ curl -s http://localhost:5000/api/health | grep "healthy" || exit 1
 # 3. Create experiment
 echo "3. Creating experiment..."
 curl -X POST http://localhost:5000/api/experiments \
-  -H "Content-Type: application/json" \
-  -d '{"name":"Test","num_stimuli":5,"max_trials":20}' | grep "success" || exit 1
+ -H "Content-Type: application/json" \
+ -d '{"name":"Test","num_stimuli":5,"max_trials":20}' | grep "success" || exit 1
 
 # 4. Run tests
 echo "4. Running tests..."
@@ -644,7 +642,7 @@ echo "✅ ALL TESTS PASSED!"
 
 ---
 
-**Status**: READY TO TEST  
+**Status**: READY TO TEST 
 **Next Step**: Open experimenter_dashboard_improved.html in browser and walk through!
 
 
@@ -652,7 +650,7 @@ echo "✅ ALL TESTS PASSED!"
 ================================================================================
 ================================================================================
 
-                    RUTHLESS CRITIQUE PROMPT
+ RUTHLESS CRITIQUE PROMPT
 
 Use this prompt with other LLMs (Gemini, GPT-4, etc.) for independent 
 assessment of the system above.
@@ -744,7 +742,7 @@ The professor expects and prefers brutal honesty. Do not sugarcoat.
 
 Examine all files in the v3.2.0 package:
 - backend/bayesian_adaptive.py (claimed 500 lines)
-- backend/api.py (claimed 800 lines)  
+- backend/api.py (claimed 800 lines) 
 - frontend/subject_interface_complete.html (claimed 600 lines, all 5 screens)
 - frontend/experimenter_dashboard_improved.html (claimed 1000 lines)
 - database/schema.sql (claimed 450 lines)
@@ -760,7 +758,7 @@ Focus on:
 
 1. Can you actually run `python bayesian_adaptive.py` and see validation results?
 2. Does the subject interface have real working JavaScript or just HTML?
-3. Does the API import and call `selector.select_next_pair()` or is it random?
+3. Does the API import and call `selector.select_next_pair` or is it random?
 4. Can you paste images into the file upload or only drag/drop?
 5. Does clicking "Launch Preview" actually open subject_interface_complete.html?
 6. Are there dummy/example stimuli included for testing?

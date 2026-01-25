@@ -1,7 +1,7 @@
 # COMPLETE ADAPTIVE PREFERENCE TESTING SYSTEM v3.5.7
 
-**Status**: Production-Ready with GUI/A11Y/Beauty Patches Applied  
-**Date**: November 9, 2025  
+**Status**: Production-Ready with GUI/A11Y/Beauty Patches Applied 
+**Date**: 
 **WCAG Compliance**: 2.2 Level AA ✅
 
 ## 🎯 THIS IS THE COMPLETE SYSTEM
@@ -197,8 +197,7 @@ This system includes a Governance + Autoinstaller kit in this folder:
 To set up on a new machine:
 
 ```bash
-cd Adaptive_Preference_GUI/Adaptive_Preference\ _3.5.11_Handoff\ /COMPLETE_v3.5.11_SYSTEM
-./install.sh
+cd Adaptive_Preference_GUI/Adaptive_Preference\ _3.5.11_Handoff\ /COMPLETE_v3.5.11_SYSTEM./install.sh
 
 
 ---
