@@ -1,1 +1,0 @@
-# backend/science package

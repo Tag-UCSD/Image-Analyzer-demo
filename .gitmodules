@@ -1,0 +1,12 @@
+[submodule "image-tagger"]
+	path = image-tagger
+	url = https://github.com/Tag-UCSD/image-tagger.git
+[submodule "article-eater"]
+	path = article-eater
+	url = https://github.com/Tag-UCSD/article-eater.git
+[submodule "knowledge-graph-ui"]
+	path = knowledge-graph-ui
+	url = https://github.com/Tag-UCSD/graph-explorer.git
+[submodule "graphical-model"]
+	path = graphical-model
+	url = https://github.com/Tag-UCSD/bayesian-network
